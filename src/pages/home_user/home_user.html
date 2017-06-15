@@ -1,0 +1,27 @@
+<ion-header>
+  
+  <custom-logged-header [title]="view | capitalize:true"></custom-logged-header>
+
+  
+  <ion-toolbar>
+    <ion-searchbar (ionInput)="filterItems($event)"></ion-searchbar>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content padding>
+
+  <div [ngSwitch]="view">
+
+    <ion-list *ngSwitchCase="'users'" no-lines>
+      <button ion-item *ngFor="let user of users | async" (click)="onChatCreate(user)">
+        <ion-avatar item-left>
+          <img [src]="user.photo || 'assets/images/no-photo.jpg'">
+        </ion-avatar>
+        {{ user.name }}
+      </button>
+    </ion-list>
+
+  </div>
+
+</ion-content>
