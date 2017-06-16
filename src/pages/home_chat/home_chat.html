@@ -7,9 +7,6 @@
       <ion-segment-button value="chats">
         Chats
       </ion-segment-button>
-      <ion-segment-button value="users">
-        Users
-      </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
   
@@ -33,15 +30,6 @@
         <ng-template #customMessage>
           <p>No messages</p>
         </ng-template>
-      </button>
-    </ion-list>
-
-    <ion-list *ngSwitchCase="'users'" no-lines>
-      <button ion-item *ngFor="let user of users | async" (click)="onChatCreate(user)">
-        <ion-avatar item-left>
-          <img [src]="user.photo || 'assets/images/no-photo.jpg'">
-        </ion-avatar>
-        {{ user.name }}
       </button>
     </ion-list>
 

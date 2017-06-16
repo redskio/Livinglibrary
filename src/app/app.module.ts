@@ -24,6 +24,8 @@ import { UserInfoComponent } from './../components/user-info/user-info.component
 import { UserMenuComponent } from './../components/user-menu/user-menu.component';
 import { UserProfilePage } from './../pages/user-profile/user-profile';
 import { UserService } from './../providers/user.service';
+import { homeUserPage } from '../pages/home_user/home_user';
+import { homeChatPage } from '../pages/home_chat/home_chat';
 
 const firebaseAppConfig: FirebaseAppConfig = {
     apiKey: "AIzaSyD4GWzQWo51VR0Fk4-PFU3Va2qGGnO3rsc",
@@ -51,7 +53,9 @@ const firebaseAuthConfig = {
     SignupPage,
     UserInfoComponent,
     UserMenuComponent,
-    UserProfilePage
+    UserProfilePage,
+    homeChatPage,
+    homeUserPage
   ],
   imports: [
     AngularFireModule.initializeApp(firebaseAppConfig, firebaseAuthConfig),
@@ -66,7 +70,9 @@ const firebaseAuthConfig = {
     MyApp,
     SigninPage,
     SignupPage,
-    UserProfilePage
+    UserProfilePage,
+    homeUserPage,
+    homeChatPage
   ],
   providers: [
     AuthService,

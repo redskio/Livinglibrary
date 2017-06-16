@@ -15,10 +15,10 @@ import { UserService } from './../../providers/user.service';
 import firebase from 'firebase';
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+  selector: 'page-homeUser',
+  templateUrl: 'home_user.html'
 })
-export class HomePage {
+export class homeUserPage {
 
   chats: FirebaseListObservable<Chat[]>;
   users: FirebaseListObservable<User[]>;
@@ -55,11 +55,6 @@ export class HomePage {
 
       switch(this.view) {
 
-        case 'chats':
-          this.chats = <FirebaseListObservable<Chat[]>>this.chats
-            .map((chats: Chat[]) => chats.filter((chat: Chat) => (chat.title.toLowerCase().indexOf(searchTerm.toLocaleLowerCase()) > -1)));
-          break;
-          
         case 'users':
           this.users = <FirebaseListObservable<User[]>>this.users
             .map((users: User[]) => users.filter((user: User) => (user.name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1)));
