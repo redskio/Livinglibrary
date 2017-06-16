@@ -5,13 +5,17 @@ import { AlertController, Loading, LoadingController, NavController, NavParams }
 import { AuthService } from './../../providers/auth.service';
 import { HomePage } from './../home/home';
 import { SignupPage } from './../signup/signup';
+import { AuthPage } from './../auth/auth';
+
+import { Facebook } from '@ionic-native/facebook';
+import firebase from 'firebase';
 
 @Component({
   selector: 'page-signin',
   templateUrl: 'signin.html',
 })
 export class SigninPage {
-
+  userProfile: any = null;
   signinForm: FormGroup;
 
   constructor(
@@ -20,7 +24,8 @@ export class SigninPage {
     public formBuilder: FormBuilder,
     public loadingCtrl: LoadingController,
     public navCtrl: NavController, 
-    public navParams: NavParams
+    public navParams: NavParams,
+    private facebook: Facebook,
   ) {
 
     let emailRegex = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
@@ -72,5 +77,25 @@ export class SigninPage {
       buttons: ['Ok']
     }).present();
   }
-
+  
+  facebookLogin(): void {
+    this.facebook.login(['email']).then( (response) => {
+    
+        this.facebook.api('/' + response.authResponse.userID + '?fields=id,name,email',[]).then((response)=>{
+          var fbresponse: string = JSON.stringify(response);
+          this.navCtrl.push(HomePage, {id:"1455970961116503",name:"김성택",email:"kstbook@naver.com"});
+          //json parameter should be post next monday!
+        }, (error) => {
+          alert(error);
+        })
+    }).catch((error) => { console.log(error) });
+  }
+  
+  
 }
+
+
+  
+
+
+

@@ -24,6 +24,11 @@
         },
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "io.ionic.starter"
+        },
+        "cordova-plugin-facebook4": {
+            "APP_ID": "1551126284897528",
+            "APP_NAME": "livinglibrary",
+            "PACKAGE_NAME": "io.ionic.starter"
         }
     },
     "dependent_plugins": {}

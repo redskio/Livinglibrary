@@ -26,6 +26,8 @@ import { UserProfilePage } from './../pages/user-profile/user-profile';
 import { UserService } from './../providers/user.service';
 import { homeUserPage } from '../pages/home_user/home_user';
 import { homeChatPage } from '../pages/home_chat/home_chat';
+import { AuthPage } from '../pages/auth/auth';
+import { Facebook } from '@ionic-native/facebook';
 
 const firebaseAppConfig: FirebaseAppConfig = {
     apiKey: "AIzaSyD4GWzQWo51VR0Fk4-PFU3Va2qGGnO3rsc",
@@ -55,7 +57,8 @@ const firebaseAuthConfig = {
     UserMenuComponent,
     UserProfilePage,
     homeChatPage,
-    homeUserPage
+    homeUserPage,
+    AuthPage
   ],
   imports: [
     AngularFireModule.initializeApp(firebaseAppConfig, firebaseAuthConfig),
@@ -72,7 +75,8 @@ const firebaseAuthConfig = {
     SignupPage,
     UserProfilePage,
     homeUserPage,
-    homeChatPage
+    homeChatPage,
+    AuthPage
   ],
   providers: [
     AuthService,
@@ -81,7 +85,8 @@ const firebaseAuthConfig = {
     StatusBar,
     SplashScreen,
     UserService,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    Facebook
   ]
 })
 export class AppModule {}
