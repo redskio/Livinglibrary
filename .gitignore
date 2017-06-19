@@ -8,6 +8,6 @@
 *.tmp.*
 *.sublime-project
 *.sublime-workspace
-
+www/build/*
 Thumbs.db
 UserInterfaceState.xcuserstate
