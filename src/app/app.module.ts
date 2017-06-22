@@ -12,6 +12,7 @@ import { AuthService } from './../providers/auth.service';
 import { CapitalizePipe } from './../pipes/capitalize.pipe';
 import { ChatPage } from './../pages/chat/chat';
 import { ChatService } from './../providers/chat.service';
+import { ItemService } from './../providers/item.service';
 import { CustomLoggedHeaderComponent } from './../components/custom-logged-header/custom-logged-header.component';
 import { MessageBoxComponent } from './../components/message-box/message-box.component';
 import { MessageService } from './../providers/message.service';
@@ -27,6 +28,7 @@ import { UserService } from './../providers/user.service';
 import { homeUserPage } from '../pages/home_user/home_user';
 import { homeChatPage } from '../pages/home_chat/home_chat';
 import { AuthPage } from '../pages/auth/auth';
+import { AddItemPage } from '../pages/add-item/add-item';
 import { Facebook } from '@ionic-native/facebook';
 
 const firebaseAppConfig: FirebaseAppConfig = {
@@ -48,6 +50,7 @@ const firebaseAuthConfig = {
     ChatPage,
     CustomLoggedHeaderComponent,
     HomePage,
+    AddItemPage,
     MessageBoxComponent,
     MyApp,
     ProgressBarComponent,
@@ -71,6 +74,7 @@ const firebaseAuthConfig = {
     ChatPage,
     HomePage,
     MyApp,
+    AddItemPage,
     SigninPage,
     SignupPage,
     UserProfilePage,
@@ -81,6 +85,7 @@ const firebaseAuthConfig = {
   providers: [
     AuthService,
     ChatService,
+    ItemService,
     MessageService,
     StatusBar,
     SplashScreen,

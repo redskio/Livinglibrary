@@ -6,7 +6,20 @@
 
 </ion-header>
 
-<ion-content padding>
-
-
+<ion-content>
+	<!--  <ion-buttons end>
+ 		 <button ion-button icon-only (click)="additem()">
+    	 <ion-icon name="add"></ion-icon>
+  		 </button>
+	</ion-buttons>-->
+	<ion-list>
+		<ion-item *ngFor="let item of items | async">
+			{{item.title}}
+			{{item.price}}
+		</ion-item>
+	</ion-list>
+ <ion-fab right bottom >
+   <button ion-fab (click)="addPage()">+</button>
+ </ion-fab>
 </ion-content>
+
