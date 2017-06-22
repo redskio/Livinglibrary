@@ -7,11 +7,13 @@ import { FirebaseListObservable } from 'angularfire2';
 import { AuthService } from './../../providers/auth.service';
 import { Chat } from './../../models/chat.model';
 import { ChatPage } from './../chat/chat';
+import { AddItemPage } from './../add-item/add-item';
 import { ChatService } from './../../providers/chat.service';
 import { SignupPage } from './../signup/signup';
 import { User } from './../../models/user.model';
 import { UserService } from './../../providers/user.service';
-
+import { ItemService } from './../../providers/item.service';
+import { Item } from './../../models/item.model';
 import firebase from 'firebase';
 
 @Component({
@@ -22,14 +24,15 @@ export class HomePage {
 
   chats: FirebaseListObservable<Chat[]>;
   users: FirebaseListObservable<User[]>;
+  items: FirebaseListObservable<Item[]>;
   view: string = 'chats';
-
   constructor(
     public authService: AuthService,
     public chatService: ChatService,
+    public itemService: ItemService,
     public menuCtrl: MenuController,
     public navCtrl: NavController,
-    public userService: UserService
+    public userService: UserService,
   ) {
 
   }
@@ -41,13 +44,12 @@ export class HomePage {
   ionViewDidLoad() {
     this.chats = this.chatService.chats;
     this.users = this.userService.users;
-
-    this.menuCtrl.enable(true, 'user-menu');
+    this.items = this.itemService.items;
+	this.menuCtrl.enable(true, 'user-menu');
   }
 
   filterItems(event: any): void {
     let searchTerm: string = event.target.value;
-
     this.chats = this.chatService.chats;
     this.users = this.userService.users;
 
@@ -117,7 +119,9 @@ export class HomePage {
       });
 
   }
-
+  addPage(): void{
+  	this.navCtrl.push(AddItemPage);
+  }
   onSignup(): void {
     this.navCtrl.push(SignupPage);
   }
