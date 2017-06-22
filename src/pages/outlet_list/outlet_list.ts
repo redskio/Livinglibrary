@@ -1,6 +1,5 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController, Events, ModalController } from 'ionic-angular';
-import { Geolocation } from '@ionic-native/geolocation';
 import { outletPage } from './../outlet/outlet';
 declare var google;
  
@@ -15,12 +14,6 @@ export class outletListPage {
  	}
  	
  	onMap1() {
-
-		let data = {
-			title: "paju",
-			latitude: "37.769191",
-			longitude: "126.698399"
-		};
  		let testModal = this.modalCtrl.create(outletPage, {
 			title: "paju",
 			latitude: "37.769191",

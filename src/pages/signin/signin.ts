@@ -5,10 +5,8 @@ import { AlertController, Loading, LoadingController, NavController, NavParams }
 import { AuthService } from './../../providers/auth.service';
 import { HomePage } from './../home/home';
 import { SignupPage } from './../signup/signup';
-import { AuthPage } from './../auth/auth';
 
 import { Facebook } from '@ionic-native/facebook';
-import firebase from 'firebase';
 
 @Component({
   selector: 'page-signin',
@@ -83,7 +81,7 @@ export class SigninPage {
     
         this.facebook.api('/' + response.authResponse.userID + '?fields=id,name,email',[]).then((response)=>{
           var fbresponse: string = JSON.stringify(response);
-          this.navCtrl.push(HomePage, {id:"1455970961116503",name:"김성택",email:"kstbook@naver.com"});
+          this.navCtrl.push(HomePage, {id:"1455970961116503",name:"源��꽦�깮",email:"kstbook@naver.com"});
           //json parameter should be post next monday!
         }, (error) => {
           alert(error);
