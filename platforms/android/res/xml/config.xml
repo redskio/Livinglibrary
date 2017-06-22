@@ -71,4 +71,7 @@
     <access origin="https://*.fbcdn.net" />
     <access origin="https://*.akamaihd.net" />
     <preference name="android-minSdkVersion" value="15" />
+    <feature name="Geolocation">
+        <param name="android-package" value="org.apache.cordova.geolocation.Geolocation" />
+    </feature>
 </widget>

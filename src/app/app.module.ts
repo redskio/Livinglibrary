@@ -26,8 +26,11 @@ import { UserProfilePage } from './../pages/user-profile/user-profile';
 import { UserService } from './../providers/user.service';
 import { homeUserPage } from '../pages/home_user/home_user';
 import { homeChatPage } from '../pages/home_chat/home_chat';
+import { outletPage } from '../pages/outlet/outlet';
+import { outletListPage } from '../pages/outlet_list/outlet_list';
 import { AuthPage } from '../pages/auth/auth';
 import { Facebook } from '@ionic-native/facebook';
+import { Geolocation } from '@ionic-native/geolocation';
 
 const firebaseAppConfig: FirebaseAppConfig = {
     apiKey: "AIzaSyD4GWzQWo51VR0Fk4-PFU3Va2qGGnO3rsc",
@@ -58,7 +61,9 @@ const firebaseAuthConfig = {
     UserProfilePage,
     homeChatPage,
     homeUserPage,
-    AuthPage
+    AuthPage,
+    outletPage,
+    outletListPage
   ],
   imports: [
     AngularFireModule.initializeApp(firebaseAppConfig, firebaseAuthConfig),
@@ -76,7 +81,9 @@ const firebaseAuthConfig = {
     UserProfilePage,
     homeUserPage,
     homeChatPage,
-    AuthPage
+    AuthPage,
+    outletPage,
+    outletListPage
   ],
   providers: [
     AuthService,
@@ -86,7 +93,8 @@ const firebaseAuthConfig = {
     SplashScreen,
     UserService,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    Facebook
+    Facebook,
+    Geolocation
   ]
 })
 export class AppModule {}

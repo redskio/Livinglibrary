@@ -7,7 +7,8 @@ import { User } from './../../models/user.model';
 import { UserProfilePage } from './../../pages/user-profile/user-profile';
 import { homeUserPage } from './../../pages/home_user/home_user';
 import { homeChatPage } from './../../pages/home_chat/home_chat';
-
+import { outletPage } from './../../pages/outlet/outlet';
+import { outletListPage } from './../../pages/outlet_list/outlet_list';
 @Component({
   selector: 'user-menu',
   templateUrl: 'user-menu.component.html'
@@ -35,5 +36,9 @@ export class UserMenuComponent extends BaseComponent {
   
   onUser(): void{
   	this.navCtrl.push(homeUserPage);
+  }
+  
+  onOutLet(): void{
+  	this.navCtrl.push(outletListPage);
   }
 }

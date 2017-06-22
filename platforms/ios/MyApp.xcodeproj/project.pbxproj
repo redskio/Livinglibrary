@@ -24,6 +24,8 @@
 		CF19C0B1CBC64B97BE8370FB /* CDVDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = F90DCD7F88A243CB8C327B31 /* CDVDevice.m */; };
 		F9E4E7CFBC754F78B707232A /* CDVSplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 297E764B27614D65BA5C8BF0 /* CDVSplashScreen.m */; };
 		FC16BCA68E904D28A66DB1FE /* FacebookConnectPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F13EC643F74F30A3911AD9 /* FacebookConnectPlugin.m */; };
+		2063696E0D4B421E9CAE1264 /* CDVLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 214EC5C403194D718D7FAEA6 /* CDVLocation.m */; };
+		92ADB88F21CA497C93F66127 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F71EF63249904D6095F13FCC /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +84,9 @@
 		F642FDF04BAC426D813D96B5 /* Bolts.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "MyApp/Plugins/cordova-plugin-facebook4/Bolts.framework"; sourceTree = "<group>"; };
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = MyApp/config.xml; sourceTree = "<group>"; };
 		F90DCD7F88A243CB8C327B31 /* CDVDevice.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CDVDevice.m; path = "cordova-plugin-device/CDVDevice.m"; sourceTree = "<group>"; };
+		214EC5C403194D718D7FAEA6 /* CDVLocation.m */ = {isa = PBXFileReference; name = "CDVLocation.m"; path = "cordova-plugin-geolocation/CDVLocation.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		46B9B03DFBB942AEA31CD59E /* CDVLocation.h */ = {isa = PBXFileReference; name = "CDVLocation.h"; path = "cordova-plugin-geolocation/CDVLocation.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		F71EF63249904D6095F13FCC /* CoreLocation.framework */ = {isa = PBXFileReference; name = "CoreLocation.framework"; path = "System/Library/Frameworks/CoreLocation.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +99,7 @@
 				A121633AC5D54FEE86F3F409 /* FBSDKCoreKit.framework in Frameworks */,
 				354173C570C24B34B5857C3F /* FBSDKLoginKit.framework in Frameworks */,
 				54FE4A2463E9410CB7FC8494 /* FBSDKShareKit.framework in Frameworks */,
+				92ADB88F21CA497C93F66127 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,6 +174,7 @@
 				4CD60066574B4102B4F436F5 /* FBSDKCoreKit.framework */,
 				57FF2CB102054C93B43129D6 /* FBSDKLoginKit.framework */,
 				AB40E3B754C04F87B1458E86 /* FBSDKShareKit.framework */,
+				F71EF63249904D6095F13FCC /* CoreLocation.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -207,6 +214,8 @@
 				06866CC9609A4BB8868DC4C2 /* CDVStatusBar.h */,
 				2134EF7AF37D4CC4AFAB84CE /* IonicKeyboard.m */,
 				95979ACD0CC843148648C551 /* IonicKeyboard.h */,
+				214EC5C403194D718D7FAEA6 /* CDVLocation.m */,
+				46B9B03DFBB942AEA31CD59E /* CDVLocation.h */,
 			);
 			name = Plugins;
 			path = MyApp/Plugins;
@@ -334,6 +343,7 @@
 				C5B1ECE736534D8AAF4A924B /* CDVViewController+SplashScreen.m in Sources */,
 				9CE21CA69F8C4B3B9F9681C3 /* CDVStatusBar.m in Sources */,
 				0701F3CDD9CF458CABE26CED /* IonicKeyboard.m in Sources */,
+				2063696E0D4B421E9CAE1264 /* CDVLocation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
