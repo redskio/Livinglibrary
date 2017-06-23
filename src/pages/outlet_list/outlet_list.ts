@@ -1,6 +1,15 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController, Events, ModalController } from 'ionic-angular';
+import { FirebaseListObservable } from 'angularfire2';
+
+import firebase from 'firebase';
+
 import { outletPage } from './../outlet/outlet';
+import { OutletService } from './../../providers/outlet.service';
+
+
+import { Outlet } from './../../models/outlet.model';
+
 declare var google;
  
 @Component({
@@ -9,8 +18,31 @@ declare var google;
 })
 export class outletListPage {
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController, public events: Events, public modalCtrl: ModalController) {
- 
+	outlet: FirebaseListObservable<Outlet[]>;
+
+	constructor(
+		public navCtrl: NavController, 
+		public navParams: NavParams, 
+		public viewCtrl: ViewController, 
+		public events: Events, 
+		public modalCtrl: ModalController,
+		public outletService: OutletService 
+		) {
+ 		
+ 	}
+ 	
+ 	ionViewDidLoad() {
+		this.outlet = this.outletService.outlet;
+  	}
+ 	
+ 	getOutlet(i, outlets){
+ 		console.log(outlets);
+ 		let data = {
+ 			title: outlets.title,
+ 			latitude: outlets.latitude,
+ 			longitude: outlets.longitude
+ 		}
+ 		this.navCtrl.push(outletPage, data);
  	}
  	
  	onMap1() {
@@ -21,32 +53,9 @@ export class outletListPage {
 		});
  		testModal.present();
  	}
- 	onMap2(): void {
- 		let data = {
-			title: "siheung",
-			latitude: "37.379407",
-			longitude: "126.736255"
-		};
-		this.navCtrl.push(outletPage, data);
- 	}
- 	onMap3(): void {
- 		 let data = {
-			title: "yeoju",
-			latitude: "37.24065",
-			longitude: "127.611415"
-		};
-		this.navCtrl.push(outletPage, data);
- 	}
- 	onMap4(): void {
- 		 let data = {
-			title: "Chicago Premium Outlet",
-			latitude: "41.800478",
-			longitude: "-88.273974"
-		};
-		this.navCtrl.push(outletPage, data);
- 	}
+ 	
  	closeModal(): void{
  		this.viewCtrl.dismiss();
 	}
  
-}
+}	

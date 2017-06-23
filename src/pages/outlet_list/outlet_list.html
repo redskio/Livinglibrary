@@ -11,24 +11,21 @@
  
 <ion-content>
  <ion-card>
- 	    <ion-list>
+     <ion-list>
+        	<div *ngFor = "let outlets of outlet | async; let i = index">
+    			<div (click) = "getOutlet( i, outlets )">
+    				<ion-icon name="cart" item-start></ion-icon> 
+    				{{i}} {{ outlets.title }}
+    			</div>
+    		</div>
+    </ion-list>
+ 	 <ion-list>
     	<button ion-item (click)="onMap1()">
     		<ion-icon name="cart" item-start></ion-icon>
     		paju
     	</button>
-    	<button ion-item (click)="onMap2()">
-    		<ion-icon name="medical" item-start></ion-icon>
-    		siheung
-    	</button>
-    	<button ion-item (click)="onMap3()">
-    		<ion-icon name="paw" item-start></ion-icon>
-			yeoju
-    	</button>
-    	<button ion-item (click)="onMap4()">
-    		<ion-icon name="person" item-start></ion-icon>
-			Chicago Premium
-    	</button>
     </ion-list> 
+
  </ion-card>
 
 </ion-content>

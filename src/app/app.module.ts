@@ -25,6 +25,7 @@ import { UserInfoComponent } from './../components/user-info/user-info.component
 import { UserMenuComponent } from './../components/user-menu/user-menu.component';
 import { UserProfilePage } from './../pages/user-profile/user-profile';
 import { UserService } from './../providers/user.service';
+import { OutletService } from './../providers/outlet.service';
 import { homeUserPage } from '../pages/home_user/home_user';
 import { homeChatPage } from '../pages/home_chat/home_chat';
 import { outletPage } from '../pages/outlet/outlet';
@@ -99,7 +100,8 @@ const firebaseAuthConfig = {
     UserService,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Facebook,
-    Geolocation
+    Geolocation,
+    OutletService
   ]
 })
 export class AppModule {}
