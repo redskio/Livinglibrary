@@ -1,40 +1,37 @@
 import { Component } from '@angular/core';
 
-import { MenuController, NavController } from 'ionic-angular';
+import { AlertController,App,MenuController, NavController } from 'ionic-angular';
 
 import { FirebaseListObservable } from 'angularfire2';
 
 import { AuthService } from './../../providers/auth.service';
-import { Chat } from './../../models/chat.model';
-import { ChatPage } from './../chat/chat';
 import { AddItemPage } from './../add-item/add-item';
 import { ChatService } from './../../providers/chat.service';
-import { SignupPage } from './../signup/signup';
-import { User } from './../../models/user.model';
 import { UserService } from './../../providers/user.service';
 import { ItemService } from './../../providers/item.service';
 import { Item } from './../../models/item.model';
-import firebase from 'firebase';
+import { BaseComponent } from "../base.component";
+import { outletListPage } from './../outlet_list/outlet_list';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage {
+export class HomePage extends BaseComponent {
 
-  chats: FirebaseListObservable<Chat[]>;
-  users: FirebaseListObservable<User[]>;
   items: FirebaseListObservable<Item[]>;
   view: string = 'chats';
   constructor(
+    public alertCtrl: AlertController,
     public authService: AuthService,
     public chatService: ChatService,
     public itemService: ItemService,
     public menuCtrl: MenuController,
     public navCtrl: NavController,
     public userService: UserService,
+    public app: App,
   ) {
-
+	super(alertCtrl, authService, app, menuCtrl);
   }
 
   ionViewCanEnter(): Promise<boolean> {
@@ -42,88 +39,17 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
-    this.chats = this.chatService.chats;
-    this.users = this.userService.users;
     this.items = this.itemService.items;
 	this.menuCtrl.enable(true, 'user-menu');
   }
 
-  filterItems(event: any): void {
-    let searchTerm: string = event.target.value;
-    this.chats = this.chatService.chats;
-    this.users = this.userService.users;
-
-    if (searchTerm) {
-
-      switch(this.view) {
-
-        case 'chats':
-          this.chats = <FirebaseListObservable<Chat[]>>this.chats
-            .map((chats: Chat[]) => chats.filter((chat: Chat) => (chat.title.toLowerCase().indexOf(searchTerm.toLocaleLowerCase()) > -1)));
-          break;
-          
-        case 'users':
-          this.users = <FirebaseListObservable<User[]>>this.users
-            .map((users: User[]) => users.filter((user: User) => (user.name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1)));
-          break;
-
-      }
-
-    }
-    
-  }
-
-  onChatCreate(recipientUser: User): void {
-
-    this.userService.currentUser
-      .first()
-      .subscribe((currentUser: User) => {
-
-        this.chatService.getDeepChat(currentUser.$key, recipientUser.$key)
-          .first()
-          .subscribe((chat: Chat) => {
-
-            if (chat.hasOwnProperty('$value')) {
-
-              let timestamp: Object = firebase.database.ServerValue.TIMESTAMP;
-
-              let chat1 = new Chat('', timestamp, recipientUser.name, (recipientUser.photo || ''));
-              this.chatService.create(chat1, currentUser.$key, recipientUser.$key);
-
-              let chat2 = new Chat('', timestamp, currentUser.name, (currentUser.photo || ''));
-              this.chatService.create(chat2, recipientUser.$key, currentUser.$key);
-
-            }
-
-          });
-
-      });
-
-    this.navCtrl.push(ChatPage, {
-      recipientUser: recipientUser
-    });
-  }
-
-  onChatOpen(chat: Chat): void {
-
-    let recipientUserId: string = chat.$key;
-
-    this.userService.get(recipientUserId)
-      .first()
-      .subscribe((user: User) => {
-
-        this.navCtrl.push(ChatPage, {
-          recipientUser: user
-        });
-
-      });
-
-  }
   addPage(): void{
   	this.navCtrl.push(AddItemPage);
   }
-  onSignup(): void {
-    this.navCtrl.push(SignupPage);
+  
+  onOutLet(): void{
+  	alert("test");
+  	this.navCtrl.push(outletListPage);
   }
 
 }

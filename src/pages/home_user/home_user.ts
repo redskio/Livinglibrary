@@ -22,7 +22,7 @@ export class homeUserPage {
 
   chats: FirebaseListObservable<Chat[]>;
   users: FirebaseListObservable<User[]>;
-  view: string = 'chats';
+  view: string = 'users';
 
   constructor(
     public authService: AuthService,

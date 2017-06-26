@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController, Events, ModalController } from 'ionic-angular';
 import { FirebaseListObservable } from 'angularfire2';
-
-import firebase from 'firebase';
-
 import { outletPage } from './../outlet/outlet';
 import { OutletService } from './../../providers/outlet.service';
 

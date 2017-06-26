@@ -1,14 +1,9 @@
 <ion-header>
   
-  <custom-logged-header [title]="view | capitalize:true"></custom-logged-header>
-  <ion-toolbar>
-    <ion-segment [(ngModel)]="view">
-      <ion-segment-button value="users">
-        User
-      </ion-segment-button>
-    </ion-segment>
-  </ion-toolbar>
-  
+  <ion-navbar>
+  	<ion-title>Users</ion-title>
+  </ion-navbar>
+
   <ion-toolbar>
     <ion-searchbar (ionInput)="filterItems($event)"></ion-searchbar>
   </ion-toolbar>

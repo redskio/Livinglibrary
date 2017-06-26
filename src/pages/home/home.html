@@ -1,9 +1,22 @@
 <ion-header>
-  
-  <custom-logged-header [title]="view | capitalize:true"></custom-logged-header>
-
- 
-
+  <ion-navbar>
+  	<button ion-button icon-only menuToggle="user-menu">
+  		<ion-icon name="menu"></ion-icon>
+  	</button>
+  	<ion-buttons start>
+  		<button ion-button icon-only (click)="onOutLet()">
+  			<ion-icon name="home" ></ion-icon>
+  		</button> 
+  	</ion-buttons>
+ 	<ion-title text-center>
+  		home
+  	</ion-title>
+    <ion-buttons end>
+    	<button ion-button icon-only (click)="onLogout()">
+      		<ion-icon name="exit"></ion-icon>
+    	</button>
+  	</ion-buttons>
+  </ion-navbar>
 </ion-header>
 
 <ion-content>
