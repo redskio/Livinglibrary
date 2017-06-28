@@ -4,15 +4,63 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
-
-  <ion-navbar>
-    <ion-title>add-item-page</ion-title>
-  </ion-navbar>
-
-</ion-header>
+<meta charset="utf-8" >
+<ion-header> <ion-navbar> <ion-title>add-item-page</ion-title>
+</ion-navbar> </ion-header>
 
 
 <ion-content padding>
+<form [formGroup]="itemForm"
+	(ngSubmit)="onSubmit(); $event.preventDefault()">
+	
+	<ion-label>제품 사진</ion-label>
+	<ion-item> 
+	<item-img [itemImg]="imgurl[0]"></item-img>
+	<item-img [itemImg]="imgurl[1]"></item-img>
+	<item-img [itemImg]="imgurl[2]"></item-img>
+	</ion-item>
+	<input type="file" accept="image/*" (change)="onPhoto($event,0)">
+	<input type="file" accept="image/*" (change)="onPhoto($event,1)">
+	<input type="file" accept="image/*" (change)="onPhoto($event,2)">
+	
+	<ion-item> 
+	<ion-label>브랜드</ion-label>
+	<ion-select formControlName="_brand">
+		<ion-option value="none" checked="true">선택안됨</ion-option>
+		<ion-option value="gucci">구찌</ion-option>
+		<ion-option value="chanel">샤넬</ion-option>
+	</ion-select>
+	</ion-item>
+	<br>
+	<ion-item> 
+	<ion-input type="text" placeholder="상품이름" formControlName="_title"></ion-input>
+	</ion-item>
+	<ion-item> 
+	<ion-input type="text" placeholder="상품 설명 및 주의사항" formControlName="_content"></ion-input>
+	</ion-item>
+	<ion-item>
+		<ion-label floating>구매장소</ion-label> <button ion-button onClick="">지도</button>
+		<ion-input type="hidden" formControlName="_location"></ion-input>
+	</ion-item>
+	<ion-item>
+	<ion-label floating>구매가능 기간</ion-label>
+	<ion-input type="number" formControlName="_time"></ion-input>
+	<ion-select formControlName="_duration">
+		<ion-option value="hour" checked="true">시간</ion-option>
+		<ion-option value="min">분</ion-option>
+		<ion-option value="day">일</ion-option>
+	</ion-select>
+	</ion-item>
+	<ion-item>
+	<ion-input type="number" placeholder="판매할 가격"
+		formControlName="selling_price"></ion-input><br>
+	<ion-input type="number" placeholder="정상가격"
+		formControlName="normal_price"></ion-input>
+	<ion-input type="number" placeholder="구매한 가격"
+		formControlName="purchase_price"></ion-input>
+	</ion-item>
+	
+	<button ion-button full type="submit" [disabled]="itemForm.invalid">Enter</button>
 
+</form>
 </ion-content>
