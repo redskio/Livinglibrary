@@ -3,7 +3,7 @@
   	<button ion-button icon-only menuToggle="user-menu">
   		<ion-icon name="menu"></ion-icon>
   	</button>
-  	<ion-buttons start>
+  	<ion-buttons left>
   		<button ion-button icon-only (click)="onOutLet()">
   			<ion-icon name="home" ></ion-icon>
   		</button> 
@@ -11,12 +11,17 @@
  	<ion-title text-center>
   		home
   	</ion-title>
-    <ion-buttons end>
+  	<ion-buttons right>
+  		<button ion-button icon-only (click)="onSearch()">
+  			<ion-icon name="search" ></ion-icon>
+  		</button> 
+  	</ion-buttons>
+    <ion-buttons right>
     	<button ion-button icon-only (click)="onLogout()">
       		<ion-icon name="exit"></ion-icon>
     	</button>
   	</ion-buttons>
-  </ion-navbar>
+  </ion-navbar>	
 </ion-header>
 
 <ion-content>
