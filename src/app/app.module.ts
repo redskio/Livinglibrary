@@ -31,6 +31,7 @@ import { homeChatPage } from '../pages/home_chat/home_chat';
 import { outletPage } from '../pages/outlet/outlet';
 import { outletListPage } from '../pages/outlet_list/outlet_list';
 import { AuthPage } from '../pages/auth/auth';
+import { ItemImg } from './../components/item-img/item-img.component';
 import { AddItemPage } from '../pages/add-item/add-item';
 import { Facebook } from '@ionic-native/facebook';
 import { Geolocation } from '@ionic-native/geolocation';
@@ -67,7 +68,8 @@ const firebaseAuthConfig = {
     homeUserPage,
     AuthPage,
     outletPage,
-    outletListPage
+    outletListPage,
+    ItemImg
   ],
   imports: [
     AngularFireModule.initializeApp(firebaseAppConfig, firebaseAuthConfig),
