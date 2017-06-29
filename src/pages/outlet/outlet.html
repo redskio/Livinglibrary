@@ -11,5 +11,8 @@
  
 <ion-content>
   <div #map id="map"></div>
-  {{outletBrand.brand}}  {{outletBrand.tel}}  
+  <div *ngFor = "let OutletBrands of outletBrand | async; let i = index">
+  	  {{OutletBrands.brand}}  {{OutletBrands.tel}}  
+  </div>
+
 </ion-content>
