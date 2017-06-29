@@ -1,7 +1,8 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
- 
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { OutletBrand } from './../../models/outletBrand.model';
 declare var google;
  
 @Component({
@@ -10,12 +11,17 @@ declare var google;
 })
 export class outletPage {
  
+  outletBrand: FirebaseListObservable<OutletBrand[]>;
+ 
   @ViewChild('map') mapElement: ElementRef;
   map: any;
   
-  constructor(public navCtrl: NavController, public geolocation: Geolocation, public params: NavParams ) {
-
-  }
+  constructor(
+  	public navCtrl: NavController, 
+  	public geolocation: Geolocation, 
+  	public params: NavParams,
+  	public af: AngularFire 
+  	) {}
  
   ionViewDidLoad(){
     this.loadMap();
@@ -25,6 +31,11 @@ export class outletPage {
  	let latitude = this.params.get('latitude');
  	let longitude = this.params.get('longitude');
  	let title = this.params.get('title');
+ 	
+   	console.log("test");
+    this.outletBrand = this.af.database.list('/'+title);
+    console.log(this.outletBrand);
+  
     this.geolocation.getCurrentPosition().then((position) => {
 
       let latLng = new google.maps.LatLng(latitude,longitude);
