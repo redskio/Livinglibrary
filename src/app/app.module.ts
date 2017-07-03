@@ -9,6 +9,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireModule, AuthMethods, AuthProviders, FirebaseAppConfig } from 'angularfire2';
 
 import { AuthService } from './../providers/auth.service';
+import { AuthProvider} from '../providers/auth-provider' ;
 import { CapitalizePipe } from './../pipes/capitalize.pipe';
 import { ChatPage } from './../pages/chat/chat';
 import { ChatService } from './../providers/chat.service';
@@ -103,7 +104,8 @@ const firebaseAuthConfig = {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Facebook,
     Geolocation,
-    OutletService
+    OutletService,
+    AuthProvider
   ]
 })
 export class AppModule {}

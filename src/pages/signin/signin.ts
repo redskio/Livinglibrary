@@ -5,8 +5,9 @@ import { AlertController, Loading, LoadingController, NavController, NavParams }
 import { AuthService } from './../../providers/auth.service';
 import { HomePage } from './../home/home';
 import { SignupPage } from './../signup/signup';
-
+import { AuthProvider } from './../../providers/auth-provider';
 import { Facebook } from '@ionic-native/facebook';
+import { UserService } from './../../providers/user.service';
 
 @Component({
   selector: 'page-signin',
@@ -15,6 +16,7 @@ import { Facebook } from '@ionic-native/facebook';
 export class SigninPage {
   userProfile: any = null;
   signinForm: FormGroup;
+  signupForm: FormGroup;
 
   constructor(
     public alertCtrl: AlertController,
@@ -24,6 +26,9 @@ export class SigninPage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     private facebook: Facebook,
+    private auth: AuthProvider,
+
+    public userService: UserService
   ) {
 
     let emailRegex = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
@@ -32,7 +37,7 @@ export class SigninPage {
       email: ['', Validators.compose([Validators.required, Validators.pattern(emailRegex)])],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
-
+    
   }
 
   onSubmit(): void {
@@ -77,18 +82,31 @@ export class SigninPage {
   }
   
   facebookLogin(): void {
-    this.facebook.login(['email']).then( (response) => {
-    
-        this.facebook.api('/' + response.authResponse.userID + '?fields=id,name,email',[]).then((response)=>{
-          var fbresponse: string = JSON.stringify(response);
-          this.navCtrl.push(HomePage, {id:"1455970961116503",name:"源��꽦�깮",email:"kstbook@naver.com"});
-          //json parameter should be post next monday!
-        }, (error) => {
-          alert(error);
-        })
-    }).catch((error) => { console.log(error) });
+    this.auth.loginWithFacebook().subscribe((success) => {
+      let loading: Loading = this.showLoading();
+      this.signupForm = this.formBuilder.group({
+      email: [success.email, ],
+      name: [success.displayName, ],
+      photo : [success.photoURL, ],
+      username: [success.email, ],
+      });
+      let formUser = this.signupForm.value;
+      let uuid: string = success.uid;
+      this.userService.create(formUser, uuid)
+         .then(() => {
+           loading.dismiss();
+           this.navCtrl.setRoot(HomePage);
+         }).catch((error: any) => {
+           console.log(error);
+           loading.dismiss();
+           this.showAlert(error);
+          });
+    }, err => {
+      
+      console.log(err);
+    });
   }
-  
+
   
 }
 

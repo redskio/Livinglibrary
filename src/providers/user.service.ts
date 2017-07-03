@@ -50,6 +50,11 @@ export class UserService extends BaseService {
       .set(user)
       .catch(this.handlePromiseError);
   }
+  createfb(user: User, uuid: string): firebase.Promise<void> {
+    return this.af.database.object(`/users/${uuid}`)
+      .set({user})
+      .catch(this.handlePromiseError);
+  }
 
   edit(user: {name: string, username: string, photo: string}): firebase.Promise<void> {
     return this.currentUser
