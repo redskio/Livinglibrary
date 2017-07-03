@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { IonicPage, Loading, LoadingController, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, Loading, LoadingController, NavController, NavParams, ActionSheetController } from 'ionic-angular';
 import { FirebaseListObservable } from 'angularfire2';
 import { ItemService } from './../../providers/item.service';
 import { UserService } from './../../providers/user.service';
@@ -8,6 +8,7 @@ import { Item } from './../../models/item.model';
 import { User } from './../../models/user.model';
 import { HomePage } from './../home/home';
 import firebase from 'firebase';
+import { Camera } from '@ionic-native/camera';
 
 
 /**
@@ -25,17 +26,19 @@ export class AddItemPage {
   itemForm: FormGroup;
   items: FirebaseListObservable<Item[]>;
   imgurl: string[];
-  filePhoto: File[];
+  filePhoto: string[];
   currentTimestamp: Object;
   currentUser: User;
-
+  
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public formBuilder: FormBuilder,
     public itemService: ItemService,
     public loadingCtrl: LoadingController,
+    public actionSheetCtrl: ActionSheetController,
     public userService: UserService,
+    public camera: Camera,
 
   ) {
     this.itemForm = this.formBuilder.group({
@@ -70,22 +73,103 @@ export class AddItemPage {
     loading.present();
     return loading;
   }
+  public presentActionSheet(index: number) {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Select Image Source',
+      buttons: [
+        {
+          text: 'Load from Library',
+          handler: () => {
+            this.camera.getPicture({
+              sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+              destinationType: this.camera.DestinationType.DATA_URL,
+              allowEdit: true,
+              targetWidth: 1024,
+              targetHeight: 1024
+            }).then((imageData) => {
+              // imageData is a base64 encoded string
+              this.filePhoto[index] =imageData;
+              this.uploadPhoto(index);
+            }, (err) => {
+              alert(err);
+            });
 
-  onPhoto(event, _index: number): void {
-    this.filePhoto[_index] = event.target.files[0];
-    if (this.filePhoto[_index]) {
+          }
+        },
+        {
+          text: 'Use Camera',
+          handler: () => {
+            this.camera.getPicture({
+              sourceType: this.camera.PictureSourceType.CAMERA,
+              destinationType: this.camera.DestinationType.DATA_URL,
+              allowEdit: true,
+              targetWidth: 1024,
+              targetHeight: 1024
+            }).then((imageData) => {
+              // imageData is a base64 encoded string
+              this.filePhoto[index] =imageData;
+              this.uploadPhoto(index);
+            }, (err) => {
+                alert(err);            
+            });
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        }
+      ]
+    });
+    actionSheet.present();
 
-      let uploadTask = this.itemService.uploadPhoto(this.filePhoto[_index], this.currentUser.name + '_' + 'currentTimestamp' + '_' + _index);
+  }
+  uploadPhoto(index:number){
+    let uploadTask = this.itemService.uploadPhoto(this.filePhoto[index], this.currentUser.name + '_' + new Date().getTime() + '_' + index);
       let loading: Loading = this.showLoading();
 
       uploadTask.on('state_changed', (snapshot) => {
 
       }, (error: Error) => {
         // catch error
+        alert(error);
       }, () => {
         loading.dismiss();
-        this.imgurl[_index] = uploadTask.snapshot.downloadURL;
+        this.imgurl[index] = uploadTask.snapshot.downloadURL;
       });
+  }
+  //  openModal(i:number) {
+  //    let myModal = this.modalCtrl.create(CameraModalPage);
+  //    myModal.onDidDismiss(data=>{
+  //      this.camera.getPicture({
+  //        destinationType: this.camera.DestinationType.DATA_URL,
+  //        sourceType: this.camera.PictureSourceType.SAVEDPHOTOALBUM,
+  //        targetWidth: 1000,
+  //        targetHeight: 1000
+  //    }).then((imageData) => {
+  //      // imageData is a base64 encoded string
+  //        this.imgurl[i] = "data:image/jpeg;base64," + imageData;
+  //        
+  //    }, (err) => {
+  //        console.log(err);
+  //    });
+  //    });
+  //    myModal.present();
+  //  }
+  onPhoto(event, _index: number): void {
+    this.filePhoto[_index] = event.target.files[0];
+    if (this.filePhoto[_index]) {
+
+//      let uploadTask = this.itemService.uploadPhoto(this.filePhoto[_index], this.currentUser.name + '_' + 'currentTimestamp' + '_' + _index);
+//      let loading: Loading = this.showLoading();
+//
+//      uploadTask.on('state_changed', (snapshot) => {
+//
+//      }, (error: Error) => {
+//        // catch error
+//      }, () => {
+//        loading.dismiss();
+//        this.imgurl[_index] = uploadTask.snapshot.downloadURL;
+//      });
 
     }
   }
@@ -98,24 +182,24 @@ export class AddItemPage {
     let selling_price: number = formItem.selling_price;
     let purchase_price: number = formItem.purchase_price;
     let normal_price: number = formItem.normal_price;
-    
+
     let date: number = new Date().getTime();
     let obduedate = new Date();
-    
+
     switch (formItem._duration) {
       case 'min':
-        obduedate.setMinutes(obduedate.getMinutes()+formItem._time);
+        obduedate.setMinutes(obduedate.getMinutes() + formItem._time);
         break;
       case 'hour':
-        obduedate.setHours(obduedate.getHours()+formItem._time);
+        obduedate.setHours(obduedate.getHours() + formItem._time);
         break;
       case 'day':
-        obduedate.setDate(obduedate.getDate()+formItem._time);
+        obduedate.setDate(obduedate.getDate() + formItem._time);
         break;
     }
     let duedate: number = obduedate.getTime();
-      this.itemService.addItem(title,content,location,date,duedate,selling_price,normal_price,purchase_price,this.imgurl[0],this.imgurl[1],this.imgurl[2]);
-      this.navCtrl.push(HomePage);
+    this.itemService.addItem(title, content, location, date, duedate, selling_price, normal_price, purchase_price, this.imgurl[0], this.imgurl[1], this.imgurl[2]);
+    this.navCtrl.push(HomePage);
 
   }
 }

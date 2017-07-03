@@ -32,11 +32,13 @@
         },
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "kr.whatshoe.outlet"
-        }
-    },
-    "dependent_plugins": {
+        },
         "cordova-plugin-compat": {
             "PACKAGE_NAME": "kr.whatshoe.outlet"
+        },
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "kr.whatshoe.outlet"
         }
-    }
+    },
+    "dependent_plugins": {}
 }

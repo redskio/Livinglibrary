@@ -6,6 +6,7 @@
     <content src="index.html" />
     <access origin="*" />
     <allow-navigation href="http://ionic.local/*" />
+    <allow-navigation href="http://192.168.0.218:8100" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
@@ -90,5 +91,9 @@
     <plugin name="cordova-plugin-facebook4" spec="~1.9.1">
         <variable name="APP_ID" value="234943326999319" />
         <variable name="APP_NAME" value="livinglibrary" />
+    <plugin name="cordova-plugin-compat" spec="~1.1.0" />
+    <plugin name="cordova-plugin-camera" spec="~2.4.1" />
+        <variable name="CAMERA_USAGE_DESCRIPTION" value=" " />
+        <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value=" " />
     </plugin>
 </widget>

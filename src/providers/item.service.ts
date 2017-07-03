@@ -65,12 +65,12 @@ export class ItemService extends BaseService {
       price: _price
     });
   }
-  uploadPhoto(file: File, _filename: string): firebase.storage.UploadTask {
+  uploadPhoto(url: string, _filename: string): firebase.storage.UploadTask {
     return this.firebaseApp
       .storage()
       .ref()
       .child(`/items/${_filename}`)
-      .put(file);
+      .putString(url, 'base64', {contentType:'image/jpeg'});
   }
 
 }

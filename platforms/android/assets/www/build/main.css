@@ -29752,6 +29752,23 @@ ion-navbar.toolbar {
   font-size: 7.0em;
 }
 
+item-img p {
+  margin-top: -10px;
+}
+
+item-img .imagebox {
+  width: 100%;
+}
+
+item-img .custom-background {
+  background-color: #333;
+}
+
+item-img ion-avatar {
+  padding-top: 10px;
+  padding-bottom: 35px;
+}
+
 message-box {
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -29818,6 +29835,10 @@ user-info .custom-background {
 user-info ion-avatar {
   padding-top: 10px;
   padding-bottom: 35px;
+}
+
+page-add-item .item-img {
+  width: 30%;
 }
 
 page-home .scroll {

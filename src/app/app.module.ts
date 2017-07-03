@@ -36,6 +36,7 @@ import { ItemImg } from './../components/item-img/item-img.component';
 import { AddItemPage } from '../pages/add-item/add-item';
 import { Facebook } from '@ionic-native/facebook';
 import { Geolocation } from '@ionic-native/geolocation';
+import {Camera} from '@ionic-native/camera';
 
 const firebaseAppConfig: FirebaseAppConfig = {
     apiKey: "AIzaSyD4GWzQWo51VR0Fk4-PFU3Va2qGGnO3rsc",
@@ -105,7 +106,8 @@ const firebaseAuthConfig = {
     Facebook,
     Geolocation,
     OutletService,
-    AuthProvider
+    AuthProvider,
+    Camera
   ]
 })
 export class AppModule {}

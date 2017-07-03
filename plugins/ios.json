@@ -38,6 +38,11 @@
     "dependent_plugins": {
         "cordova-plugin-compat": {
             "PACKAGE_NAME": "kr.whatshoe.outlet"
+        },
+        "cordova-plugin-camera": {
+            "CAMERA_USAGE_DESCRIPTION": " ",
+            "PHOTOLIBRARY_USAGE_DESCRIPTION": " ",
+            "PACKAGE_NAME": "kr.whatshoe.outlet"
         }
     }
 }

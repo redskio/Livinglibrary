@@ -14,15 +14,9 @@
 	(ngSubmit)="onSubmit(); $event.preventDefault()">
 	
 	<ion-label>제품 사진</ion-label>
-	<ion-item> 
-	<item-img [itemImg]="imgurl[0]"></item-img>
-	<item-img [itemImg]="imgurl[1]"></item-img>
-	<item-img [itemImg]="imgurl[2]"></item-img>
-	</ion-item>
-	<input type="file" accept="image/*" (change)="onPhoto($event,0)">
-	<input type="file" accept="image/*" (change)="onPhoto($event,1)">
-	<input type="file" accept="image/*" (change)="onPhoto($event,2)">
-	
+	<item-img class="item-img" [itemImg]="imgurl[0]" (click)="presentActionSheet(0)"></item-img>
+	<item-img class="item-img" [itemImg]="imgurl[1]" (click)="presentActionSheet(1)"></item-img>
+	<item-img class="item-img" [itemImg]="imgurl[2]" (click)="presentActionSheet(2)"></item-img>
 	<ion-item> 
 	<ion-label>브랜드</ion-label>
 	<ion-select formControlName="_brand">
@@ -38,10 +32,10 @@
 	<ion-item> 
 	<ion-input type="text" placeholder="상품 설명 및 주의사항" formControlName="_content"></ion-input>
 	</ion-item>
-	<ion-item>
-		<ion-label floating>구매장소</ion-label> <button ion-button onClick="">지도</button>
-		<ion-input type="hidden" formControlName="_location"></ion-input>
-	</ion-item>
+	<ion-label>구매장소</ion-label> 
+	<ion-input type="hidden" formControlName="_location"></ion-input>
+	<br>
+	<button ion-button  type="button"  >지도</button>
 	<ion-item>
 	<ion-label floating>구매가능 기간</ion-label>
 	<ion-input type="number" formControlName="_time"></ion-input>
