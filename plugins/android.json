@@ -7,6 +7,12 @@
         "files": {}
     },
     "installed_plugins": {
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "kr.whatshoe.outlet"
+        },
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "kr.whatshoe.outlet"
+        },
         "cordova-plugin-console": {
             "PACKAGE_NAME": "kr.whatshoe.outlet"
         },
@@ -31,12 +37,6 @@
             "PACKAGE_NAME": "kr.whatshoe.outlet"
         },
         "ionic-plugin-keyboard": {
-            "PACKAGE_NAME": "kr.whatshoe.outlet"
-        },
-        "cordova-plugin-compat": {
-            "PACKAGE_NAME": "kr.whatshoe.outlet"
-        },
-        "cordova-plugin-camera": {
             "PACKAGE_NAME": "kr.whatshoe.outlet"
         }
     },
