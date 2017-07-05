@@ -4,6 +4,7 @@ import { AlertController,App,MenuController, NavController } from 'ionic-angular
 
 import { FirebaseListObservable } from 'angularfire2';
 
+import { pushService } from './../../providers/push.service';
 import { AuthService } from './../../providers/auth.service';
 import { AddItemPage } from './../add-item/add-item';
 import { ChatService } from './../../providers/chat.service';
@@ -29,9 +30,11 @@ export class HomePage extends BaseComponent {
     public menuCtrl: MenuController,
     public navCtrl: NavController,
     public userService: UserService,
+    public pushService: pushService,
     public app: App,
   ) {
 	super(alertCtrl, authService, app, menuCtrl);
+    this.pushService.getToken();
   }
 
   ionViewCanEnter(): Promise<boolean> {
@@ -46,7 +49,7 @@ export class HomePage extends BaseComponent {
   addPage(): void{
   	this.navCtrl.push(AddItemPage);
   }
-  
+
   onOutLet(): void{
   	alert("test");
   	this.navCtrl.push(outletListPage);

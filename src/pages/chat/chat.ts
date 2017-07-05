@@ -102,6 +102,7 @@ export class ChatPage {
       this.messageService.create(
         new Message(
           this.sender.$key,
+          this.recipient.$key,
           newMessage,
           currentTimestamp
         ),

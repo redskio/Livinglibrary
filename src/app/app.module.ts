@@ -13,6 +13,7 @@ import { AuthProvider} from '../providers/auth-provider' ;
 import { CapitalizePipe } from './../pipes/capitalize.pipe';
 import { ChatPage } from './../pages/chat/chat';
 import { ChatService } from './../providers/chat.service';
+import { pushService } from './../providers/push.service';
 import { ItemService } from './../providers/item.service';
 import { CustomLoggedHeaderComponent } from './../components/custom-logged-header/custom-logged-header.component';
 import { MessageBoxComponent } from './../components/message-box/message-box.component';
@@ -37,6 +38,7 @@ import { AddItemPage } from '../pages/add-item/add-item';
 import { Facebook } from '@ionic-native/facebook';
 import { Geolocation } from '@ionic-native/geolocation';
 import {Camera} from '@ionic-native/camera';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 const firebaseAppConfig: FirebaseAppConfig = {
     apiKey: "AIzaSyD4GWzQWo51VR0Fk4-PFU3Va2qGGnO3rsc",
@@ -107,7 +109,9 @@ const firebaseAuthConfig = {
     Geolocation,
     OutletService,
     AuthProvider,
-    Camera
+    Camera,
+    AngularFireDatabase,
+    pushService
   ]
 })
 export class AppModule {}

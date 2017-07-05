@@ -24,6 +24,9 @@
             "APP_NAME": "livinglibrary",
             "PACKAGE_NAME": "kr.whatshoe.outlet"
         },
+        "cordova-plugin-fcm": {
+            "PACKAGE_NAME": "kr.whatshoe.outlet"
+        },
         "cordova-plugin-geolocation": {
             "PACKAGE_NAME": "kr.whatshoe.outlet"
         },
