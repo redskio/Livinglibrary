@@ -35,9 +35,10 @@ import { outletListPage } from '../pages/outlet_list/outlet_list';
 import { AuthPage } from '../pages/auth/auth';
 import { ItemImg } from './../components/item-img/item-img.component';
 import { AddItemPage } from '../pages/add-item/add-item';
+import { ItemViewPage } from '../pages/item-view/item-view';
 import { Facebook } from '@ionic-native/facebook';
 import { Geolocation } from '@ionic-native/geolocation';
-import {Camera} from '@ionic-native/camera';
+import { Camera } from '@ionic-native/camera';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 const firebaseAppConfig: FirebaseAppConfig = {
@@ -70,6 +71,7 @@ const firebaseAuthConfig = {
     UserProfilePage,
     homeChatPage,
     homeUserPage,
+    ItemViewPage,
     AuthPage,
     outletPage,
     outletListPage,
@@ -87,6 +89,7 @@ const firebaseAuthConfig = {
     HomePage,
     MyApp,
     AddItemPage,
+    ItemViewPage,
     SigninPage,
     SignupPage,
     UserProfilePage,

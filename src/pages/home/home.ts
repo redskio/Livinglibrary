@@ -13,6 +13,7 @@ import { ItemService } from './../../providers/item.service';
 import { Item } from './../../models/item.model';
 import { BaseComponent } from "../base.component";
 import { outletListPage } from './../outlet_list/outlet_list';
+import { ItemViewPage } from './../item-view/item-view';
 
 @Component({
   selector: 'page-home',
@@ -54,5 +55,9 @@ export class HomePage extends BaseComponent {
   	alert("test");
   	this.navCtrl.push(outletListPage);
   }
-
+  onItemClick(item : Item){
+        this.navCtrl.push(ItemViewPage, {
+          itemInfo: item
+    });
+  }
 }

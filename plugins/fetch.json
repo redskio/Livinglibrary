@@ -66,14 +66,6 @@
         "is_top_level": true,
         "variables": {}
     },
-    "cordova-plugin-compat": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-compat"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "cordova-plugin-camera": {
         "source": {
             "type": "registry",
@@ -82,10 +74,34 @@
         "is_top_level": true,
         "variables": {}
     },
+    "cordova-plugin-file": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-file"
+        },
+        "is_top_level": false,
+        "variables": {}
+    },
+    "cordova-plugin-compat": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-compat"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-image-resizer": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-image-resizer"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
     "cordova-plugin-fcm": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-fcm@^2.1.2"
+            "id": "cordova-plugin-fcm"
         },
         "is_top_level": true,
         "variables": {}

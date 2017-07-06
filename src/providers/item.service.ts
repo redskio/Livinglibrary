@@ -30,8 +30,11 @@ export class ItemService extends BaseService {
       .set(item)
       .catch(this.handlePromiseError);
   }
-  addItem(title: string,
+  addItem(
+    userId: string,
+    title: string,
     content: string,
+    brand: string,
     location: string,
     date: number,
     duedate: number,
@@ -40,10 +43,13 @@ export class ItemService extends BaseService {
     purchase_price: number,
     imgurl1: string,
     imgurl2: string,
-    imgurl3: string) {
+    imgurl3: string,
+	_thumb: string) {
     this.items.push({
+      userId:userId,
       title: title,
       content: content,
+      brand: brand,
       location: location,
       date: date,
       duedate: duedate,
@@ -52,7 +58,8 @@ export class ItemService extends BaseService {
       purchase_price: purchase_price,
       imgurl1: imgurl1,
       imgurl2: imgurl2,
-      imgurl3: imgurl3
+      imgurl3: imgurl3,
+	  _thumb: _thumb
     });
   }
   removeItem(itemId: string) {

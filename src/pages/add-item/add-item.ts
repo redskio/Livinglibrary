@@ -9,7 +9,7 @@ import { User } from './../../models/user.model';
 import { HomePage } from './../home/home';
 import firebase from 'firebase';
 import { Camera } from '@ionic-native/camera';
-
+import { ImageResizerOptions, ImageResizer } from 'ionic-native';
 
 /**
  * Generated class for the AddItemPage page.
@@ -27,6 +27,7 @@ export class AddItemPage {
   items: FirebaseListObservable<Item[]>;
   imgurl: string[];
   filePhoto: string[];
+  _thumb: string;
   currentTimestamp: Object;
   currentUser: User;
   
@@ -39,7 +40,6 @@ export class AddItemPage {
     public actionSheetCtrl: ActionSheetController,
     public userService: UserService,
     public camera: Camera,
-
   ) {
     this.itemForm = this.formBuilder.group({
       _title: ['', [Validators.required, Validators.minLength(3)]],
@@ -90,6 +90,9 @@ export class AddItemPage {
               // imageData is a base64 encoded string
               this.filePhoto[index] =imageData;
               this.uploadPhoto(index);
+              if(index==0){
+                this.resize(this.filePhoto[index]);
+              }
             }, (err) => {
               alert(err);
             });
@@ -109,6 +112,9 @@ export class AddItemPage {
               // imageData is a base64 encoded string
               this.filePhoto[index] =imageData;
               this.uploadPhoto(index);
+              if(index==0){
+                this.resize(this.filePhoto[index]);
+              }
             }, (err) => {
                 alert(err);            
             });
@@ -121,6 +127,32 @@ export class AddItemPage {
       ]
     });
     actionSheet.present();
+  }
+  resize(_img: string){
+    let options1 = {
+       uri: _img,
+       quality: 90,
+       width: 100,
+       height: 100,
+    } as ImageResizerOptions;
+
+
+//    ImageResizer
+//      .resize(options1)
+//      .then((filePath: any) => {
+//          let uploadTask = this.itemService.uploadPhoto(filePath, 'thumb_'+this.currentUser.name + '_' + new Date().getTime());
+//          let loading: Loading = this.showLoading();   
+//          uploadTask.on('state_changed', (snapshot) => {
+//    
+//          }, (error: Error) => {
+//            // catch error
+//            alert(error);
+//          }, () => {
+//            loading.dismiss();
+//            this._thumb = uploadTask.snapshot.downloadURL;
+//          });
+//       })
+//      .catch(e => alert("Failedresizeerr"+e));
 
   }
   uploadPhoto(index:number){
@@ -137,69 +169,38 @@ export class AddItemPage {
         this.imgurl[index] = uploadTask.snapshot.downloadURL;
       });
   }
-  //  openModal(i:number) {
-  //    let myModal = this.modalCtrl.create(CameraModalPage);
-  //    myModal.onDidDismiss(data=>{
-  //      this.camera.getPicture({
-  //        destinationType: this.camera.DestinationType.DATA_URL,
-  //        sourceType: this.camera.PictureSourceType.SAVEDPHOTOALBUM,
-  //        targetWidth: 1000,
-  //        targetHeight: 1000
-  //    }).then((imageData) => {
-  //      // imageData is a base64 encoded string
-  //        this.imgurl[i] = "data:image/jpeg;base64," + imageData;
-  //        
-  //    }, (err) => {
-  //        console.log(err);
-  //    });
-  //    });
-  //    myModal.present();
-  //  }
-  onPhoto(event, _index: number): void {
-    this.filePhoto[_index] = event.target.files[0];
-    if (this.filePhoto[_index]) {
-
-//      let uploadTask = this.itemService.uploadPhoto(this.filePhoto[_index], this.currentUser.name + '_' + 'currentTimestamp' + '_' + _index);
-//      let loading: Loading = this.showLoading();
-//
-//      uploadTask.on('state_changed', (snapshot) => {
-//
-//      }, (error: Error) => {
-//        // catch error
-//      }, () => {
-//        loading.dismiss();
-//        this.imgurl[_index] = uploadTask.snapshot.downloadURL;
-//      });
-
-    }
-  }
 
   onSubmit(): void {
-    let formItem = this.itemForm.value;
-    let title: string = formItem._title;
-    let content: string = formItem._content;
-    let location: string = formItem._location;
-    let selling_price: number = formItem.selling_price;
-    let purchase_price: number = formItem.purchase_price;
-    let normal_price: number = formItem.normal_price;
-
-    let date: number = new Date().getTime();
-    let obduedate = new Date();
-
-    switch (formItem._duration) {
-      case 'min':
-        obduedate.setMinutes(obduedate.getMinutes() + formItem._time);
-        break;
-      case 'hour':
-        obduedate.setHours(obduedate.getHours() + formItem._time);
-        break;
-      case 'day':
-        obduedate.setDate(obduedate.getDate() + formItem._time);
-        break;
-    }
-    let duedate: number = obduedate.getTime();
-    this.itemService.addItem(title, content, location, date, duedate, selling_price, normal_price, purchase_price, this.imgurl[0], this.imgurl[1], this.imgurl[2]);
-    this.navCtrl.push(HomePage);
+    this.userService.currentUser
+      .first()
+      .subscribe((currentUser: User) => {
+          let formItem = this.itemForm.value;
+          let title: string = formItem._title;
+          let content: string = formItem._content;
+          let brand: string = formItem._brand;
+          let location: string = formItem._location;
+          let selling_price: number = formItem.selling_price;
+          let purchase_price: number = formItem.purchase_price;
+          let normal_price: number = formItem.normal_price;
+          let date: number = new Date().getTime();
+          let obduedate = new Date();
+      
+          switch (formItem._duration) {
+            case 'min':
+              obduedate.setMinutes(obduedate.getMinutes() + formItem._time);
+              break;
+            case 'hour':
+              obduedate.setHours(obduedate.getHours() + formItem._time);
+              break;
+            case 'day':
+              obduedate.setDate(obduedate.getDate() + formItem._time);
+              break;
+          }
+          this._thumb= '';
+          let duedate: number = obduedate.getTime();
+          this.itemService.addItem(currentUser.$key, title, content, brand, location, date, duedate, selling_price, normal_price, purchase_price, this.imgurl[0], this.imgurl[1], this.imgurl[2], this._thumb);
+          this.navCtrl.push(HomePage);
+        });
 
   }
 }

@@ -25,17 +25,21 @@
 </ion-header>
 
 <ion-content>
-	<!--  <ion-buttons end>
- 		 <button ion-button icon-only (click)="additem()">
-    	 <ion-icon name="add"></ion-icon>
-  		 </button>
-	</ion-buttons>-->
-	<ion-list>
-		<ion-item *ngFor="let item of items | async">
-			{{item.title}}
-			{{item.price}}
-		</ion-item>
-	</ion-list>
+ <div [ngSwitch]="view">
+
+    <ion-list>
+      <button ion-item *ngFor="let item of items | async" (click)="onItemClick(item)">
+		<ion-thumbnail item-start >
+          <img [src]="item.imgurl1 || 'assets/images/no-photo.jpg'">
+        </ion-thumbnail>
+        <h2>{{ item.brand }}</h2>
+        <h2>{{ item.title }}</h2>
+        <p>Original Price <label style="text-decoration: line-through;" >${{ item.normal_price }}</label>  ${{ item.selling_price }}</p>
+      </button>
+    </ion-list>
+
+  </div>
+
  <ion-fab right bottom >
    <button ion-fab (click)="addPage()">+</button>
  </ion-fab>
