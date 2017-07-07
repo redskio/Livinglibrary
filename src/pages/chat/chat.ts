@@ -1,5 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
-import { Content, NavController, NavParams } from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import { Content, NavController, NavParams, MenuController, AlertController, App } from 'ionic-angular';
 
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 
@@ -17,9 +17,10 @@ import firebase from 'firebase';
   selector: 'page-chat',
   templateUrl: 'chat.html',
 })
-export class ChatPage {
+export class ChatPage{
 
   @ViewChild(Content) content: Content;
+
   messages: FirebaseListObservable<Message[]>;
   pageTitle: string;
   sender: User;
@@ -33,7 +34,10 @@ export class ChatPage {
     public messageService: MessageService,
     public navCtrl: NavController,
     public navParams: NavParams,
-    public userService: UserService
+    public userService: UserService,
+    public alertCtrl: AlertController,
+    public app: App,
+    public menuCtrl: MenuController
   ) {
   }
 

@@ -1,7 +1,24 @@
 <ion-header>
+  <ion-navbar>
+  <button ion-button menuToggle="user-menu">
+    <ion-icon name="menu"></ion-icon>
+  </button>
 
-  <custom-logged-header [title]="pageTitle" [user]="recipient"></custom-logged-header>
+  <ion-title>
 
+    <ion-item detail-none no-lines color="transparent" *ngIf="user; else titleTemplate">
+      <ion-avatar item-left>
+        <img [src]="recipient.photo || 'assets/images/no-photo.jpg'">
+      </ion-avatar>
+      {{ pageTitle }}
+    </ion-item>
+
+    <ng-template #titleTemplate>
+      {{ pageTitle }}
+    </ng-template>
+
+  </ion-title>
+  </ion-navbar>
 </ion-header>
 
 
