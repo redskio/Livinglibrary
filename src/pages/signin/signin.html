@@ -7,10 +7,9 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding  id="content-body">
 
   <h1 text-center>
-    <ion-icon class="auth-icon" name="chatboxes" color="primary"></ion-icon>
   </h1>
 
   <form [formGroup]="signinForm" (ngSubmit)="onSubmit(); $event.preventDefault()">
@@ -29,11 +28,11 @@
     <button ion-button full type="submit" [disabled]="signinForm.invalid">Enter</button>
 
   </form>
-    
+
   <button ion-button center (click)="facebookLogin()">
     Log In with Facebook
   </button>
 
   <button ion-button full clear textx-center (click)="onSignup()">Sign Up</button>
-  
+
 </ion-content>
