@@ -7,7 +7,9 @@
         "files": {}
     },
     "installed_plugins": {
-
+        "cordova-plugin-android-permissions": {
+            "PACKAGE_NAME": "kr.whatshoe.outlet"
+        },
         "cordova-plugin-camera": {
             "PACKAGE_NAME": "kr.whatshoe.outlet"
         },
@@ -45,19 +47,14 @@
         },
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "kr.whatshoe.outlet"
-        },
-        "cordova-sqlite-storage": {
-            "PACKAGE_NAME": "kr.whatshoe.outlet"
         }
     },
     "dependent_plugins": {
         "cordova-plugin-file": {
             "PACKAGE_NAME": "kr.whatshoe.outlet"
         },
-      "cordova-plugin-android-permissions": {
-        "PACKAGE_NAME": "kr.whatshoe.outlet"
-      }
-    },
-
-    "dependent_plugins": {}
+        "cordova-sqlite-storage": {
+            "PACKAGE_NAME": "kr.whatshoe.outlet"
+        }
+    }
 }

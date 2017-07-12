@@ -24,16 +24,6 @@ export class pushService extends BaseService {
   }
 
   pushCheck() {
-    FCMPlugin.onNotification(
-      (data)=>{
-        if(data.wasTapped){
-          alert( JSON.stringify(data.message) );
-          alert("2_");
-        } else {
-          alert("1");
-        }
-      });
-    /*
     FCMPlugin.onNotification(function(data){
       if(data.wasTapped){
         //Notification was received on device tray and tapped by the user.
@@ -46,7 +36,7 @@ export class pushService extends BaseService {
         console.log("222222222222222")
         console.log(data.wasTapped);
       }
-    });*/
+    });
 
     FCMPlugin.onTokenRefresh(function(token){
       alert( token );
