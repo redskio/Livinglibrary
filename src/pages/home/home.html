@@ -1,3 +1,5 @@
+<meta charset="utf-8" >
+
 <ion-header>
   <ion-navbar>
   	<button ion-button icon-only menuToggle="user-menu">
@@ -25,6 +27,24 @@
 </ion-header>
 
 <ion-content>
+<ion-slides pager style="height:30%">
+
+  <ion-slide style="background-color: black">
+    	<img src="assets/images/main_1.jpg">
+  </ion-slide>
+
+  <ion-slide style="background-color: black">
+        <img src="assets/images/main_2.jpg">
+    
+  </ion-slide>
+
+  <ion-slide style="background-color: black">
+        <img src="assets/images/main_3.jpg">
+    
+  </ion-slide>
+
+</ion-slides>
+ <div style="width:100%; text-align:center;">{{items_length}}개의 상품이 올라왔어요.</div>
  <div [ngSwitch]="view">
 
     <ion-list>

@@ -4,12 +4,15 @@ import { IonicPage, Loading, LoadingController, NavController, NavParams, Action
 import { FirebaseListObservable } from 'angularfire2';
 import { ItemService } from './../../providers/item.service';
 import { UserService } from './../../providers/user.service';
+import { OutletService } from '../../providers/outlet.service';
 import { Item } from './../../models/item.model';
 import { User } from './../../models/user.model';
+import { Outlet } from './../../models/outlet.model';
 import { HomePage } from './../home/home';
 import firebase from 'firebase';
 import { Camera } from '@ionic-native/camera';
 import { ImageResizerOptions, ImageResizer } from 'ionic-native';
+import { outletPage } from './../outlet/outlet';
 
 /**
  * Generated class for the AddItemPage page.
@@ -25,6 +28,7 @@ import { ImageResizerOptions, ImageResizer } from 'ionic-native';
 export class AddItemPage {
   itemForm: FormGroup;
   items: FirebaseListObservable<Item[]>;
+  outlets: FirebaseListObservable<Outlet[]>;
   imgurl: string[];
   filePhoto: string[];
   _thumb: string;
@@ -40,6 +44,7 @@ export class AddItemPage {
     public actionSheetCtrl: ActionSheetController,
     public userService: UserService,
     public camera: Camera,
+    public outletService: OutletService,
   ) {
     this.itemForm = this.formBuilder.group({
       _title: ['', [Validators.required, Validators.minLength(3)]],
@@ -52,8 +57,9 @@ export class AddItemPage {
       normal_price: ['', [Validators.required]],
       purchase_price: ['', [Validators.required]],
     });
-    this.imgurl = new Array(3);
+    this.imgurl =  ['', '', ''];
     this.filePhoto = new Array(3);
+    this.imgurl
   }
 
   ionViewDidLoad() {
@@ -64,6 +70,7 @@ export class AddItemPage {
       .subscribe((currentUser: User) => {
         this.currentUser = currentUser;
       });
+    this.outlets = this.outletService.outlet;
   }
 
   private showLoading(): Loading {
@@ -169,7 +176,9 @@ export class AddItemPage {
         this.imgurl[index] = uploadTask.snapshot.downloadURL;
       });
   }
-
+  currentMap(){
+    this.navCtrl.push(outletPage);
+  }
   onSubmit(): void {
     this.userService.currentUser
       .first()

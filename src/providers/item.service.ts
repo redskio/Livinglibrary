@@ -11,7 +11,7 @@ import { Item } from './../models/item.model';
 export class ItemService extends BaseService {
 
   items: FirebaseListObservable<Item[]>;
-
+  private item_length:number;
   constructor(
     public af: AngularFire,
     @Inject(FirebaseApp) public firebaseApp: any,
