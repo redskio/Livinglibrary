@@ -33,8 +33,8 @@ export class outletListPage {
   	}
  	
  	getOutlet(i, outlets){
- 		console.log(outlets);
  		let data = {
+      _type: 'outlet',
  			title: outlets.title,
  			latitude: outlets.latitude,
  			longitude: outlets.longitude

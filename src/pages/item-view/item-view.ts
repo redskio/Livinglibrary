@@ -1,11 +1,16 @@
-import { Chat } from '../../models/chat.model';
-import { Item } from '../../models/item.model';
-import { User } from '../../models/user.model';
-import { ChatService } from '../../providers/chat.service';
-import { UserService } from '../../providers/user.service';
-import { ChatPage } from '../chat/chat';
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Chat} from '../../models/chat.model';
+import {Item} from '../../models/item.model';
+import {Outlet} from '../../models/outlet.model';
+import {User} from '../../models/user.model';
+import {ChatService} from '../../providers/chat.service';
+import {UserService} from '../../providers/user.service';
+import {OutletService} from '../../providers/outlet.service';
+import {ChatPage} from '../chat/chat';
+import {Component, ViewChild, ElementRef} from '@angular/core';
+import {FirebaseObjectObservable} from 'angularfire2';
+import {IonicPage, Loading, LoadingController, NavController, NavParams} from 'ionic-angular';
+import firebase from 'firebase';
+declare var google;
 
 /**
  * Generated class for the ItemViewPage page.
@@ -19,21 +24,78 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'item-view.html',
 })
 export class ItemViewPage {
+  handleObservableError: any;
   public currentItem: Item;
   public user: User;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public userService: UserService, public chatService: ChatService) {
+  public current_location: FirebaseObjectObservable<Outlet>;
+  public location_title: string;
+  @ViewChild('map') mapElement: ElementRef;
+  map: any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public userService: UserService, public chatService: ChatService, public outletService: OutletService, public loadingCtrl: LoadingController) {
     this.currentItem = this.navParams.get('itemInfo');
     userService.get(this.currentItem.userId).first()
       .subscribe((editor: User) => {
         this.user = editor;
       });
+    this.current_location = outletService.getOutlet(this.currentItem.location);
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ItemViewPage');
+    this.mapLoad();
+
   }
-  onProfileClick(){
-  this.userService.currentUser
+  mapLoad() {
+    this.current_location.subscribe(loc => {
+      let loading: Loading = this.showLoading();
+      if (loc.latitude != 0) {
+        loading.dismiss();
+
+      }
+      let latitude = loc.latitude;
+      let longitude = loc.longitude;
+      let title = loc.title;
+      this.location_title = title;
+      let latLng = new google.maps.LatLng(latitude, longitude);
+
+      let mapOptions = {
+        center: latLng,
+        zoom: 15,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      }
+
+      this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+      let marker = new google.maps.Marker({
+        map: this.map,
+        animation: google.maps.Animation.DROP,
+        position: latLng
+      });
+
+      this.addInfoWindow(marker, title);
+    });
+
+  }
+  addInfoWindow(marker, content) {
+
+    let infoWindow = new google.maps.InfoWindow({
+      content: content
+    });
+
+    google.maps.event.addListener(marker, 'click', () => {
+      infoWindow.open(this.map, marker);
+    });
+
+  }
+  private showLoading(): Loading {
+    let loading: Loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
+
+    loading.present();
+
+    return loading;
+  }
+  onProfileClick() {
+    this.userService.currentUser
       .first()
       .subscribe((currentUser: User) => {
 

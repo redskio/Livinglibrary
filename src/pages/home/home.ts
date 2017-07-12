@@ -23,6 +23,7 @@ import {Storage} from '@ionic/storage';
 export class HomePage extends BaseComponent {
 
   items: FirebaseListObservable<Item[]>;
+  items_length: number;
   view: string = 'chats';
   constructor(
     public alertCtrl: AlertController,
@@ -45,7 +46,8 @@ export class HomePage extends BaseComponent {
   }
 
   ionViewDidLoad() {
-    this.items = this.itemService.items;
+  this.items = this.itemService.items;
+  this.items.subscribe(item_array =>{this.items_length= item_array.length;});
 	this.menuCtrl.enable(true, 'user-menu');
   }
 
@@ -54,7 +56,6 @@ export class HomePage extends BaseComponent {
   }
 
   onOutLet(): void{
-  	alert("test");
   	this.navCtrl.push(outletListPage);
   }
   onItemClick(item : Item){

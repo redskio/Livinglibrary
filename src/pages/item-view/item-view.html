@@ -4,6 +4,8 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
+<meta charset="utf-8" >
+
 <ion-header>
 
   <ion-navbar>
@@ -36,5 +38,9 @@
           <img [src]="user.photo || 'assets/images/no-photo.jpg'">
         </ion-avatar>
         {{ user.name }}
-    </button>
+    </button><br><br>
+    {{currentItem.content}}
+    <br>
+    구매장소 {{location_title}}
+  <div #map id="map" style="height:20%"></div>
 </ion-content>
