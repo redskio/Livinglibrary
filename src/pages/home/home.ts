@@ -14,6 +14,7 @@ import { Item } from './../../models/item.model';
 import { BaseComponent } from "../base.component";
 import { outletListPage } from './../outlet_list/outlet_list';
 import { ItemViewPage } from './../item-view/item-view';
+import {Storage} from '@ionic/storage';
 
 @Component({
   selector: 'page-home',
@@ -33,8 +34,9 @@ export class HomePage extends BaseComponent {
     public userService: UserService,
     public pushService: pushService,
     public app: App,
+    public storage: Storage
   ) {
-	super(alertCtrl, authService, app, menuCtrl);
+	super(alertCtrl, authService, app, menuCtrl, storage);
     this.pushService.getToken();
   }
 

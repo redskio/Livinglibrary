@@ -18,7 +18,7 @@ export class UserProfilePage {
 
   constructor(
     public authService: AuthService,
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams,
     public userService: UserService
   ) {
@@ -37,7 +37,7 @@ export class UserProfilePage {
 
   onSubmit(event: Event): void {
     event.preventDefault();
-    
+
     if (this.filePhoto) {
 
       let uploadTask = this.userService.uploadPhoto(this.filePhoto, this.currentUser.$key);
@@ -58,7 +58,7 @@ export class UserProfilePage {
 
   }
 
-  onPhoto(event): void {  
+  onPhoto(event): void {
     this.filePhoto = event.target.files[0];
   }
 

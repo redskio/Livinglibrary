@@ -7,6 +7,7 @@ import { FirebaseAuthState } from 'angularfire2';
 
 import { AuthService } from './../providers/auth.service';
 import { SigninPage } from './../pages/signin/signin';
+import { loadPage } from './../pages/loading/loading';
 import { User } from './../models/user.model';
 import { UserService } from './../providers/user.service';
 
@@ -15,13 +16,13 @@ import { UserService } from './../providers/user.service';
 })
 export class MyApp {
 
-  rootPage:any = SigninPage;
+  rootPage:any = loadPage;
   currentUser: User;
 
   constructor(
     authService: AuthService,
-    platform: Platform, 
-    statusBar: StatusBar, 
+    platform: Platform,
+    statusBar: StatusBar,
     splashScreen: SplashScreen,
     userService: UserService
   ) {

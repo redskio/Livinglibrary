@@ -10,5 +10,6 @@
 *.sublime-workspace
 www/build/*
 platforms/*
+.idea/*
 Thumbs.db
 UserInterfaceState.xcuserstate

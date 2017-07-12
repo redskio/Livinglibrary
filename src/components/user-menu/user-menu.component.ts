@@ -8,6 +8,7 @@ import { UserProfilePage } from './../../pages/user-profile/user-profile';
 import { homeUserPage } from './../../pages/home_user/home_user';
 import { homeChatPage } from './../../pages/home_chat/home_chat';
 import { outletListPage } from './../../pages/outlet_list/outlet_list';
+import {Storage} from '@ionic/storage';
 @Component({
   selector: 'user-menu',
   templateUrl: 'user-menu.component.html'
@@ -20,23 +21,24 @@ export class UserMenuComponent extends BaseComponent {
     public alertCtrl: AlertController,
     public authService: AuthService,
     public app: App,
-    public menuCtrl: MenuController
+    public menuCtrl: MenuController,
+    public storage: Storage
   ) {
-    super(alertCtrl, authService, app, menuCtrl);
+    super(alertCtrl, authService, app, menuCtrl, storage);
   }
 
   onProfile(): void {
     this.navCtrl.push(UserProfilePage);
   }
-  
+
   onChat(): void{
   	this.navCtrl.push(homeChatPage);
   }
-  
+
   onUser(): void{
   	this.navCtrl.push(homeUserPage);
   }
-  
+
   onOutLet(): void{
   	this.navCtrl.push(outletListPage);
   }

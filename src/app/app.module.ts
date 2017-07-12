@@ -23,6 +23,7 @@ import { MyApp } from './app.component';
 import { ProgressBarComponent } from './../components/progress-bar/progress-bar.component';
 import { SigninPage } from './../pages/signin/signin';
 import { SignupPage } from './../pages/signup/signup';
+import { loadPage } from './../pages/loading/loading';
 import { UserInfoComponent } from './../components/user-info/user-info.component';
 import { UserMenuComponent } from './../components/user-menu/user-menu.component';
 import { UserProfilePage } from './../pages/user-profile/user-profile';
@@ -40,6 +41,7 @@ import { Facebook } from '@ionic-native/facebook';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Camera } from '@ionic-native/camera';
 import { AngularFireDatabase } from 'angularfire2/database';
+import {IonicStorageModule } from '@ionic/storage';
 
 const firebaseAppConfig: FirebaseAppConfig = {
     apiKey: "AIzaSyD4GWzQWo51VR0Fk4-PFU3Va2qGGnO3rsc",
@@ -75,13 +77,15 @@ const firebaseAuthConfig = {
     AuthPage,
     outletPage,
     outletListPage,
-    ItemImg
+    ItemImg,
+    loadPage
   ],
   imports: [
     AngularFireModule.initializeApp(firebaseAppConfig, firebaseAuthConfig),
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -97,7 +101,8 @@ const firebaseAuthConfig = {
     homeChatPage,
     AuthPage,
     outletPage,
-    outletListPage
+    outletListPage,
+    loadPage
   ],
   providers: [
     AuthService,
@@ -114,7 +119,8 @@ const firebaseAuthConfig = {
     AuthProvider,
     Camera,
     AngularFireDatabase,
-    pushService
+    pushService,
+    IonicStorageModule
   ]
 })
 export class AppModule {}

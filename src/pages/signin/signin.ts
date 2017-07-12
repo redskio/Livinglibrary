@@ -8,6 +8,7 @@ import { SignupPage } from './../signup/signup';
 import { AuthProvider } from './../../providers/auth-provider';
 import { Facebook } from '@ionic-native/facebook';
 import { UserService } from './../../providers/user.service';
+import {Storage} from '@ionic/storage';
 
 @Component({
   selector: 'page-signin',
@@ -23,11 +24,11 @@ export class SigninPage {
     public authService: AuthService,
     public formBuilder: FormBuilder,
     public loadingCtrl: LoadingController,
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public navParams: NavParams,
+    public storage: Storage,
     private facebook: Facebook,
     private auth: AuthProvider,
-
     public userService: UserService
   ) {
 
@@ -37,7 +38,6 @@ export class SigninPage {
       email: ['', Validators.compose([Validators.required, Validators.pattern(emailRegex)])],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
-    
   }
 
   onSubmit(): void {
@@ -45,9 +45,13 @@ export class SigninPage {
     let loading: Loading = this.showLoading();
 
     this.authService.signinWithEmail(this.signinForm.value)
+
       .then((isLogged: boolean) => {
 
         if (isLogged) {
+          this.storage.set('email',this.signinForm.value.email);
+          this.storage.set('pwd', this.signinForm.value.password);
+          this.storage.set('logType', 'email');
           this.navCtrl.setRoot(HomePage);
           loading.dismiss();
         }
@@ -80,7 +84,7 @@ export class SigninPage {
       buttons: ['Ok']
     }).present();
   }
-  
+
   facebookLogin(): void {
     this.auth.loginWithFacebook().subscribe((success) => {
       let loading: Loading = this.showLoading();
@@ -95,6 +99,10 @@ export class SigninPage {
       this.userService.create(formUser, uuid)
          .then(() => {
            loading.dismiss();
+           this.storage.set('email',this.signinForm.value.email);
+           this.storage.set('name', this.signinForm.value.name);
+           this.storage.set('photo', this.signinForm.value.photo);
+           this.storage.set('logType', 'facebook');
            this.navCtrl.setRoot(HomePage);
          }).catch((error: any) => {
            console.log(error);
@@ -102,16 +110,16 @@ export class SigninPage {
            this.showAlert(error);
           });
     }, err => {
-      
+
       console.log(err);
     });
   }
 
-  
+
 }
 
 
-  
+
 
 
 
