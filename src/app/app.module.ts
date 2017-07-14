@@ -37,6 +37,7 @@ import { AuthPage } from '../pages/auth/auth';
 import { ItemImg } from './../components/item-img/item-img.component';
 import { AddItemPage } from '../pages/add-item/add-item';
 import { ItemViewPage } from '../pages/item-view/item-view';
+import { SigninBhalfPage } from '../pages/signin-bhalf/signin-bhalf';
 import { Facebook } from '@ionic-native/facebook';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Camera } from '@ionic-native/camera';
@@ -77,6 +78,7 @@ const firebaseAuthConfig = {
     AuthPage,
     outletPage,
     outletListPage,
+    SigninBhalfPage,
     ItemImg,
     loadPage
   ],
@@ -96,6 +98,7 @@ const firebaseAuthConfig = {
     ItemViewPage,
     SigninPage,
     SignupPage,
+    SigninBhalfPage,
     UserProfilePage,
     homeUserPage,
     homeChatPage,

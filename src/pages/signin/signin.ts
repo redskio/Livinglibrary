@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { AlertController, Loading, LoadingController, NavController, NavParams } from 'ionic-angular';
-
 import { AuthService } from './../../providers/auth.service';
 import { HomePage } from './../home/home';
 import { SignupPage } from './../signup/signup';
+import { SigninBhalfPage } from './../signin-bhalf/signin-bhalf';
 import { AuthProvider } from './../../providers/auth-provider';
 import { Facebook } from '@ionic-native/facebook';
 import { UserService } from './../../providers/user.service';
@@ -16,7 +16,6 @@ import {Storage} from '@ionic/storage';
 })
 export class SigninPage {
   userProfile: any = null;
-  signinForm: FormGroup;
   signupForm: FormGroup;
 
   constructor(
@@ -32,36 +31,11 @@ export class SigninPage {
     public userService: UserService
   ) {
 
-    let emailRegex = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
-
-    this.signinForm = this.formBuilder.group({
-      email: ['', Validators.compose([Validators.required, Validators.pattern(emailRegex)])],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-    });
+   
   }
 
-  onSubmit(): void {
-
-    let loading: Loading = this.showLoading();
-
-    this.authService.signinWithEmail(this.signinForm.value)
-
-      .then((isLogged: boolean) => {
-
-        if (isLogged) {
-          this.storage.set('email',this.signinForm.value.email);
-          this.storage.set('pwd', this.signinForm.value.password);
-          this.storage.set('logType', 'email');
-          this.navCtrl.setRoot(HomePage);
-          loading.dismiss();
-        }
-
-      }).catch((error: any) => {
-        console.log(error);
-        loading.dismiss();
-        this.showAlert(error);
-      });
-
+  onSigninBhalf(): void{
+    this.navCtrl.push(SigninBhalfPage);
   }
 
   onSignup(): void {
@@ -99,9 +73,9 @@ export class SigninPage {
       this.userService.create(formUser, uuid)
          .then(() => {
            loading.dismiss();
-           this.storage.set('email',this.signinForm.value.email);
-           this.storage.set('name', this.signinForm.value.name);
-           this.storage.set('photo', this.signinForm.value.photo);
+           this.storage.set('email',this.signupForm.value.email);
+           this.storage.set('name', this.signupForm.value.name);
+           this.storage.set('photo', this.signupForm.value.photo);
            this.storage.set('logType', 'facebook');
            this.navCtrl.setRoot(HomePage);
          }).catch((error: any) => {
