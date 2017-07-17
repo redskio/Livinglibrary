@@ -15,7 +15,7 @@ import { BaseComponent } from "../base.component";
 import { outletListPage } from './../outlet_list/outlet_list';
 import { ItemViewPage } from './../item-view/item-view';
 import {Storage} from '@ionic/storage';
-declare var FCMPlugin;
+declare var FCMPlugin : any;
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -37,9 +37,14 @@ export class HomePage extends BaseComponent {
     public app: App,
     public storage: Storage
   ) {
-	super(alertCtrl, authService, app, menuCtrl, storage);
+  super(alertCtrl, authService, app, menuCtrl, storage);
+    
     this.pushService.getToken();
-    this.pushCheck();
+    try{
+      this.pushCheck();
+    } catch(e){
+       console.log(e);
+    }
   }
 
   ionViewCanEnter(): Promise<boolean> {
@@ -69,14 +74,14 @@ export class HomePage extends BaseComponent {
     FCMPlugin.onNotification(function(data){
       if(data.wasTapped){
         //Notification was received on device tray and tapped by the user.
-        alert( JSON.stringify(data.message) );
+        // alert( JSON.stringify(data.message) );
 
       }else{
         //Notification was received in foreground. Maybe the user needs to be notified.
-        alert( JSON.stringify(data) );
-        console.log(data);
-        console.log("222222222222222")
-        console.log(data.wasTapped);
+        // alert( JSON.stringify(data) );
+        // console.log(data);
+        // console.log("222222222222222")
+        // console.log(data.wasTapped);
       }
     });
 

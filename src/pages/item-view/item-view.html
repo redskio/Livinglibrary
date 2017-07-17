@@ -19,25 +19,25 @@
 <ion-slides pager style="height:30%">
 
   <ion-slide style="background-color: black">
-    	<img src="{{ currentItem.imgurl1 }}">
+    	<img src="{{ currentItem?.imgurl1 }}">
   </ion-slide>
 
   <ion-slide style="background-color: black">
-        <img src="{{ currentItem.imgurl2 }}">
+        <img src="{{ currentItem?.imgurl2 }}">
     
   </ion-slide>
 
   <ion-slide style="background-color: black">
-        <img src="{{ currentItem.imgurl3 }}">
+        <img src="{{ currentItem?.imgurl3 }}">
     
   </ion-slide>
 
 </ion-slides>
 <button ion-item (click)="onProfileClick()">
         <ion-avatar item-left>
-          <img [src]="user.photo || 'assets/images/no-photo.jpg'">
+          <img [src]="user?.photo || 'assets/images/no-photo.jpg'">
         </ion-avatar>
-        {{ user.name }}
+        {{ user?.name }}
     </button><br><br>
     {{currentItem.content}}
     <br>

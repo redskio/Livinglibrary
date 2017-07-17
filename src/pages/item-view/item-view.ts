@@ -33,7 +33,7 @@ export class ItemViewPage {
   map: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public userService: UserService, public chatService: ChatService, public outletService: OutletService, public loadingCtrl: LoadingController) {
     this.currentItem = this.navParams.get('itemInfo');
-    userService.get(this.currentItem.userId).first()
+    userService.get(this.currentItem.userId)
       .subscribe((editor: User) => {
         this.user = editor;
       });

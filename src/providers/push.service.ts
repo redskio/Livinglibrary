@@ -45,12 +45,13 @@ export class pushService extends BaseService {
 
   tokensetup() {
     var promise = new Promise((resolve, reject) => {
+      if (typeof FCMPlugin != 'undefined') {
       FCMPlugin.getToken(function(token){
         resolve(token);
       }, (err) => {
         reject(err);
       });
-    })
+    }})
     return promise;
   }
 
