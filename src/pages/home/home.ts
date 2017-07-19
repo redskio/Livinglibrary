@@ -15,6 +15,8 @@ import { BaseComponent } from "../base.component";
 import { outletListPage } from './../outlet_list/outlet_list';
 import { ItemViewPage } from './../item-view/item-view';
 import {Storage} from '@ionic/storage';
+import {ChatPage} from "../chat/chat";
+import {User} from "../../models/user.model";
 declare var FCMPlugin : any;
 @Component({
   selector: 'page-home',
@@ -37,11 +39,27 @@ export class HomePage extends BaseComponent {
     public app: App,
     public storage: Storage
   ) {
-  super(alertCtrl, authService, app, menuCtrl, storage);
-    
-    this.pushService.getToken();
+  super(alertCtrl, authService, app, menuCtrl, storage, userService);
+
     try{
-      this.pushCheck();
+      FCMPlugin.onNotification(function(data){
+        if(data.wasTapped){
+          //Notification was received on device tray and tapped by the user.
+          let recipientUserId: string = data.senderKey;
+
+          userService.get(recipientUserId)
+            .first()
+            .subscribe((user: User) => {
+              navCtrl.push(ChatPage, {
+                recipientUser: user
+              });
+
+            });
+        }else{
+          //Notification was received in foreground. Maybe the user needs to be notified.
+
+        }
+      });
     } catch(e){
        console.log(e);
     }
@@ -69,24 +87,12 @@ export class HomePage extends BaseComponent {
           itemInfo: item
     });
   }
-
+/*
   pushCheck() {
-    FCMPlugin.onNotification(function(data){
-      if(data.wasTapped){
-        //Notification was received on device tray and tapped by the user.
-        // alert( JSON.stringify(data.message) );
-
-      }else{
-        //Notification was received in foreground. Maybe the user needs to be notified.
-        // alert( JSON.stringify(data) );
-        // console.log(data);
-        // console.log("222222222222222")
-        // console.log(data.wasTapped);
-      }
-    });
 
     FCMPlugin.onTokenRefresh(function(token){
       alert( token );
     });
   }
+  */
 }

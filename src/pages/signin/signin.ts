@@ -9,6 +9,7 @@ import { AuthProvider } from './../../providers/auth-provider';
 import { Facebook } from '@ionic-native/facebook';
 import { UserService } from './../../providers/user.service';
 import {Storage} from '@ionic/storage';
+import {pushService} from "../../providers/push.service";
 
 @Component({
   selector: 'page-signin',
@@ -28,10 +29,11 @@ export class SigninPage {
     public storage: Storage,
     private facebook: Facebook,
     private auth: AuthProvider,
-    public userService: UserService
+    public userService: UserService,
+    public pushService: pushService,
   ) {
 
-   
+
   }
 
   onSigninBhalf(): void{
@@ -77,6 +79,7 @@ export class SigninPage {
            this.storage.set('name', this.signupForm.value.name);
            this.storage.set('photo', this.signupForm.value.photo);
            this.storage.set('logType', 'facebook');
+           this.pushService.setToken(uuid);
            this.navCtrl.setRoot(HomePage);
          }).catch((error: any) => {
            console.log(error);
