@@ -7,22 +7,21 @@ declare var FCMPlugin;
 
 @Injectable()
 export class pushService extends BaseService {
-  firestore = firebase.database().ref('pushtokens/'+firebase.auth().currentUser.uid);
 
   constructor(
     public afd: AngularFireDatabase) {
     super();
   }
 
-  getToken(){
+  setToken(uuid){
 
     this.tokensetup().then((token) => {
 
-      this.storetoken(token);
+      this.storetoken(token, uuid);
 
     })
   }
-
+/*
   pushCheck() {
     FCMPlugin.onNotification(function(data){
       if(data.wasTapped){
@@ -32,9 +31,6 @@ export class pushService extends BaseService {
       }else{
         //Notification was received in foreground. Maybe the user needs to be notified.
         alert( JSON.stringify(data) );
-        console.log(data);
-        console.log("222222222222222")
-        console.log(data.wasTapped);
       }
     });
 
@@ -42,7 +38,7 @@ export class pushService extends BaseService {
       alert( token );
     });
   }
-
+*/
   tokensetup() {
     var promise = new Promise((resolve, reject) => {
       if (typeof FCMPlugin != 'undefined') {
@@ -55,39 +51,30 @@ export class pushService extends BaseService {
     return promise;
   }
 
-  storetoken(t) {
-    var check = 0;
+  storetoken(t, currentUser) {
+    let firestore = firebase.database().ref('pushtokens/'+currentUser);
     firebase.database().ref('pushtokens/').once('value').then((data) => {
-      if(data.hasChild(firebase.auth().currentUser.uid)){
-        firebase.database().ref('pushtokens/'+firebase.auth().currentUser.uid).once('value').then((snapshot) => {
-          snapshot.forEach(function (data) {
-              if(data.val().devtoken == t){
-                check ++;
-              }
-          })
-          if(check == 0){
-            this.afd.list(this.firestore).push({
-              userId: firebase.auth().currentUser.uid,
-              devtoken: t
-            }).then(() => {
-              alert('Token stored1');
-            }).catch(() => {
-              alert('Token not stored');
-            })
-          }
-        });
-        } else{
-        this.afd.list(this.firestore).push({
-          userId: firebase.auth().currentUser.uid,
+      if(data.hasChild(currentUser)){
+        firestore.remove();
+        this.afd.list(firestore).push({
+          userId: currentUser,
           devtoken: t
         }).then(() => {
-          alert('Token stored2');
+       //   alert('Token stored1');
         }).catch(() => {
-          alert('Token not stored');
+        //  alert('Token not stored');
+        })
+      } else{
+        this.afd.list(firestore).push({
+          userId: currentUser,
+          devtoken: t
+        }).then(() => {
+       //   alert('Token stored2');
+        }).catch(() => {
+       //   alert('Token not stored');
         })
       }
     });
-
   }
 
 }
