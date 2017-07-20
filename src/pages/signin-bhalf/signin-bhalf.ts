@@ -4,7 +4,7 @@ import {IonicPage, NavController, NavParams, Loading, LoadingController} from 'i
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Storage} from '@ionic/storage';
 import { HomePage } from './../home/home';
-
+import { FindPasswordPage } from './../find-password/find-password';
 /**
  * Generated class for the SigninBhalfPage page.
  *
@@ -69,5 +69,9 @@ export class SigninBhalfPage {
     loading.present();
 
     return loading;
+  }
+
+  onFindPassword(){
+    this.navCtrl.push(FindPasswordPage);
   }
 }

@@ -10,6 +10,7 @@ import {Component, ViewChild, ElementRef} from '@angular/core';
 import {FirebaseObjectObservable} from 'angularfire2';
 import {IonicPage, Loading, LoadingController, NavController, NavParams} from 'ionic-angular';
 import firebase from 'firebase';
+import { PaypalPage } from './../paypal/paypal';
 declare var google;
 
 /**
@@ -122,5 +123,9 @@ export class ItemViewPage {
     this.navCtrl.push(ChatPage, {
       recipientUser: this.user
     });
+  }
+
+  onPaypalClick(){
+    this.navCtrl.push(PaypalPage);
   }
 }

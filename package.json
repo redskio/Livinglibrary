@@ -147,7 +147,8 @@
                 },
                 "cordova-plugin-fcm": {},
                 "cordova-plugin-image-resizer": {},
-                "cordova-sqlite-storage": {}
+                "cordova-sqlite-storage": {},
+                "com.paypal.cordova.mobilesdk":{}
             },
             "platforms": [
                 "android"

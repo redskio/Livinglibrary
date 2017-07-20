@@ -43,6 +43,8 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { Camera } from '@ionic-native/camera';
 import { AngularFireDatabase } from 'angularfire2/database';
 import {IonicStorageModule } from '@ionic/storage';
+import { PaypalPage} from '../pages/paypal/paypal';
+import { FindPasswordPage} from '../pages/find-password/find-password'
 
 const firebaseAppConfig: FirebaseAppConfig = {
     apiKey: "AIzaSyD4GWzQWo51VR0Fk4-PFU3Va2qGGnO3rsc",
@@ -80,13 +82,24 @@ const firebaseAuthConfig = {
     outletListPage,
     SigninBhalfPage,
     ItemImg,
-    loadPage
+    loadPage,
+    PaypalPage,
+    FindPasswordPage
   ],
   imports: [
     AngularFireModule.initializeApp(firebaseAppConfig, firebaseAuthConfig),
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp,{
+      backButtonText: '',
+      backButtonIcon: "ios-arrow-back",
+      iconMode: 'ios',
+      modalEnter: 'modal-slide-in',
+      modalLeave: 'modal-slide-out',  
+      tabsPlacement: 'bottom',
+      pageTransition: 'ios-transition'
+    }
+    ),
     IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
@@ -105,7 +118,9 @@ const firebaseAuthConfig = {
     AuthPage,
     outletPage,
     outletListPage,
-    loadPage
+    loadPage,
+    PaypalPage,
+    FindPasswordPage
   ],
   providers: [
     AuthService,
