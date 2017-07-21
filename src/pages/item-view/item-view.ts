@@ -1,14 +1,16 @@
 import {Chat} from '../../models/chat.model';
 import {Item} from '../../models/item.model';
+import {Comment} from '../../models/comment.model';
 import {Outlet} from '../../models/outlet.model';
 import {User} from '../../models/user.model';
 import {ChatService} from '../../providers/chat.service';
 import {UserService} from '../../providers/user.service';
 import {OutletService} from '../../providers/outlet.service';
+import {CommentService} from '../../providers/comment.service';
 import {ChatPage} from '../chat/chat';
 import {Component, ViewChild, ElementRef} from '@angular/core';
-import {FirebaseObjectObservable} from 'angularfire2';
-import {IonicPage, Loading, LoadingController, NavController, NavParams} from 'ionic-angular';
+import {FirebaseObjectObservable, FirebaseListObservable} from 'angularfire2';
+import {IonicPage, Loading, LoadingController, NavController, NavParams, Content} from 'ionic-angular';
 import firebase from 'firebase';
 import { PaypalPage } from './../paypal/paypal';
 declare var google;
@@ -25,14 +27,25 @@ declare var google;
   templateUrl: 'item-view.html',
 })
 export class ItemViewPage {
+  @ViewChild(Content) content: Content;
+  currentItem: Item;
+  currentUser: User;
+  comments : FirebaseListObservable<Comment[]>;
   handleObservableError: any;
-  public currentItem: Item;
   public user: User;
   public current_location: FirebaseObjectObservable<Outlet>;
   public location_title: string;
   @ViewChild('map') mapElement: ElementRef;
   map: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public userService: UserService, public chatService: ChatService, public outletService: OutletService, public loadingCtrl: LoadingController) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public userService: UserService,
+    public chatService: ChatService,
+    public outletService: OutletService,
+    public loadingCtrl: LoadingController,
+    public commentService: CommentService
+  ) {
     this.currentItem = this.navParams.get('itemInfo');
     userService.get(this.currentItem.userId)
       .subscribe((editor: User) => {
@@ -42,9 +55,49 @@ export class ItemViewPage {
   }
 
   ionViewDidLoad() {
+    this.setComment();
     this.mapLoad();
-
   }
+  setComment(){
+    this.userService.currentUser
+      .first()
+      .subscribe((currentUser: User) => {
+        this.currentUser = currentUser;
+
+        let doSubscription = () => {
+          this.comments
+            .subscribe((comments: Comment[]) => {
+
+            });
+        };
+
+        this.comments = this.commentService
+          .getComments(this.currentItem.$key);
+
+        this.comments
+          .first()
+          .subscribe((comments: Comment[]) => {
+            doSubscription();
+          })
+      })
+  }
+
+  sendComment(newComment: string): void {
+    if (newComment) {
+
+      let currentTimestamp: Object = firebase.database.ServerValue.TIMESTAMP;
+      this.commentService.create(
+        new Comment(
+          newComment,
+          currentTimestamp,
+          this.currentUser.name
+        ),
+        this.comments
+      ).then(() => {
+      });
+    }
+  }
+
   mapLoad() {
     this.current_location.subscribe(loc => {
       let loading: Loading = this.showLoading();

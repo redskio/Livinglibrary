@@ -1,0 +1,15 @@
+<div class="text">
+  <p>{{comment?.userId}} : {{ comment?.text }}</p>
+  <p class="timestamp">{{ comment?.timestamp | date:'dd/MM/y H:mm' }}</p>  <p class="addComment" (click)="addAnswerInput()">답글달기</p>
+  <answerComment-box *ngFor="let answer of answerComments | async" [answerComment]="answer"></answerComment-box>
+  <div *ngIf="answerPush">
+    <ion-toolbar>
+      <ion-item no-lines>
+        <ion-input type="text" (keyup.enter)="sendAnswerComment(newAnswerComment); newAnswerComment=''" placeholder="AnswerComment..." [(ngModel)]="newAnswerComment"></ion-input>
+          <button ion-button item-right (click)="sendAnswerComment(newAnswerComment); newAnswerComment=''">
+            <ion-icon name="send"></ion-icon>
+        </button>
+      </ion-item>
+    </ion-toolbar>
+  </div>
+</div>

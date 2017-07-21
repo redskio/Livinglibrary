@@ -24,12 +24,12 @@
 
   <ion-slide style="background-color: black">
         <img src="{{ currentItem?.imgurl2 }}">
-    
+
   </ion-slide>
 
   <ion-slide style="background-color: black">
         <img src="{{ currentItem?.imgurl3 }}">
-    
+
   </ion-slide>
 
 </ion-slides>
@@ -46,6 +46,18 @@
 <br>
 	<button ion-button (click)="onPaypalClick()">
     지금 구매
-  </button> 
-
+  </button>
+  <comment-box *ngFor=" let c of comments | async"  [comment]="c" [currentUser]="currentUser" [currentItem]="currentItem"></comment-box>
 </ion-content>
+<ion-footer>
+
+  <ion-toolbar>
+    <ion-item no-lines>
+      <ion-input type="text" (keyup.enter)="sendComment(newComment); newComment=''" placeholder="Comment..." [(ngModel)]="newComment"></ion-input>
+      <button ion-button item-right (click)="sendComment(newComment); newComment=''">
+        <ion-icon name="send"></ion-icon>
+      </button>
+    </ion-item>
+  </ion-toolbar>
+
+</ion-footer>

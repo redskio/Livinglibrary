@@ -1,0 +1,7 @@
+<div *ngIf="answerComment">
+  <div class="text">
+    <p>RE : {{answerComment?.userId}} {{ answerComment?.text }}</p>
+    <p class="timestamp">{{ answerComment?.timestamp | date:'dd/MM/y H:mm' }}</p>
+  </div>
+</div>
+

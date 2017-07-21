@@ -26,6 +26,8 @@ import { SignupPage } from './../pages/signup/signup';
 import { loadPage } from './../pages/loading/loading';
 import { UserInfoComponent } from './../components/user-info/user-info.component';
 import { UserMenuComponent } from './../components/user-menu/user-menu.component';
+import { answerCommentBox } from './../components/answerComment-box/answerComment-box.component';
+import { CommentBox } from './../components/comment-box/comment-box.component';
 import { UserProfilePage } from './../pages/user-profile/user-profile';
 import { UserService } from './../providers/user.service';
 import { OutletService } from './../providers/outlet.service';
@@ -45,6 +47,8 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import {IonicStorageModule } from '@ionic/storage';
 import { PaypalPage} from '../pages/paypal/paypal';
 import { FindPasswordPage} from '../pages/find-password/find-password'
+import {CommentService} from "../providers/comment.service";
+
 
 const firebaseAppConfig: FirebaseAppConfig = {
     apiKey: "AIzaSyD4GWzQWo51VR0Fk4-PFU3Va2qGGnO3rsc",
@@ -84,7 +88,9 @@ const firebaseAuthConfig = {
     ItemImg,
     loadPage,
     PaypalPage,
-    FindPasswordPage
+    FindPasswordPage,
+    answerCommentBox,
+    CommentBox
   ],
   imports: [
     AngularFireModule.initializeApp(firebaseAppConfig, firebaseAuthConfig),
@@ -95,7 +101,7 @@ const firebaseAuthConfig = {
       backButtonIcon: "ios-arrow-back",
       iconMode: 'ios',
       modalEnter: 'modal-slide-in',
-      modalLeave: 'modal-slide-out',  
+      modalLeave: 'modal-slide-out',
       tabsPlacement: 'bottom',
       pageTransition: 'ios-transition'
     }
@@ -138,7 +144,8 @@ const firebaseAuthConfig = {
     Camera,
     AngularFireDatabase,
     pushService,
-    IonicStorageModule
+    IonicStorageModule,
+    CommentService
   ]
 })
 export class AppModule {}
