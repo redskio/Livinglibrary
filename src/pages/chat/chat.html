@@ -31,9 +31,17 @@
 <ion-footer>
 
   <ion-toolbar>
+    <ion-item *ngIf="imgChat" style="text-align: center">
+      <item-img class="item-img" [itemImg]="imgurl" ></item-img>
+    </ion-item>
     <ion-item no-lines>
-      <ion-input type="text" (keyup.enter)="sendMessage(newMessage); newMessage=''" placeholder="Message..." [(ngModel)]="newMessage"></ion-input>
-      <button ion-button item-right (click)="sendMessage(newMessage); newMessage=''">
+      <button ion-button item-left (click)="sendImage(); " style="display: inline-block">
+        <ion-icon name="add"></ion-icon>
+      </button>
+      <ion-item style="display:inline-block">
+        <ion-input type="text" (keyup.enter)="sendMessage(newMessage); newMessage=''" placeholder="Message..." [(ngModel)]="newMessage"></ion-input>
+      </ion-item>
+      <button ion-button item-right (click)="sendMessage(newMessage); newMessage=''" style="display: inline-block;">
         <ion-icon name="send"></ion-icon>
       </button>
     </ion-item>

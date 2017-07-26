@@ -1,4 +1,8 @@
 <div class="text" [ngClass]="{'sender-background': isFromSender}">
+  <span>
+    <img class="item-img" *ngIf="message.photo_url" [src]="message?.photo_url " imageViewer="OTHER_IMAGE_URL" (close)="callbackAfterImageViewerCloses()">
+  </span>
+
   <p>{{ message.text }}</p>
   <p class="timestamp">{{ message.timestamp | date:'dd/MM/y H:mm' }}</p>
 </div>

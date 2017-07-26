@@ -48,7 +48,7 @@ import {IonicStorageModule } from '@ionic/storage';
 import { PaypalPage} from '../pages/paypal/paypal';
 import { FindPasswordPage} from '../pages/find-password/find-password'
 import {CommentService} from "../providers/comment.service";
-
+import { IonicImageViewerModule } from 'ionic-img-viewer';
 
 const firebaseAppConfig: FirebaseAppConfig = {
     apiKey: "AIzaSyD4GWzQWo51VR0Fk4-PFU3Va2qGGnO3rsc",
@@ -106,7 +106,8 @@ const firebaseAuthConfig = {
       pageTransition: 'ios-transition'
     }
     ),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    IonicImageViewerModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

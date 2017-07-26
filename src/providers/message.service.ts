@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Injectable, Inject} from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import {AngularFire, FirebaseListObservable, FirebaseApp} from 'angularfire2';
 
 import { BaseService } from "./base.service";
 import { Message } from '../models/message.model';
@@ -12,7 +12,8 @@ export class MessageService extends BaseService {
 
   constructor(
     public af: AngularFire,
-    public http: Http
+    public http: Http,
+    @Inject(FirebaseApp) public firebaseApp: any,
   ) {
     super();
   }
@@ -30,5 +31,11 @@ export class MessageService extends BaseService {
       }
     }).catch(this.handleObservableError);
   }
-
+  uploadPhoto(url: string, _filename: string): firebase.storage.UploadTask {
+    return this.firebaseApp
+      .storage()
+      .ref()
+      .child(`/messages/${_filename}`)
+      .putString(url, 'base64', {contentType:'image/jpeg'});
+  }
 }
