@@ -5,6 +5,7 @@ import {Outlet} from '../../models/outlet.model';
 import {User} from '../../models/user.model';
 import {ChatService} from '../../providers/chat.service';
 import {UserService} from '../../providers/user.service';
+import {ItemService} from '../../providers/item.service';
 import {OutletService} from '../../providers/outlet.service';
 import {CommentService} from '../../providers/comment.service';
 import {ChatPage} from '../chat/chat';
@@ -40,23 +41,24 @@ export class ItemViewPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public userService: UserService,
+    public userService: UserService,public itemService: ItemService,
     public chatService: ChatService,
     public outletService: OutletService,
     public loadingCtrl: LoadingController,
     public commentService: CommentService
   ) {
     this.currentItem = this.navParams.get('itemInfo');
-    userService.get(this.currentItem.userId)
+    this.current_location = outletService.getOutlet(this.currentItem.location);
+    this.userService.get(this.currentItem.userId)
       .subscribe((editor: User) => {
         this.user = editor;
       });
-    this.current_location = outletService.getOutlet(this.currentItem.location);
   }
 
   ionViewDidLoad() {
     this.setComment();
     this.mapLoad();
+    this.itemService.updateView(this.currentItem.$key,++this.currentItem._view);
   }
   setComment(){
     this.userService.currentUser

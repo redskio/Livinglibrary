@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
-
 import { AlertController,App,MenuController, NavController } from 'ionic-angular';
-
 import { FirebaseListObservable } from 'angularfire2';
-
 import { pushService } from './../../providers/push.service';
 import { AuthService } from './../../providers/auth.service';
 import { AddItemPage } from './../add-item/add-item';
@@ -14,9 +11,11 @@ import { Item } from './../../models/item.model';
 import { BaseComponent } from "../base.component";
 import { outletListPage } from './../outlet_list/outlet_list';
 import { ItemViewPage } from './../item-view/item-view';
-import {Storage} from '@ionic/storage';
-import {ChatPage} from "../chat/chat";
-import {User} from "../../models/user.model";
+import { Storage } from '@ionic/storage';
+import { ChatPage } from "../chat/chat";
+import { User } from "../../models/user.model";
+import { SearchDataProvider } from '../../providers/search-data/search-data';
+
 declare var FCMPlugin : any;
 @Component({
   selector: 'page-home',
@@ -24,9 +23,10 @@ declare var FCMPlugin : any;
 })
 export class HomePage extends BaseComponent {
 
-  items: FirebaseListObservable<Item[]>;
+  items: any;
   items_length: number;
   view: string = 'chats';
+  searchTerm: string = '';
   constructor(
     public alertCtrl: AlertController,
     public authService: AuthService,
@@ -37,7 +37,8 @@ export class HomePage extends BaseComponent {
     public userService: UserService,
     public pushService: pushService,
     public app: App,
-    public storage: Storage
+    public storage: Storage,
+    public searchProvider: SearchDataProvider
   ) {
   super(alertCtrl, authService, app, menuCtrl, storage, userService);
 
@@ -72,7 +73,9 @@ export class HomePage extends BaseComponent {
   ionViewDidLoad() {
   this.items = this.itemService.items;
   this.items.subscribe(item_array =>{this.items_length= item_array.length;});
-	this.menuCtrl.enable(true, 'user-menu');
+  this.menuCtrl.enable(true, 'user-menu');
+  this.setFilteredItems();
+
   }
 
   addPage(): void{
@@ -95,4 +98,11 @@ export class HomePage extends BaseComponent {
     });
   }
   */
+  setFilteredItems() {
+
+      this.items = this.searchProvider.searchItems(this.searchTerm);
+  }
+  onSearch() {
+      document.getElementById('searchbar').style.display='block';
+  }
 }

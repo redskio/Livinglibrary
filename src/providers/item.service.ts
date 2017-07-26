@@ -59,7 +59,8 @@ export class ItemService extends BaseService {
       imgurl1: imgurl1,
       imgurl2: imgurl2,
       imgurl3: imgurl3,
-	  _thumb: _thumb
+      _thumb: _thumb,
+      _view: 0
     });
   }
   removeItem(itemId: string) {
@@ -72,6 +73,11 @@ export class ItemService extends BaseService {
       price: _price
     });
   }
+  updateView(itemId: string, view: number){
+    this.items.update(itemId,{
+      _view:view
+    });
+  }
   uploadPhoto(url: string, _filename: string): firebase.storage.UploadTask {
     return this.firebaseApp
       .storage()
@@ -79,5 +85,4 @@ export class ItemService extends BaseService {
       .child(`/items/${_filename}`)
       .putString(url, 'base64', {contentType:'image/jpeg'});
   }
-
 }

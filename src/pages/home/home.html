@@ -3,11 +3,11 @@
 <ion-header>
   <ion-navbar>
   	<button ion-button icon-only menuToggle="user-menu">
-  		<ion-icon style="width: 24px; content: url(../../assets/images/bar_nav.png);"></ion-icon>
+  		<ion-icon style="width: 24px; content: url(assets/images/bar_nav.png);"></ion-icon>
   	</button>
   	<ion-buttons left>
   		<button ion-button icon-only (click)="onOutLet()">
-  		<ion-icon style="width: 24px; content: url(../../assets/images/bar_outletinfo.png);"></ion-icon>
+  		<ion-icon style="width: 24px; content: url(assets/images/bar_outletinfo.png);"></ion-icon>
   		</button> 
   	</ion-buttons>
  	<ion-title text-center>
@@ -15,12 +15,12 @@
   	</ion-title>
   	<ion-buttons right>
   		<button ion-button icon-only (click)="onSearch()">
-  		<ion-icon style="width: 24px; content: url(../../assets/images/bar_search.png);"></ion-icon>
+  		<ion-icon style="width: 24px; content: url(assets/images/bar_search.png);"></ion-icon>
   		</button> 
   	</ion-buttons>
     <ion-buttons right>
-    	<button ion-button icon-only (click)="addpage()">
-  		<ion-icon style="width: 24px; content: url(../../assets/images/bar_write.png);"></ion-icon>
+    	<button ion-button icon-only (click)="addPage()">
+  		<ion-icon style="width: 24px; content: url(assets/images/bar_write.png);"></ion-icon>
     	</button>
   	</ion-buttons>
   </ion-navbar>	
@@ -44,7 +44,8 @@
   </ion-slide>
 
 </ion-slides>
- <div style="width:100%; text-align:center; background-color:#431922; color:white;">{{items_length}}개의 상품이 올라왔어요.</div>
+ <div style="width:100%; padding-top:10px; padding-bottom:10px; text-align:center; background-color:#431922; color:white;">{{items_length}}개의 상품이 올라왔어요.</div>
+ <ion-searchbar id="searchbar" style="display:none;" [(ngModel)]="searchTerm" (ionInput)="setFilteredItems()"></ion-searchbar>
  <div style="width:100%; background-color:#fafafa; color:#9a9a9a;">
   <div style="padding-left:2%; padding-top:2%; padding-bottom:2%;"> 
        <label>HOT DEAL</label>
@@ -55,25 +56,27 @@
  <div [ngSwitch]="view" style="margin-left:1%;margin-right:1%">
 
     <ion-list style="height:100%;">
-      <ion-card ion-item *ngFor="let item of items | async" (click)="onItemClick(item)" >
-		<ion-thumbnail item-start >
-        <img [src]="item.imgurl1 || 'assets/images/no-photo.jpg'">
+      <ion-card ion-item style="margin-bottom:1%;" *ngFor="let item of items | async" (click)="onItemClick(item)" >
+	    	<ion-thumbnail item-start >
+          <img [src]="item.imgurl1 || 'assets/images/no-photo.jpg'">
         </ion-thumbnail>
         <div>
           <h3>{{ item.brand }}</h3><label></label>
           <h3 style="color:#9a9a9a;">{{ item.title }}</h3>
         </div>
-        <div style="width:45%;" item-end > 
+        <div style="width:45%;" item-end >
+          
           <label ion-button style="background-color:#431922">{{item.selling_price / item.normal_price  | percent:'1.0-0' }}</label>
           <label style="float:right; font-size:15px; line-height:200%;">{{ item.selling_price|currency:'USD':true:'2.0-2' }}</label></div>
         <!-- Original Price <label style="text-decoration: line-through;" >${{ item.normal_price }}</label>  -->
+        <p>view : {{item._view}}</p>
       </ion-card>
     </ion-list>
 
   </div>
 </div>
- <ion-fab right bottom >
+ <!-- <ion-fab right bottom >
    <button ion-fab (click)="addPage()">+</button>
- </ion-fab>
+ </ion-fab> -->
 </ion-content>
 

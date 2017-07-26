@@ -48,7 +48,11 @@ import {IonicStorageModule } from '@ionic/storage';
 import { PaypalPage} from '../pages/paypal/paypal';
 import { FindPasswordPage} from '../pages/find-password/find-password'
 import {CommentService} from "../providers/comment.service";
+<<<<<<< Updated upstream
 import { IonicImageViewerModule } from 'ionic-img-viewer';
+=======
+import { SearchDataProvider } from '../providers/search-data/search-data';
+>>>>>>> Stashed changes
 
 const firebaseAppConfig: FirebaseAppConfig = {
     apiKey: "AIzaSyD4GWzQWo51VR0Fk4-PFU3Va2qGGnO3rsc",
@@ -146,7 +150,8 @@ const firebaseAuthConfig = {
     AngularFireDatabase,
     pushService,
     IonicStorageModule,
-    CommentService
+    CommentService,
+    SearchDataProvider
   ]
 })
 export class AppModule {}

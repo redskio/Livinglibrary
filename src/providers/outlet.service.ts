@@ -42,6 +42,10 @@ export class OutletService extends BaseService {
       longitude: _longitude
     });
   }
-
+  getOutletTitle(index: string){
+    var title: string;
+    this.af.database.object('/outlet/'+index).subscribe(_outlet=>{title =_outlet.title}) ;
+    return title;
+  }
 
 }
