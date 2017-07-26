@@ -1,26 +1,26 @@
-outlet-home {
+outletList-page {
           .scroll {
         height: 100%
       }
- 
+
       #map {
         width: 100%;
         height: 100%;
       }
 }
 .ios, .md, .android {
- 
-    outlet-page {
- 
+
+  outletList-page {
+
       .scroll {
         height: 100%
       }
- 
+
       #map {
         width: 100%;
         height: 100%;
       }
- 
+
     }
- 
+
 }

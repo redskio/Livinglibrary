@@ -5,24 +5,17 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
- 
+
 <ion-content>
  <ion-card>
      <ion-list>
         	<div *ngFor = "let outlets of outlet | async; let i = index">
-    			<div (click) = "getOutlet( i, outlets )">
-    				<ion-icon name="cart" item-start></ion-icon> 
+    			<div (click) = "getOutlet(outlets )">
+    				<ion-icon name="cart" item-start></ion-icon>
     				{{i}} {{ outlets.title }}
     			</div>
     		</div>
     </ion-list>
- 	 <ion-list>
-    	<button ion-item (click)="onMap1()">
-    		<ion-icon name="cart" item-start></ion-icon>
-    		paju
-    	</button>
-    </ion-list> 
-
  </ion-card>
 
 </ion-content>

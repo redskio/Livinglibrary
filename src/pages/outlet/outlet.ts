@@ -14,19 +14,19 @@ declare var cordova;
 export class outletPage {
 
   outletBrand: FirebaseListObservable<OutletBrand[]>;
-  outlets: FirebaseListObservable<Outlet[]>;
+  currentOutlet: Outlet;
   @ViewChild('map') mapElement: ElementRef;
   map: any;
 
   constructor(
     public navCtrl: NavController,
     public geolocation: Geolocation,
-    public params: NavParams,
+    public navParams: NavParams,
     public af: AngularFire
   ) {}
 
   ionViewDidLoad() {
-    if (this.params.get('_type') == 'outlet') {
+    if (this.navParams.get('outletInfo')) {
       this.loadOutlet();
     } else {
       this.currentLocWithOutlet();
@@ -34,12 +34,10 @@ export class outletPage {
   }
 
   loadOutlet() {
-    let latitude = this.params.get('latitude');
-    let longitude = this.params.get('longitude');
-    let title = this.params.get('title');
+    this.currentOutlet = this.navParams.get('outletInfo');
 
-    this.outletBrand = this.af.database.list('/' + title);
-    let latLng = new google.maps.LatLng(latitude, longitude);
+    this.outletBrand = this.af.database.list('/outlet/'+ this.currentOutlet.$key+'/brandList');
+    let latLng = new google.maps.LatLng(this.currentOutlet.latitude, this.currentOutlet.longitude);
 
     let mapOptions = {
       center: latLng,
@@ -54,7 +52,7 @@ export class outletPage {
       position: latLng
     });
 
-    this.addInfoWindow(marker, title);
+    this.addInfoWindow(marker, this.currentOutlet.title);
   }
   currentLocWithOutlet() {
     this.getPermissions();
@@ -63,7 +61,7 @@ export class outletPage {
       var lat: number = position.coords.latitude
       var lon: number = position.coords.longitude
       let latLng = new google.maps.LatLng(lat, lon);
-      alert(lat);
+
       let mapOptions = {
         center: latLng,
         zoom: 15,
@@ -95,7 +93,7 @@ export class outletPage {
     this.addInfoWindow(marker, content);
 
   }
-  
+
   getPermissions() {
     var permissions = cordova.plugins.permissions;
 
