@@ -1,14 +1,13 @@
 import {Chat} from '../../models/chat.model';
 import {Item} from '../../models/item.model';
-import {Comment} from '../../models/comment.model';
 import {Outlet} from '../../models/outlet.model';
 import {User} from '../../models/user.model';
 import {ChatService} from '../../providers/chat.service';
 import {UserService} from '../../providers/user.service';
 import {ItemService} from '../../providers/item.service';
 import {OutletService} from '../../providers/outlet.service';
-import {CommentService} from '../../providers/comment.service';
 import {ChatPage} from '../chat/chat';
+import {QnaPage} from '../qna/qna';
 import {Component, ViewChild, ElementRef} from '@angular/core';
 import {FirebaseObjectObservable, FirebaseListObservable} from 'angularfire2';
 import {IonicPage, Loading, LoadingController, NavController, NavParams, Content} from 'ionic-angular';
@@ -31,7 +30,6 @@ export class ItemViewPage {
   @ViewChild(Content) content: Content;
   currentItem: Item;
   currentUser: User;
-  comments : FirebaseListObservable<Comment[]>;
   handleObservableError: any;
   public user: User;
   public current_location: FirebaseObjectObservable<Outlet>;
@@ -41,11 +39,11 @@ export class ItemViewPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public userService: UserService,public itemService: ItemService,
+    public userService: UserService,
+    public itemService: ItemService,
     public chatService: ChatService,
     public outletService: OutletService,
     public loadingCtrl: LoadingController,
-    public commentService: CommentService
   ) {
     this.currentItem = this.navParams.get('itemInfo');
     this.current_location = outletService.getOutlet(this.currentItem.location);
@@ -56,49 +54,10 @@ export class ItemViewPage {
   }
 
   ionViewDidLoad() {
-    this.setComment();
     this.mapLoad();
     this.itemService.updateView(this.currentItem.$key,++this.currentItem._view);
   }
-  setComment(){
-    this.userService.currentUser
-      .first()
-      .subscribe((currentUser: User) => {
-        this.currentUser = currentUser;
-
-        let doSubscription = () => {
-          this.comments
-            .subscribe((comments: Comment[]) => {
-
-            });
-        };
-
-        this.comments = this.commentService
-          .getComments(this.currentItem.$key);
-
-        this.comments
-          .first()
-          .subscribe((comments: Comment[]) => {
-            doSubscription();
-          })
-      })
-  }
-
-  sendComment(newComment: string): void {
-    if (newComment) {
-
-      let currentTimestamp: Object = firebase.database.ServerValue.TIMESTAMP;
-      this.commentService.create(
-        new Comment(
-          newComment,
-          currentTimestamp,
-          this.currentUser.name
-        ),
-        this.comments
-      ).then(() => {
-      });
-    }
-  }
+ 
 
   mapLoad() {
     this.current_location.subscribe(loc => {
@@ -179,7 +138,11 @@ export class ItemViewPage {
       recipientUser: this.user
     });
   }
-
+  onQnaClick(){
+     this.navCtrl.push(QnaPage, {
+          itemInfo: this.currentItem
+    });
+  }
   onPaypalClick(){
     this.navCtrl.push(PaypalPage);
   }

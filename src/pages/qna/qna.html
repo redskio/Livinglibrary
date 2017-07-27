@@ -1,0 +1,29 @@
+<!--
+  Generated template for the QnaPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>qna_page</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <comment-box *ngFor=" let c of comments | async"  [comment]="c" [currentUser]="currentUser" [currentItem]="currentItem"></comment-box>
+
+</ion-content>
+<ion-footer>
+   <ion-toolbar>
+    <ion-item no-lines>
+      <ion-input type="text" (keyup.enter)="sendComment(newComment); newComment=''" placeholder="Comment..." [(ngModel)]="newComment"></ion-input>
+      <button ion-button item-right (click)="sendComment(newComment); newComment=''">
+        <ion-icon name="send"></ion-icon>
+      </button>
+    </ion-item>
+  </ion-toolbar>
+</ion-footer>

@@ -15,7 +15,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
 <ion-slides pager style="height:30%">
 
   <ion-slide style="background-color: black">
@@ -38,26 +38,23 @@
           <img [src]="user?.photo || 'assets/images/no-photo.jpg'">
         </ion-avatar>
         {{ user?.name }}
-    </button><br><br>
-    {{currentItem.content}}
-    <br>
-    구매장소 {{location_title}}
-  <div #map id="map" style="height:20%"></div>
-<br>
-	<button ion-button (click)="onPaypalClick()">
+</button><br><br>
+<div padding>
+{{currentItem.content}}
+</div>
+<div padding style="background-color:#eaeaea; margin-top:15px; color:#8b8b8b;">
+  <label><b>수량</b> 5개 (1/5)</label><br/>
+  <label><b>구매장소</b> {{location_title}}</label>
+</div>
+<div #map id="map" style="height:20%"></div>
+<button style="margin-bottom:100px;" ion-button (click)="onQnaClick()">
+  qna
+  </button>
+
+</ion-content>
+
+<ion-footer>
+<button end ion-button class="buy-btn" (click)="onPaypalClick()">
     지금 구매
   </button>
-  <comment-box *ngFor=" let c of comments | async"  [comment]="c" [currentUser]="currentUser" [currentItem]="currentItem"></comment-box>
-</ion-content>
-<ion-footer>
-
-  <ion-toolbar>
-    <ion-item no-lines>
-      <ion-input type="text" (keyup.enter)="sendComment(newComment); newComment=''" placeholder="Comment..." [(ngModel)]="newComment"></ion-input>
-      <button ion-button item-right (click)="sendComment(newComment); newComment=''">
-        <ion-icon name="send"></ion-icon>
-      </button>
-    </ion-item>
-  </ion-toolbar>
-
-</ion-footer>
+ </ion-footer>

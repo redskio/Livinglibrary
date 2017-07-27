@@ -36,6 +36,7 @@ import { homeChatPage } from '../pages/home_chat/home_chat';
 import { outletPage } from '../pages/outlet/outlet';
 import { outletListPage } from '../pages/outlet_list/outlet_list';
 import { AuthPage } from '../pages/auth/auth';
+import { QnaPage } from '../pages/qna/qna';
 import { ItemImg } from './../components/item-img/item-img.component';
 import { AddItemPage } from '../pages/add-item/add-item';
 import { ItemViewPage } from '../pages/item-view/item-view';
@@ -87,6 +88,7 @@ const firebaseAuthConfig = {
     outletPage,
     outletListPage,
     SigninBhalfPage,
+    QnaPage,
     ItemImg,
     loadPage,
     PaypalPage,
@@ -127,6 +129,7 @@ const firebaseAuthConfig = {
     AuthPage,
     outletPage,
     outletListPage,
+    QnaPage,
     loadPage,
     PaypalPage,
     FindPasswordPage

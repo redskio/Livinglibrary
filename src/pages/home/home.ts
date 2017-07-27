@@ -99,7 +99,6 @@ export class HomePage extends BaseComponent {
   }
   */
   setFilteredItems() {
-
       this.items = this.searchProvider.searchItems(this.searchTerm);
   }
   onSearch() {
