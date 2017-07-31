@@ -4,7 +4,8 @@ export class OutletBrand {
 
     constructor(
         public brand: string,
-        public tel: string
+        public tel: string,
+        public img: string
     ) {}
 
 }

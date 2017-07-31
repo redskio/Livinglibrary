@@ -1,21 +1,17 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Map
+      Outlet List
     </ion-title>
   </ion-navbar>
 </ion-header>
+<ion-content class="card-background-page">
 
-<ion-content>
- <ion-card>
-     <ion-list>
-        	<div *ngFor = "let outlets of outlet | async; let i = index">
-    			<div (click) = "getOutlet(outlets )">
-    				<ion-icon name="cart" item-start></ion-icon>
-    				{{i}} {{ outlets.title }}
-    			</div>
-    		</div>
-    </ion-list>
- </ion-card>
+  <ion-list>
+    <ion-card *ngFor = "let outlets of outlet | async; let i = index" (click) = "getOutlet( outlets )">
+      <img src="{{outlets.photo}}"/>
+      <div class="card-title">{{outlets.title}}</div>
+    </ion-card>
+  </ion-list>
 
 </ion-content>

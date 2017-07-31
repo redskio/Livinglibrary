@@ -22,11 +22,12 @@ export class OutletService extends BaseService {
   private setOutlet(): void {
     this.outlet = this.af.database.list('/outlet');
   }
-  addOutlet(_title: string, _latitude: number, _longitude: number) {
+  addOutlet(_title: string, _latitude: number, _longitude: number, _url: string) {
     this.outlet.push({
       title: _title,
       latitude: _latitude,
-      longitude: _longitude
+      longitude: _longitude,
+      url: _url
     });
   }
   removeOutlet(outletId: string) {
@@ -35,11 +36,12 @@ export class OutletService extends BaseService {
   getOutlet(index: string){
     return <FirebaseObjectObservable<Outlet>>this.af.database.object('/outlet/'+index);
   }
-  updateOutlet(outletId: string, _title: string, _latitude: number, _longitude: number) {
+  updateOutlet(outletId: string, _title: string, _latitude: number, _longitude: number, _url: string) {
     this.outlet.update(outletId, {
       title: _title,
       latitude: _latitude,
-      longitude: _longitude
+      longitude: _longitude,
+      url: _url
     });
   }
   getOutletTitle(index: string){

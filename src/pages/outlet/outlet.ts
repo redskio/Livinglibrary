@@ -17,13 +17,19 @@ export class outletPage {
   currentOutlet: Outlet;
   @ViewChild('map') mapElement: ElementRef;
   map: any;
+  url : string;
+  title: string;
+  addr: string;
+  tel: string;
 
   constructor(
     public navCtrl: NavController,
     public geolocation: Geolocation,
     public navParams: NavParams,
     public af: AngularFire
-  ) {}
+  ) {
+
+  }
 
   ionViewDidLoad() {
     if (this.navParams.get('outletInfo')) {
@@ -35,8 +41,11 @@ export class outletPage {
 
   loadOutlet() {
     this.currentOutlet = this.navParams.get('outletInfo');
-
-    this.outletBrand = this.af.database.list('/outlet/'+ this.currentOutlet.$key+'/brandList');
+    this.url = this.currentOutlet.url;
+    this.title = this.currentOutlet.title;
+    this.addr = this.currentOutlet.addr;
+    this.tel = this.currentOutlet.tel;
+    this.outletBrand = this.af.database.list('/outlet/'+ this.currentOutlet.$key+'/brandImg');
     let latLng = new google.maps.LatLng(this.currentOutlet.latitude, this.currentOutlet.longitude);
 
     let mapOptions = {

@@ -1,18 +1,34 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      Map
+    <ion-title >
+      <p style="font-size: 10px; color:#660099;">{{title}}</p>
     </ion-title>
     <ion-buttons end>
       <button ion-button (click)="addMarker()"><ion-icon name="add"></ion-icon>Add Marker</button>
-    </ion-buttons>  
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
- 
+
 <ion-content>
   <div #map id="map"></div>
-  <div *ngFor = "let OutletBrands of outletBrand | async; let i = index">
-  	  {{OutletBrands.brand}}  {{OutletBrands.tel}}  
+  <br>
+  <table>
+    <tr>
+      <td class="left">Address</td>
+      <td class="right">{{addr}}</td>
+    </tr>
+    <tr>
+      <td class="left">Tel</td>
+      <td class="right">{{tel}}</td>
+    </tr>
+    <tr>
+      <td class="left">Website</td>
+      <td class="right"><a href={{url}} style="font-size: 13px; word-break:break-all;">{{url}}</a></td>
+    </tr>
+  </table>
+  <br>
+  <div *ngFor = "let OutletBrands of outletBrand | async; let i = index" style="display: inline-block; width: 48%; margin: 3px;">
+  	 <img src="{{OutletBrands.img}}">
   </div>
 
 </ion-content>

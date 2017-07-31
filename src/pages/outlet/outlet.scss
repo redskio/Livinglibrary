@@ -2,10 +2,44 @@ outlet-page {
       .scroll {
         height: 100%
       }
+  #map {
+    width: 100%;
+    height: 30%;
+  }
+  a:link {
+    color: #660099;
+    text-decoration: none;
+  }
+  a:visited {
+    color: #660099;
+    text-decoration: none;
+  }
 
-      #map {
-        width: 100%;
-        height: 50%;
-      }
+  img{
+    height: 100px;
+    width: 200px;
+    text-align: center;
+
+    border: 1px solid black;
+  }
+  .left{
+    width: 40%;
+    text-align: left;
+  }
+  .right{
+    width: 60%;
+    text-align: right;
+    color:#660099;
+
+  }
+  table{
+    margin: auto;
+    text-align: right;
+    width: 90%;
+  }
+  tr{
+    height: 40px;
+    border-bottom: 1px solid #a0a0a0;
+  }
 }
 
