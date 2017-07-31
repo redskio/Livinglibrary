@@ -49,17 +49,15 @@ export class AddItemPage {
     this.itemForm = this.formBuilder.group({
       _title: ['', [Validators.required, Validators.minLength(3)]],
       _content: ['', [Validators.required, Validators.minLength(1)]],
-      _brand: ['º±≈√æ»µ ', Validators.required],
+      _brand: ['ÏÑ†ÌÉù ÏïàÎê®', Validators.required],
       _location: ['', Validators.required],
-      _duration: ['Ω√∞£', Validators.required],
-      _time: ['', Validators.required],
       selling_price: ['', [Validators.required]],
       normal_price: ['', [Validators.required]],
       purchase_price: ['', [Validators.required]],
+      duedate:[new Date().toISOString(),]
     });
     this.imgurl =  ['', '', ''];
     this.filePhoto = new Array(3);
-    this.imgurl
   }
 
   ionViewDidLoad() {
@@ -192,21 +190,22 @@ export class AddItemPage {
           let purchase_price: number = formItem.purchase_price;
           let normal_price: number = formItem.normal_price;
           let date: number = new Date().getTime();
-          let obduedate = new Date();
       
-          switch (formItem._duration) {
-            case 'min':
-              obduedate.setMinutes(obduedate.getMinutes() + formItem._time);
-              break;
-            case 'hour':
-              obduedate.setHours(obduedate.getHours() + formItem._time);
-              break;
-            case 'day':
-              obduedate.setDate(obduedate.getDate() + formItem._time);
-              break;
-          }
+          // switch (formItem._duration) {
+          //   case 'min':
+          //     obduedate.setMinutes(obduedate.getMinutes() + formItem._time);
+              
+          //     break;
+          //   case 'hour':
+          //     obduedate.setHours(obduedate.getHours() + formItem._time);
+          //     break;
+          //   case 'day':
+          //     obduedate.setDate(obduedate.getDate() + formItem._time);
+          //     alert(obduedate.getDate()-new Date().getDate());
+          //     break;
+          // }
           this._thumb= '';
-          let duedate: number = obduedate.getTime();
+          let duedate: number = new Date(formItem.duedate).getTime();
           this.itemService.addItem(currentUser.$key, title, content, brand, location, date, duedate, selling_price, normal_price, purchase_price, this.imgurl[0], this.imgurl[1], this.imgurl[2], this._thumb);
           this.navCtrl.push(HomePage);
         });

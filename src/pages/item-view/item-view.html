@@ -47,14 +47,17 @@
   <label><b>구매장소</b> {{location_title}}</label>
 </div>
 <div #map id="map" style="height:20%"></div>
-<button style="margin-bottom:100px;" ion-button (click)="onQnaClick()">
-  qna
+<button ion-item style="margin-bottom:50px;" (click)="onQnaClick()">
+  <label style="color:#8b8b8b;">Q & A</label>
   </button>
 
 </ion-content>
 
 <ion-footer>
-<button end ion-button class="buy-btn" (click)="onPaypalClick()">
+  <div style="padding:5px;background-color:#aaaaaa;left:0px;" class="buy-btn">
+    <label style="color:#431922;font-size:1.5rem">{{currentItem.selling_price|currency:'USD':true:'2.0-2' }}</label> <label style="color:white; font-size:1rem">original price {{currentItem.normal_price|currency:'USD':true:'2.0-2' }}</label>
+  </div>
+  <button style="right:0px;background-color:#431922; color:white;" class="buy-btn" (click)="onPaypalClick()">
     지금 구매
   </button>
  </ion-footer>

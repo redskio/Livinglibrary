@@ -56,21 +56,36 @@
  <div [ngSwitch]="view" style="margin-left:1%;margin-right:1%">
 
     <ion-list style="height:100%;">
-      <ion-card ion-item style="margin-bottom:1%;" *ngFor="let item of items | async" (click)="onItemClick(item)" >
-	    	<ion-thumbnail item-start >
-          <img [src]="item.imgurl1 || 'assets/images/no-photo.jpg'">
+      <ion-item ion-card  style="margin-bottom:1%;" *ngFor="let item of items | async" (click)="onItemClick(item)" >
+        <ion-item style="padding:0px;">
+        <ion-thumbnail style=" min-width: 7rem; min-height: 7rem;" item-start >
+          <img style="max-width: 7rem; min-width: 7rem; max-height: 7rem; min-height: 7rem;" [src]="item.imgurl1 || 'assets/images/no-photo.jpg'">
         </ion-thumbnail>
-        <div>
-          <h3>{{ item.brand }}</h3><label></label>
-          <h3 style="color:#9a9a9a;">{{ item.title }}</h3>
+        <div style="width:100%; position:relative;">
+          <label style="font-size:1.4rem;"><b>{{ item.brand }}</b></label>
+          <button icon-start ion-button outline style="float:right;border-color:#431922; color:#431922;" round>
+            <ion-icon style="font-size:1.4rem;" name='alarm'><timer [endTime]="item.duedate"></timer></ion-icon>
+          </button>
         </div>
-        <div style="width:45%;" item-end >
-          
-          <label ion-button style="background-color:#431922">{{item.selling_price / item.normal_price  | percent:'1.0-0' }}</label>
-          <label style="float:right; font-size:15px; line-height:200%;">{{ item.selling_price|currency:'USD':true:'2.0-2' }}</label></div>
+        <div style="width:100%; position:relative;">
+          <label style="font-size:1.3rem; color:#9a9a9a;"><b>{{ item.title }}</b></label>
+        </div>
+        <div style="margin-top:-5px; width:45%; position:relative; float:right;">
+          <label style="font-size:1.1rem; padding-top:3px; padding-bottom:3px; padding-left:7px; padding-right:7px; color:white; background-color:#431922">{{item.selling_price / item.normal_price  | percent:'1.0-0' }}</label>
+          <label style="float:right; font-size:1.2rem; line-height:200%;">{{ item.selling_price|currency:'USD':true:'2.0-2' }}</label>
+         </div>
         <!-- Original Price <label style="text-decoration: line-through;" >${{ item.normal_price }}</label>  -->
-        <p>view : {{item._view}}</p>
-      </ion-card>
+        </ion-item>
+        <div style="padding-top:10px; padding-left:5rem;">
+          <label icon-start style="float:left; font-size:1.1rem; color:gray;">
+            <ion-icon name="eye"></ion-icon>   {{item._view}}
+          </label>
+          <label icon-start style="float:right; font-size:1.1rem; color:gray;">
+            <ion-icon name="pricetags" style="font-size:1.1rem"></ion-icon>
+            <label style=" font-size:0.9rem;padding:1px; margin-right:2px; color:white;background-color:gray;">KOREA</label>{{getlocationTitle(item.location)}}
+          </label>
+        </div>
+      </ion-item>
     </ion-list>
 
   </div>

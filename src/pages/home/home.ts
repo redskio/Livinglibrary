@@ -7,6 +7,7 @@ import { AddItemPage } from './../add-item/add-item';
 import { ChatService } from './../../providers/chat.service';
 import { UserService } from './../../providers/user.service';
 import { ItemService } from './../../providers/item.service';
+import { OutletService } from './../../providers/outlet.service';
 import { Item } from './../../models/item.model';
 import { BaseComponent } from "../base.component";
 import { outletListPage } from './../outlet_list/outlet_list';
@@ -36,6 +37,7 @@ export class HomePage extends BaseComponent {
     public navCtrl: NavController,
     public userService: UserService,
     public pushService: pushService,
+    public outletService: OutletService,
     public app: App,
     public storage: Storage,
     public searchProvider: SearchDataProvider
@@ -77,7 +79,9 @@ export class HomePage extends BaseComponent {
   this.setFilteredItems();
 
   }
-
+  getlocationTitle(value: string): string{
+    return this.outletService.getOutletTitle(value);
+  }
   addPage(): void{
   	this.navCtrl.push(AddItemPage);
   }

@@ -51,6 +51,7 @@ import { FindPasswordPage} from '../pages/find-password/find-password'
 import {CommentService} from "../providers/comment.service";
 import { IonicImageViewerModule } from 'ionic-img-viewer';
 import { SearchDataProvider } from '../providers/search-data/search-data';
+import { TimerComponent } from '../components/timer/timer';
 
 
 const firebaseAppConfig: FirebaseAppConfig = {
@@ -94,7 +95,8 @@ const firebaseAuthConfig = {
     PaypalPage,
     FindPasswordPage,
     answerCommentBox,
-    CommentBox
+    CommentBox,
+    TimerComponent
   ],
   imports: [
     AngularFireModule.initializeApp(firebaseAppConfig, firebaseAuthConfig),

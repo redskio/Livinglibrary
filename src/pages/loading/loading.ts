@@ -45,20 +45,16 @@ export class loadPage {
                 email: email_set,
                 password: pwd_set
               }
-              let loading: Loading = this.showLoading();
               this.authService.signinWithEmail(userLogin).then((isLogged: boolean) => {
 
                 if(isLogged){
                   this.navCtrl.setRoot(HomePage);
-                  loading.dismiss();
                 } else{
                   this.navCtrl.setRoot(SigninPage);
-                  loading.dismiss();
                 }
               }).catch((error: any) => {
                 console.log(error);
                 this.navCtrl.setRoot(SigninPage);
-                loading.dismiss();
                 this.showAlert(error);
               })
             } else{
