@@ -1,6 +1,6 @@
 <div *ngIf="user">
   <ion-avatar [ngClass]="{'custom-background': isMenu}">
-    <img class="round" [src]="user.photo || 'assets/images/no-photo.jpg'" imageViewer="OTHER_IMAGE_URL" (close)="callbackAfterImageViewerCloses()">
+    <img class="profile" [src]="user.photo || 'assets/images/no-photo.jpg'" imageViewer="OTHER_IMAGE_URL" (close)="callbackAfterImageViewerCloses()">
   </ion-avatar>
   <h2 text-center>{{ user.name }}</h2>
   <p text-center>@{{ user.username }}</p>
