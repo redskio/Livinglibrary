@@ -1,0 +1,44 @@
+<!--
+  Generated template for the OrderlistPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>orderlist</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+ <!--
+   Send SMS
+
+  <button ion-button (click)="sendSMS()">Send SMS</button>
+
+   Send SMS
+ -->
+<div [ngSwitch]="view" style="margin-left:1%;margin-right:1%">
+
+    <ion-list style="height:100%;">
+      <ion-card ion-item *ngFor="let item of items | async" (click)="onItemClick(item)" >
+		<ion-thumbnail item-start >
+        <img [src]="item.imgurl1 || 'assets/images/no-photo.jpg'">
+        </ion-thumbnail>
+        <div>
+          <h3>{{ item.brand }}</h3><label></label>
+          <h3 style="color:#9a9a9a;">{{ item.title }}</h3>
+        </div>
+        <div style="width:45%;" item-end > 
+          <label ion-button style="background-color:#431922">{{item.selling_price / item.normal_price  | percent:'1.0-0' }}</label>
+          <label style="float:right; font-size:15px; line-height:200%;">{{ item.selling_price|currency:'USD':true:'2.0-2' }}</label></div>
+        <!-- Original Price <label style="text-decoration: line-through;" >${{ item.normal_price }}</label>  -->
+      </ion-card>
+    </ion-list>
+
+  </div>
+
+</ion-content>
