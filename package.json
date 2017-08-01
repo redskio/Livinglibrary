@@ -29,6 +29,7 @@
         "@ionic-native/status-bar": "3.13.1",
         "@ionic/storage": "2.0.1",
         "angularfire2": "^2.0.0-beta.8",
+        "buffer-shims": "^1.0.0",
         "com.paypal.cordova.mobilesdk": "~3.5.0",
         "cordova-android": "^6.2.3",
         "cordova-plugin-camera": "~2.4.1",
@@ -49,9 +50,11 @@
         "ionic-native": "^2.9.0",
         "ionic-plugin-keyboard": "~2.2.1",
         "ionicons": "3.0.0",
+        "jodid25519": "^1.0.2",
         "promise-polyfill": "^6.0.2",
         "rxjs": "5.4.2",
         "sw-toolbox": "3.6.0",
+        "tslib": "^1.7.1",
         "zone.js": "0.8.12"
     },
     "devDependencies": {

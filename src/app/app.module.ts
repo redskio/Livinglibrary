@@ -30,11 +30,13 @@ import { answerCommentBox } from './../components/answerComment-box/answerCommen
 import { CommentBox } from './../components/comment-box/comment-box.component';
 import { UserProfilePage } from './../pages/user-profile/user-profile';
 import { UserService } from './../providers/user.service';
+import { OrderService } from './../providers/order.service';
 import { OutletService } from './../providers/outlet.service';
 import { homeUserPage } from '../pages/home_user/home_user';
 import { homeChatPage } from '../pages/home_chat/home_chat';
 import { outletPage } from '../pages/outlet/outlet';
 import { outletListPage } from '../pages/outlet_list/outlet_list';
+import { OrderlistPage } from '../pages/orderlist/orderlist';
 import { AuthPage } from '../pages/auth/auth';
 import { QnaPage } from '../pages/qna/qna';
 import { ItemImg } from './../components/item-img/item-img.component';
@@ -90,6 +92,7 @@ const firebaseAuthConfig = {
     outletListPage,
     SigninBhalfPage,
     QnaPage,
+    OrderlistPage,
     ItemImg,
     loadPage,
     PaypalPage,
@@ -126,6 +129,7 @@ const firebaseAuthConfig = {
     SignupPage,
     SigninBhalfPage,
     UserProfilePage,
+    OrderlistPage,
     homeUserPage,
     homeChatPage,
     AuthPage,
@@ -140,6 +144,7 @@ const firebaseAuthConfig = {
     AuthService,
     ChatService,
     ItemService,
+    OrderService,
     MessageService,
     StatusBar,
     SplashScreen,

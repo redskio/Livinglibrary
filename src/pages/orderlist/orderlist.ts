@@ -8,9 +8,7 @@ import { UserService } from './../../providers/user.service';
 import { Storage } from '@ionic/storage';
 import { User } from '../../models/user.model';
 import { AngularFire, FirebaseApp, FirebaseListObservable } from 'angularfire2';
-////핸드폰 인증////
-import { SMS } from '@ionic-native/sms';
-////핸드폰 인증////
+
 @IonicPage()
 @Component({
   selector: 'page-orderlist',
@@ -32,9 +30,6 @@ export class OrderlistPage extends BaseComponent{
     public storage: Storage,
     public user: UserService,
     public af: AngularFire,
-    ////핸드폰 인증////
-    private smsVar: SMS
-    ////핸드폰 인증////
   ) {
     super(alertCtrl, authService,app, menuCtrl, storage, userService);
    
@@ -47,8 +42,7 @@ export class OrderlistPage extends BaseComponent{
       .subscribe((currentUser: User) => {
         this.currentUser = currentUser;
 			});
-    console.log(this.currentUser.email+this.currentUser.$key);
-        this.items = this.af.database.list('/users/'+this.currentUser.$key+'/buyItems');
+      this.items = this.af.database.list('/users/'+this.currentUser.$key+'/buyItems');
 
   }
 }

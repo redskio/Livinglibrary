@@ -6,7 +6,7 @@ import { AngularFire, FirebaseApp, FirebaseListObservable } from 'angularfire2';
 
 import { BaseService } from "./base.service";
 import { Order } from './../models/order.model';
-
+import { User } from './../models/user.model';
 @Injectable()
 export class OrderService extends BaseService {
 
@@ -30,6 +30,7 @@ export class OrderService extends BaseService {
       .set(ordernum)
       .catch(this.handlePromiseError);
   }
+
   addOrder(
     itemId: string,
     userId: string,
@@ -49,6 +50,13 @@ export class OrderService extends BaseService {
     this.order.remove(ordernum);
   }
 
-
+  createBuy(orderNum: any, buyList: FirebaseListObservable<User>): firebase.Promise<void> {
+    return buyList.push(orderNum)
+      .catch(this.handlePromiseError);
+  }
+  buyItem(userKey: string): FirebaseListObservable<User> {
+    return <FirebaseListObservable<User>>this.af.database.list(`/users/${userKey}/buyItems/`)
+      .catch(this.handleObservableError);
+  }
 
 }

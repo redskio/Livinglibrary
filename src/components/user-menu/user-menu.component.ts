@@ -8,6 +8,8 @@ import { UserProfilePage } from './../../pages/user-profile/user-profile';
 import { homeUserPage } from './../../pages/home_user/home_user';
 import { homeChatPage } from './../../pages/home_chat/home_chat';
 import { outletListPage } from './../../pages/outlet_list/outlet_list';
+import { OrderlistPage } from './../../pages/orderlist/orderlist';
+
 import {Storage} from '@ionic/storage';
 @Component({
   selector: 'user-menu',
@@ -41,5 +43,8 @@ export class UserMenuComponent extends BaseComponent {
 
   onOutLet(): void{
   	this.navCtrl.push(outletListPage);
+  }
+  onOrderlist(): void{
+  	this.navCtrl.push(OrderlistPage);
   }
 }

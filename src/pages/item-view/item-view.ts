@@ -9,10 +9,14 @@ import {OutletService} from '../../providers/outlet.service';
 import {ChatPage} from '../chat/chat';
 import {QnaPage} from '../qna/qna';
 import {Component, ViewChild, ElementRef} from '@angular/core';
-import {FirebaseObjectObservable, FirebaseListObservable} from 'angularfire2';
+import { AngularFire, FirebaseApp, FirebaseListObservable,FirebaseObjectObservable } from 'angularfire2';
 import {IonicPage, Loading, LoadingController, NavController, NavParams, Content} from 'ionic-angular';
 import firebase from 'firebase';
 import { PaypalPage } from './../paypal/paypal';
+import { PayPal, PayPalPayment, PayPalConfiguration } from 'ionic-native';
+import { OrderService } from './../../providers/order.service';
+import { HomePage } from './../home/home';
+import { Order} from './../../models/order.model';
 declare var google;
 
 /**
@@ -32,8 +36,15 @@ export class ItemViewPage {
   currentUser: User;
   handleObservableError: any;
   public user: User;
+  buyList : FirebaseListObservable<User>;
   public current_location: FirebaseObjectObservable<Outlet>;
   public location_title: string;
+  public sellerId:string;
+  orderNum:number;
+  payment:PayPalPayment;
+  order_price:string;
+  currencies = ['KOR', 'USD'];
+  payPalEnvironment: string = 'payPalEnvironmentSandbox';
   @ViewChild('map') mapElement: ElementRef;
   map: any;
   constructor(
@@ -44,6 +55,8 @@ export class ItemViewPage {
     public chatService: ChatService,
     public outletService: OutletService,
     public loadingCtrl: LoadingController,
+    public orderService: OrderService,
+    
   ) {
     this.currentItem = this.navParams.get('itemInfo');
     this.current_location = outletService.getOutlet(this.currentItem.location);
@@ -51,11 +64,20 @@ export class ItemViewPage {
       .subscribe((editor: User) => {
         this.user = editor;
       });
+      this.order_price =Number(this.currentItem.selling_price).toString();
+      this.payment = new PayPalPayment(this.order_price, 'USD', this.currentItem.title, 'sale');
   }
 
   ionViewDidLoad() {
     this.mapLoad();
     this.itemService.updateView(this.currentItem.$key,++this.currentItem._view);
+    this.userService.currentUser
+      .first()
+      .subscribe((currentUser: User) => {
+        this.currentUser = currentUser;
+			});
+    this.orderNum=Math.floor(Math.random() * 100000 + 10000000);
+    
   }
  
 
@@ -144,6 +166,51 @@ export class ItemViewPage {
     });
   }
   onPaypalClick(){
-    this.navCtrl.push(PaypalPage);
+    var payPalEnvironmentSandbox = 'AbpxqNgj4BrH8zSOKWVCacFYatJuAujMh2TtwmzRD9kI5QY5Wdog2575tu58wNPwL4J0Z8lY88kVRkHZ';
+	  var payPalEnvironmentProduction = 'AdM032KL1Wc4WXxzcc7eRPp1Xn8Pz-gMC3BngHejDbiisgzMy82KAFGZD9YRmzAghqP_i1noe7Z0doKA';
+    PayPal.init({
+			PayPalEnvironmentProduction: payPalEnvironmentProduction,
+			PayPalEnvironmentSandbox: payPalEnvironmentSandbox
+		}).then(() => {
+			PayPal.prepareToRender(this.payPalEnvironment, new PayPalConfiguration({})).then(() => {
+				PayPal.renderSinglePaymentUI(this.payment).then((response) => {
+					this.inputOrder();
+				}, () => {
+					console.error('Error or render dialog closed without being successful');
+				});
+			}, () => {
+				console.error('Error in configuration');
+			});
+		}, () => {
+      console.error('Error in initialization, maybe PayPal isn\'t supported or something else');
+      this.inputOrder();// temp order, should be remove before launch
+    });
+  }
+  inputOrder(){
+    let date: number = new Date().getTime();
+    alert('결제가 완료되었습니다. 판매자가 확인을 완료하면 물품이 배송될 예정입니다. 감사합니다.');
+    this.orderService.addOrder(this.currentItem.$key,this.user.$key,this.currentItem.userId,'0',date);
+    this.buyList = this.orderService.buyItem(this.currentUser.$key);
+    this.orderService.createBuy(new Order (
+      null,
+      null,
+      null,
+      this.currentItem.$key,
+      this.currentItem.title,
+      this.currentItem.content,
+      this.currentItem.brand,
+      this.currentItem.location,
+      this.currentItem.date,
+      this.currentItem.duedate,
+      this.currentItem.selling_price,
+      this.currentItem.normal_price,
+      this.currentItem.purchase_price,
+      this.currentItem.imgurl1,
+      this.currentItem.imgurl2,
+      this.currentItem.imgurl3,
+      this.currentItem._thumb,
+    ),this.buyList);
+    // console.log(response);
+    this.navCtrl.setRoot(HomePage);
   }
 }
