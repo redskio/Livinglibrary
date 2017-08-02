@@ -7,6 +7,9 @@
         "files": {}
     },
     "installed_plugins": {
+        "com.paypal.cordova.mobilesdk": {
+            "PACKAGE_NAME": "kr.whatshoe.outlet"
+        },
         "cordova-plugin-android-permissions": {
             "PACKAGE_NAME": "kr.whatshoe.outlet"
         },
@@ -50,6 +53,9 @@
         }
     },
     "dependent_plugins": {
+        "card.io.cordova.mobilesdk": {
+            "PACKAGE_NAME": "kr.whatshoe.outlet"
+        },
         "cordova-plugin-file": {
             "PACKAGE_NAME": "kr.whatshoe.outlet"
         },

@@ -58,7 +58,7 @@ export class ChatPage{
     this.imgChat = false;
     this.recipient = this.navParams.get('recipientUser');
     this.pageTitle = this.recipient.name;
-
+    this.imgurl = null;
     this.userService.currentUser
       .first()
       .subscribe((currentUser: User) => {
