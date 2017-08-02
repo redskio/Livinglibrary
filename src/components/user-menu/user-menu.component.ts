@@ -11,6 +11,7 @@ import { outletListPage } from './../../pages/outlet_list/outlet_list';
 import { OrderlistPage } from './../../pages/orderlist/orderlist';
 
 import {Storage} from '@ionic/storage';
+import {UserService} from "../../providers/user.service";
 @Component({
   selector: 'user-menu',
   templateUrl: 'user-menu.component.html'
@@ -24,9 +25,10 @@ export class UserMenuComponent extends BaseComponent {
     public authService: AuthService,
     public app: App,
     public menuCtrl: MenuController,
-    public storage: Storage
+    public storage: Storage,
+    public userService: UserService
   ) {
-    super(alertCtrl, authService, app, menuCtrl, storage);
+    super(alertCtrl, authService, app, menuCtrl, storage, userService);
   }
 
   onProfile(): void {

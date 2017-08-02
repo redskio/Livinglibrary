@@ -5,16 +5,20 @@ import { App, AlertController, MenuController, NavController } from 'ionic-angul
 import { AuthService } from './../providers/auth.service';
 import { SigninPage } from './../pages/signin/signin';
 import {Storage} from '@ionic/storage';
+import {User} from "../models/user.model";
+import {UserService} from "../providers/user.service";
+import firebase from 'firebase';
 export abstract class BaseComponent implements OnInit {
 
     protected navCtrl: NavController;
-
+    public currentUser: User;
     constructor(
         public alertCtrl: AlertController,
         public authService: AuthService,
         public app: App,
         public menuCtrl: MenuController,
-        public storage: Storage
+        public storage: Storage,
+        public userService: UserService
     ) {}
 
     ngOnInit(): void {
@@ -31,11 +35,20 @@ export abstract class BaseComponent implements OnInit {
                 {
                     text: 'Yes',
                     handler: () => {
-                        this.authService.logout()
-                            .then(() => {
-                                this.navCtrl.setRoot(SigninPage);
-                                this.menuCtrl.enable(false, 'user-menu');
-                            });
+                      this.authService.logout()
+                        .then(() => {
+                          this.storage.set('email',null);
+                          this.storage.set('pwd', null);
+                          this.storage.set('logType', null);
+                          this.userService.currentUser
+                            .first()
+                            .subscribe((currentUser: User) => {
+                              this.currentUser = currentUser;
+                              firebase.database().ref('pushtokens/'+this.currentUser.$key).remove();
+                            })
+                          this.navCtrl.setRoot(SigninPage);
+                          this.menuCtrl.enable(false, 'user-menu');
+                        });
                     }
                 },
                 {
