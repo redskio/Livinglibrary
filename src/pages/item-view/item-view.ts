@@ -189,7 +189,7 @@ export class ItemViewPage {
   inputOrder(){
     let date: number = new Date().getTime();
     alert('결제가 완료되었습니다. 판매자가 확인을 완료하면 물품이 배송될 예정입니다. 감사합니다.');
-    this.orderService.addOrder(this.currentItem.$key,this.user.$key,this.currentItem.userId,'0',date);
+    this.orderService.addOrder(this.currentItem.$key,this.currentUser.$key,this.currentItem.userId,'0',date);
     this.buyList = this.orderService.buyItem(this.currentUser.$key);
     this.orderService.createBuy(new Order (
       null,
