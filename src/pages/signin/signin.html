@@ -6,19 +6,20 @@
 
 
 <ion-content padding  id="content-body">
-	<div style="margin-top:40%; margin-bottom:10%;" align="center">
+	<div style="margin-top:20%; margin-bottom:10%;" align="center">
 		<img style="width:28%;"  src="assets/images/bhalf_logo.png"/>
 	</div>
-   <button ion-button center style="margin-top: 40%;width:100%;background-color:#431922;color:white;" (click)="onSigninBhalf()">
-    Sign in to Bhalf
+   <button class="btn btn-login" ion-button center (click)="onSigninBhalf()">
+    <b>Log in to Bhalf</b>
   </button>
 
-  <button ion-button center style="width:100%;background-color:#3b5998;color:white;"  (click)="facebookLogin()">
-    Sign in with Facebook
+  <button class="btn btn-facebook" ion-button center (click)="facebookLogin()">
+   <!--<img src="../assets/images/facebook_logo.png" width="10">&nbsp;&nbsp;-->
+   <b>Log in with Facebook</b>
   </button>
-  <button ion-button center style="width:100%;background-color:rgba(255,255,255,0.3);color:white;"  (click)="facebookLogin()">
-    Look around
+  <button class="btn btn-look" ion-button center (click)="facebookLogin()">
+    <b>Look around</b>
   </button>
-  <button ion-button full clear textx-center style="margin-top: 10%; color:white"  (click)="onSignup()">create account</button>
+  <button class="create" ion-button full clear textx-center (click)="onSignup()"><b>create account</b></button>
 
 </ion-content>

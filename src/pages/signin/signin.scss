@@ -1,7 +1,20 @@
-page-signin {
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
+page-signin {
+  font-size:14px;
+	font-family: "Nanum Gothic", sans-serif;	
 }
 #content-body{
   background-image:url('../assets/images/body_bg.jpg');
   background-size:cover;
+  height:100%;
 }
+
+.btn{height:50px; width:100%;}
+.btn-login{margin-top:50%; background-color:#431922;color:white;}
+.btn-login:hover{background-color:#33131b;}
+.btn-facebook{background-color:#3a5998;color:white;}
+.btn-facebook:hover{background-color:#355587;}
+.btn-look, .btn-look:hover{background-color:rgba(255,255,255,0.3);color:white;}
+
+.create{color:white; margin-top:10%;}
