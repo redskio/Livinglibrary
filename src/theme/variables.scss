@@ -3,7 +3,9 @@
 $font-path: "../assets/fonts";
 
 @import "ionic.globals";
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
+$font-family-base: "Nanum Gothic", sans-serif !default;
 
 // Shared Variables
 // --------------------------------------------------
