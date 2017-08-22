@@ -27,65 +27,76 @@
 </ion-header>
 
 <ion-content>
-<ion-slides pager style="height:30%">
+<ion-slides pager style="height:25%">
 
   <ion-slide style="background-color: black">
-    	<img src="assets/images/main_1.jpg">
+    	<img src="assets/images/ad1.jpg">
   </ion-slide>
 
   <ion-slide style="background-color: black">
-        <img src="assets/images/main_2.jpg">
+        <img src="assets/images/ad2.jpg">
     
   </ion-slide>
 
   <ion-slide style="background-color: black">
-        <img src="assets/images/main_3.jpg">
+        <img src="assets/images/ad3.jpg">
     
   </ion-slide>
 
 </ion-slides>
- <div style="width:100%; padding-top:10px; padding-bottom:10px; text-align:center; background-color:#431922; color:white;">{{items_length}}개의 상품이 올라왔어요.</div>
+ 
+<div style="width:100%; padding-top:10px; padding-bottom:10px; text-align:center; background-color:#431922; color:white;">{{items_length}}개의 상품이 올라왔어요.</div>
  <ion-searchbar id="searchbar" style="display:none;" [(ngModel)]="searchTerm" (ionInput)="setFilteredItems()"></ion-searchbar>
  <div style="width:100%; background-color:#fafafa; color:#9a9a9a;">
-  <div style="padding-left:2%; padding-top:2%; padding-bottom:2%;"> 
-       <label>HOT DEAL</label>
-       <button icon-only style="width:2.5rem;  background-color:transparent;"> <img src="assets/images/main_refresh.png"></button> 
-       <button float-right icon-only style="width:2.5rem; background-color:transparent;"> <img src="assets/images/main_filter.png"></button>
-   </div>
+    <div style="padding-left:2%; padding-top:2%; padding-bottom:2%;"> 
+        <label>HOT DEAL</label>
+        <button icon-only style="width:2.5rem;  background-color:transparent;"> <img src="assets/images/main_refresh.png"></button> 
+        <button float-right icon-only style="width:2.5rem; background-color:transparent;"> <img src="assets/images/main_filter.png"></button>
+    </div>
+  
 
- <div [ngSwitch]="view" style="margin-left:1%;margin-right:1%">
+ <div [ngSwitch]="view">
+    <ion-list>
+      <ion-item class="list_view" *ngFor="let item of items | async" (click)="onItemClick(item)" >
+        
+          <span class="list_img">
+          <img [src]="item.imgurl1 || 'assets/images/no-photo.jpg'" >
+          </span>
+        
 
-    <ion-list style="height:100%;">
-      <ion-item ion-card  style="margin-bottom:1%;" *ngFor="let item of items | async" (click)="onItemClick(item)" >
-        <ion-item style="padding:0px;">
-        <ion-thumbnail style=" min-width: 7rem; min-height: 7rem;" item-start >
-          <img style="max-width: 7rem; min-width: 7rem; max-height: 7rem; min-height: 7rem;" [src]="item.imgurl1 || 'assets/images/no-photo.jpg'">
-        </ion-thumbnail>
-        <div style="width:100%; position:relative;">
-          <label style="font-size:1.4rem;"><b>{{ item.brand }}</b></label>
-          <button icon-start ion-button outline style="float:right;border-color:#431922; color:#431922;" round>
-            <ion-icon style="font-size:1.4rem;" name='alarm'><timer [endTime]="item.duedate"></timer></ion-icon>
-          </button>
+        <div id="list_content">
+          <div class="list_title">
+            <label>{{ item.title }}</label>
+          </div>
+          <div class="list_brand">
+            <label>{{ item.brand }}</label>
+          </div>
+          <div class="list_price">
+            <label>{{item.selling_price / item.normal_price | percent:'1.0-0' }}</label>
+            <label>{{ item.selling_price|currency:'USD':true:'2.0-2' }}</label>
+            <label>(${{ item.normal_price }})</label>
+          </div>
+        
+        
+        <div class="timer">
+          <timer [endTime]="item.duedate"></timer>
         </div>
-        <div style="width:100%; position:relative;">
-          <label style="font-size:1.3rem; color:#9a9a9a;"><b>{{ item.title }}</b></label>
+        
+        <div class="view">
+        <span>
+          <img src="../assets/images/list_view.png" width="15">{{item._view}}
+        </span>
+        
+        <span>
+          <img src="../assets/images/list_outlet.png" width="13"></span>
+        <span class="nation">KOREA</span><span>&nbsp;{{getlocationTitle(item.location)}}</span>
+        
         </div>
-        <div style="margin-top:-5px; width:45%; position:relative; float:right;">
-          <label style="font-size:1.1rem; padding-top:3px; padding-bottom:3px; padding-left:7px; padding-right:7px; color:white; background-color:#431922">{{item.selling_price / item.normal_price  | percent:'1.0-0' }}</label>
-          <label style="float:right; font-size:1.2rem; line-height:200%;">{{ item.selling_price|currency:'USD':true:'2.0-2' }}</label>
-         </div>
-        <!-- Original Price <label style="text-decoration: line-through;" >${{ item.normal_price }}</label>  -->
-        </ion-item>
-        <div style="padding-top:10px; padding-left:5rem;">
-          <label icon-start style="float:left; font-size:1.1rem; color:gray;">
-            <ion-icon name="eye"></ion-icon>   {{item._view}}
-          </label>
-          <label icon-start style="float:right; font-size:1.1rem; color:gray;">
-            <ion-icon name="pricetags" style="font-size:1.1rem"></ion-icon>
-            <label style=" font-size:0.9rem;padding:1px; margin-right:2px; color:white;background-color:gray;">KOREA</label>{{getlocationTitle(item.location)}}
-          </label>
         </div>
+
+        <span class="nextbtn"><ion-icon name="arrow-forward"></ion-icon></span>
       </ion-item>
+      
     </ion-list>
 
   </div>

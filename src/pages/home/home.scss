@@ -2,12 +2,82 @@ page-home {
     .scroll {
         height: 100%
     }
-
-
-    
 }
+
 .ios, .md, .android {
     .scroll {
         height: 100%
     }    
 }        
+
+.list_view{
+    height:30%;
+}
+
+.list_img img{
+    width:12rem;
+    height:15rem;
+    float:left;
+}
+#list_content{
+    float:left;
+    margin-left:3%;
+    line-height:1.3;
+    letter-spacing:-0.05rem;
+}
+
+
+.list_title{
+    font-size:1.8rem;
+    color:black;
+    font-weight:bold;
+}
+.list_brand{
+    font-size:1.6rem;
+    color:#9a9a9a;
+    font-weight:normal;
+    text-transform: uppercase;
+}
+.list_price{
+    margin:7% 0;
+}
+.list_price label:nth-child(1){
+    font-size:1.2rem;
+    font-weight:bold;
+    color:white;
+    background-color:#431922;
+    padding:0.3rem 0.4rem;
+}
+.list_price label:nth-child(2){
+    font-size:2.4rem;
+    font-weight:bold;
+    color:#431922;
+    
+}
+.list_price label:last-child{
+    text-decoration: line-through;
+    color:#9a9a9a;
+    margin-left:1%;
+}
+.timer{
+    color:#9a9a9a;
+    font-size:1.2rem;
+    margin:5% 0;
+}
+
+.view{
+    border-top:1px solid #9a9a9a;
+}
+.view span{
+    font-size:1.2rem;
+    color:#9a9a9a;
+    margin-left:1%;
+}
+.view span>img{margin-top:0.7rem;}
+
+.nation{
+    background-color:#9a9a9a;
+    color:white !important;
+}
+
+.nextbtn{line-height:9; margin-left:2%;}
