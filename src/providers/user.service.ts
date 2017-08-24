@@ -85,5 +85,11 @@ export class UserService extends BaseService {
       .child(`/users/${userId}`)
       .put(file);
   }
-
+  uploadPhoto_url(url: string, _filename: string): firebase.storage.UploadTask {
+    return this.firebaseApp
+      .storage()
+      .ref()
+      .child(`/users/${_filename}`)
+      .putString(url, 'base64', {contentType:'image/jpeg'});
+  }
 }

@@ -33,7 +33,7 @@ resumeTimer() {
  }
  initTimer() {
  if (!this.timeInSeconds) { 
-   this.timeInSeconds =  this.endTime- new Date().getTime(); 
+   this.timeInSeconds =  (this.endTime- new Date().getTime())/1000; 
 }
 
 this.timer = <PTimer>{
@@ -47,21 +47,24 @@ this.timer = <PTimer>{
  }
 
 getSecondsAsDigitalClock(inputSeconds: number) {
- inputSeconds=inputSeconds/1000;
  var sec_num = parseInt(inputSeconds.toString(), 10); // don't forget the second param
- var days = Math.floor(sec_num / 86400);
- var hours = Math.floor((sec_num - (days* 86400)) / 3600);
- var minutes = Math.floor((sec_num - (days* 86400) - (hours * 3600)) / 60);
- var seconds = sec_num - (days* 86400) - (hours * 3600) - (minutes * 60);
- var dayString = '';
+ //var days = Math.floor(sec_num / 86400);
+//  var hours = Math.floor((sec_num - (days* 86400)) / 3600);
+//  var minutes = Math.floor((sec_num - (days* 86400) - (hours * 3600)) / 60);
+//  var seconds = sec_num - (days* 86400) - (hours * 3600) - (minutes * 60);
+ var hours = Math.floor(sec_num/ 3600);
+ var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+ var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+//var dayString = '';
  var hoursString = '';
  var minutesString = '';
  var secondsString = '';
- dayString = (days< 10) ? "0"+ days : days.toString();
+// dayString = (days< 10) ? "0"+ days : days.toString();
  hoursString = (hours < 10) ? "0" + hours : hours.toString();
  minutesString = (minutes < 10) ? "0" + minutes : minutes.toString();
  secondsString = (seconds < 10) ? "0" + seconds : seconds.toString();
- return ' ' + dayString + '일 ' + hoursString + '시간 ' + minutesString + '분';
+ return ' ' +  hoursString + '시간 ' + minutesString + '분 ' + secondsString + '초';
  }
 startTimer() {
  this.timer.hasStarted = true;

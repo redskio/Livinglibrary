@@ -60,8 +60,12 @@ export class ItemService extends BaseService {
       imgurl2: imgurl2,
       imgurl3: imgurl3,
       _thumb: _thumb,
-      _view: 0
+      _view: 0,
+      _currentView: 0
     });
+  }
+  getItem(key: string){
+    return this.af.database.object(`/items/`+key);
   }
   removeItem(itemId: string) {
     this.items.remove(itemId);
@@ -76,6 +80,11 @@ export class ItemService extends BaseService {
   updateView(itemId: string, view: number){
     this.items.update(itemId,{
       _view:view
+    });
+  }
+  updateCurrentView(itemId: string, view: number){
+    this.items.update(itemId,{
+      _currentView:view
     });
   }
   uploadPhoto(url: string, _filename: string): firebase.storage.UploadTask {

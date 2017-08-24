@@ -10,7 +10,7 @@ import {ChatPage} from '../chat/chat';
 import {QnaPage} from '../qna/qna';
 import {Component, ViewChild, ElementRef} from '@angular/core';
 import { AngularFire, FirebaseApp, FirebaseListObservable,FirebaseObjectObservable } from 'angularfire2';
-import {IonicPage, Loading, LoadingController, NavController, NavParams, Content} from 'ionic-angular';
+import {IonicPage, Loading, LoadingController, NavController, NavParams, Content, Platform} from 'ionic-angular';
 import firebase from 'firebase';
 import { PaypalPage } from './../paypal/paypal';
 import { PayPal, PayPalPayment, PayPalConfiguration } from 'ionic-native';
@@ -33,9 +33,11 @@ declare var google;
 export class ItemViewPage {
   @ViewChild(Content) content: Content;
   currentItem: Item;
+  public observableItem: Item;
   currentUser: User;
   handleObservableError: any;
   public user: User;
+  public indi: number = 1;
   buyList : FirebaseListObservable<User>;
   public current_location: FirebaseObjectObservable<Outlet>;
   public location_title: string;
@@ -56,28 +58,45 @@ export class ItemViewPage {
     public outletService: OutletService,
     public loadingCtrl: LoadingController,
     public orderService: OrderService,
-    
+    public platform: Platform,
   ) {
     this.currentItem = this.navParams.get('itemInfo');
+   
     this.current_location = outletService.getOutlet(this.currentItem.location);
     this.userService.get(this.currentItem.userId)
       .subscribe((editor: User) => {
         this.user = editor;
       });
-      this.order_price =Number(this.currentItem.selling_price).toString();
-      this.payment = new PayPalPayment(this.order_price, 'USD', this.currentItem.title, 'sale');
+    this.itemService.getItem(this.currentItem.$key).subscribe(item=>{
+      this.observableItem= item;
+    });
+    this.order_price =Number(this.currentItem.selling_price).toString();
+    this.payment = new PayPalPayment(this.order_price, 'USD', this.currentItem.title, 'sale');
   }
 
   ionViewDidLoad() {
     this.mapLoad();
-    this.itemService.updateView(this.currentItem.$key,++this.currentItem._view);
+
     this.userService.currentUser
       .first()
       .subscribe((currentUser: User) => {
         this.currentUser = currentUser;
 			});
     this.orderNum=Math.floor(Math.random() * 100000 + 10000000);
-    
+
+    this.itemService.updateView(this.currentItem.$key,++this.currentItem._view);
+    this.indi = 1;
+    this.itemService.updateCurrentView(this.currentItem.$key,(this.indi+this.observableItem._currentView));
+    this.platform.ready().then(() => {
+        this.platform.pause.subscribe(() => {
+             this.itemService.updateCurrentView(this.currentItem.$key,(this.observableItem._currentView-this.indi));
+
+        });
+
+        this.platform.resume.subscribe(() => {
+            this.itemService.updateCurrentView(this.currentItem.$key,(this.observableItem._currentView+this.indi));
+        });
+    });
   }
  
 
@@ -213,4 +232,9 @@ export class ItemViewPage {
     // console.log(response);
     this.navCtrl.setRoot(HomePage);
   }
+  ionViewWillLeave(){
+    this.itemService.updateCurrentView(this.currentItem.$key,(this.observableItem._currentView-this.indi));
+    this.indi=0;
+  }
+  
 }
