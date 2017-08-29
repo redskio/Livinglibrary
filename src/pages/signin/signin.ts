@@ -64,6 +64,7 @@ export class SigninPage {
   facebookLogin(): void {
     this.auth.loginWithFacebook().subscribe((success) => {
       let loading: Loading = this.showLoading();
+      console.log('여기가 페이스북 회원가입이다 '+success.email+" <-이메일자리"+success.displayName+" <-이름자리");
       this.signupForm = this.formBuilder.group({
       email: [success.email, ],
       name: [success.displayName, ],
@@ -72,14 +73,22 @@ export class SigninPage {
       });
       let formUser = this.signupForm.value;
       let uuid: string = success.uid;
+      this.storage.set('logType', 'facebook');
+      this.storage.get('logType').then((val)=>{
+              console.log("무슨값?"+val);
+           })
       this.userService.create(formUser, uuid)
          .then(() => {
-           loading.dismiss();
+           
            this.storage.set('email',this.signupForm.value.email);
            this.storage.set('name', this.signupForm.value.name);
            this.storage.set('photo', this.signupForm.value.photo);
            this.storage.set('logType', 'facebook');
            this.pushService.setToken(uuid);
+           this.storage.get('logType').then((val)=>{
+              console.log("무슨값?"+val);
+           })
+           loading.dismiss();
            this.navCtrl.setRoot(HomePage);
          }).catch((error: any) => {
            console.log(error);

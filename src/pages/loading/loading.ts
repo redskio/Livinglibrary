@@ -33,7 +33,9 @@ export class loadPage {
     this.loginSet();
   }
   loginSet() {
+    
     this.storage.get('logType').then((val)=>{
+
       //로그인 타입이 이메일 일때 자동로그인
       if(val == 'email'){
         this.storage.get('email').then((email_set)=>{
@@ -64,28 +66,31 @@ export class loadPage {
         });
         //로그인 타입이 페이스북 일때 자동로그인
       } else if(val == 'facebook'){
-        this.auth.loginWithFacebook().subscribe((success) => {
-          let loading: Loading = this.showLoading();
-          this.signupForm = this.formBuilder.group({
-            email: [success.email, ],
-            name: [success.displayName, ],
-            photo : [success.photoURL, ],
-            username: [success.email, ],
-          });
-          let formUser = this.signupForm.value;
-          let uuid: string = success.uid;
-          this.userService.create(formUser, uuid)
-            .then(() => {
-              loading.dismiss();
-              this.navCtrl.setRoot(HomePage);
-            }).catch((error: any) => {
-            console.log(error);
-            loading.dismiss();
-            this.showAlert(error);
-          });
-        }, err => {
-          console.log(err);
-        });
+        this.navCtrl.setRoot(HomePage);
+        //  this.auth.loginWithFacebook().subscribe((success) => {
+        //   let loading: Loading = this.showLoading();
+        //   loading.dismiss();
+        //   this.navCtrl.setRoot(HomePage);
+        //   // this.signupForm = this.formBuilder.group({
+        //   //   email: [success.email, ],
+        //   //   name: [success.displayName, ],
+        //   //   photo : [success.photoURL, ],
+        //   //   username: [success.email, ],
+        //   // });
+        //   // let formUser = this.signupForm.value;
+        //   // let uuid: string = success.uid;
+        //   // this.userService.create(formUser, uuid)
+        //   //   .then(() => {
+        //   //     loading.dismiss();
+        //   //     this.navCtrl.setRoot(HomePage);
+        //   //   }).catch((error: any) => {
+        //   //   console.log(error);
+        //   //   loading.dismiss();
+        //   //   this.showAlert(error);
+        //   // });
+        // }, err => {
+        //   console.log(err);
+        // });
       } else{
         this.navCtrl.setRoot(SigninPage);
       }
