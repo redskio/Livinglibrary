@@ -47,21 +47,20 @@ export class SigninBhalfPage {
   onSubmit(): void {
 
     let loading: Loading = this.showLoading();
-
+    loading.dismiss();
     this.authService.signinWithEmail(this.signinForm.value)
-
       .then((isLogged: boolean) => {
-
         if (isLogged) {
+          loading.dismiss();
           this.storage.set('email', this.signinForm.value.email);
           this.storage.set('pwd', this.signinForm.value.password);
           this.storage.set('logType', 'email');
           this.userService.currentUser
             .subscribe((user: User) => {
               this.currentUser = user;
+              this.pushService.setToken(this.currentUser.$key);
             });
 
-          this.pushService.setToken(this.currentUser.$key);
           this.navCtrl.setRoot(HomePage);
           loading.dismiss();
         }
