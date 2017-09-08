@@ -7,6 +7,8 @@ import { ImageResizerOptions, ImageResizer } from 'ionic-native';
 import { FirebaseAuthState } from 'angularfire2';
 import { AuthService } from './../../providers/auth.service';
 import { HomePage } from './../home/home';
+import { AccessTermsPage } from './../access-terms/access-terms';
+import { PrivacyPolicyPage } from './../privacy-policy/privacy-policy';
 import { UserService } from './../../providers/user.service';
 
 @Component({
@@ -196,6 +198,12 @@ export class SignupPage {
       message: message,
       buttons: ['Ok']
     }).present();
+  }
+  private access_terms(){
+    this.navCtrl.push(AccessTermsPage);
+  }
+  private privacy_policy(){
+    this.navCtrl.push(PrivacyPolicyPage);
   }
 
 }

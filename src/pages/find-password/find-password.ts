@@ -38,11 +38,11 @@ pwForm
   sendEmailButton():void{
     this.auth.resetPassword(this.email).subscribe((success) =>{
       console.log("이메일 보내기 성공 : "+this.email);
-      alert("이메일이 발송되었습니다. 확인해 주세요.");
+      alert("가입시 입력한 이메일과 정보가 일치하지 않습니다. 다시 한번 확인해 주세요.");
       this.navCtrl.push(SigninBhalfPage);
     }, err => {
       console.log("이메일 보내기 실패 : "+this.email);
-      alert("가입시 입력한 이메일과 정보가 일치하지 않습니다. 다시 한번 확인해 주세요.");
+      alert("이메일이 발송되었습니다. 확인해 주세요.");
       console.log(err);
     });
   }

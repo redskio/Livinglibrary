@@ -5,4 +5,7 @@ export interface PTimer {
  hasStarted: boolean;
  hasFinished: boolean;
  displayTime: string;
+ color: string;
+ size: string;
+ guide: string;
 }

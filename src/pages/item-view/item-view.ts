@@ -211,23 +211,15 @@ export class ItemViewPage {
     this.orderService.addOrder(this.currentItem.$key,this.currentUser.$key,this.currentItem.userId,'0',date);
     this.buyList = this.orderService.buyItem(this.currentUser.$key);
     this.orderService.createBuy(new Order (
-      null,
-      null,
-      null,
+      this.currentItem.userId,
+      date,
       this.currentItem.$key,
       this.currentItem.title,
-      this.currentItem.content,
       this.currentItem.brand,
       this.currentItem.location,
-      this.currentItem.date,
-      this.currentItem.duedate,
       this.currentItem.selling_price,
       this.currentItem.normal_price,
       this.currentItem.purchase_price,
-      this.currentItem.imgurl1,
-      this.currentItem.imgurl2,
-      this.currentItem.imgurl3,
-      this.currentItem._thumb,
     ),this.buyList);
     // console.log(response);
     this.navCtrl.setRoot(HomePage);

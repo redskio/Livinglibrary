@@ -20,6 +20,7 @@
         "@angular/http": "4.2.5",
         "@angular/platform-browser": "4.2.5",
         "@angular/platform-browser-dynamic": "4.2.5",
+        "@ionic-native/badge": "^4.2.1",
         "@ionic-native/camera": "^3.13.1",
         "@ionic-native/core": "3.13.1",
         "@ionic-native/facebook": "^3.13.1",

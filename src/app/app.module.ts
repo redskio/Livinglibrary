@@ -43,6 +43,10 @@ import { ItemImg } from './../components/item-img/item-img.component';
 import { AddItemPage } from '../pages/add-item/add-item';
 import { ItemViewPage } from '../pages/item-view/item-view';
 import { SigninBhalfPage } from '../pages/signin-bhalf/signin-bhalf';
+import { AccessTermsPage } from '../pages/access-terms/access-terms';
+import { PrivacyPolicyPage } from '../pages/privacy-policy/privacy-policy';
+import { FilterModalPage } from '../pages/filter-modal/filter-modal';
+import { Badge } from '@ionic-native/badge';
 import { Facebook } from '@ionic-native/facebook';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Camera } from '@ionic-native/camera';
@@ -54,6 +58,7 @@ import {CommentService} from "../providers/comment.service";
 import { IonicImageViewerModule } from 'ionic-img-viewer';
 import { SearchDataProvider } from '../providers/search-data/search-data';
 import { TimerComponent } from '../components/timer/timer';
+import { OrderByPipe } from '../pipes/order-by/order-by';
 
 
 const firebaseAppConfig: FirebaseAppConfig = {
@@ -93,13 +98,17 @@ const firebaseAuthConfig = {
     SigninBhalfPage,
     QnaPage,
     OrderlistPage,
+    FilterModalPage,
     ItemImg,
     loadPage,
     PaypalPage,
     FindPasswordPage,
+    AccessTermsPage,
+    PrivacyPolicyPage,
     answerCommentBox,
     CommentBox,
-    TimerComponent
+    TimerComponent,
+    OrderByPipe,
   ],
   imports: [
     AngularFireModule.initializeApp(firebaseAppConfig, firebaseAuthConfig),
@@ -135,10 +144,13 @@ const firebaseAuthConfig = {
     AuthPage,
     outletPage,
     outletListPage,
+    FilterModalPage,
     QnaPage,
     loadPage,
     PaypalPage,
-    FindPasswordPage
+    FindPasswordPage,
+    AccessTermsPage,
+    PrivacyPolicyPage
   ],
   providers: [
     AuthService,
@@ -159,7 +171,8 @@ const firebaseAuthConfig = {
     pushService,
     IonicStorageModule,
     CommentService,
-    SearchDataProvider
+    SearchDataProvider,
+    Badge
   ]
 })
 export class AppModule {}

@@ -2,24 +2,48 @@
 
   <user-info [user]="currentUser" [isMenu]="true"></user-info>
 
-  <ion-list no-lines>
-    <button ion-item detail-none menuClose="user-menu" (click)="onProfile()">
-      PROFILE
+  <ion-list>
+    <div>
+      Bhalf
+    </div>
+    <button ion-item detail-none menuClose="user-menu" (click)="onOrderlist()">
+      거래내역
     </button>
     <button ion-item detail-none menuClose="user-menu" (click)="onOrderlist()">
-      ORDER LIST
+      나의 게시글
     </button>
-    <button ion-item detail-none menuClose="user-menu" (click)="onLogout()">
-      LOGOUT
+    <button ion-item detail-none menuClose="user-menu" (click)="onOutLet()">
+      아울렛 리스트
+    </button>
+    <div>
+      Account
+    </div>
+    <button ion-item detail-none menuClose="user-menu" (click)="onProfile()">
+      통계
+    </button>
+    <button ion-item detail-none menuClose="user-menu" (click)="onProfile()">
+      프로필수정
     </button>
     <button ion-item detail-none menuClose="user-menu" (click)="onChat()">
-      CHATTING
+      문의내역
+    </button>
+    <div>
+      Moreover
+    </div>
+    <button ion-item detail-none menuClose="user-menu" (click)="onUser()">
+      약관
     </button>
     <button ion-item detail-none menuClose="user-menu" (click)="onUser()">
-      USER
+      개인정보취급방침
     </button>
-      <button ion-item detail-none menuClose="user-menu" (click)="onOutLet()">
-      OUTLET
+    <button ion-item detail-none menuClose="user-menu" (click)="onUser()">
+      도움말
+    </button>
+    <button ion-item detail-none menuClose="user-menu" (click)="onUser()">
+      문의하기
+    </button>
+    <button ion-item detail-none menuClose="user-menu" (click)="onLogout()">
+      로그아웃
     </button>
   </ion-list>
 

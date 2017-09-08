@@ -41,7 +41,10 @@ this.timer = <PTimer>{
  runTimer: false,
  hasStarted: false,
  hasFinished: false,
- timeRemaining: this.timeInSeconds
+ timeRemaining: this.timeInSeconds,
+ color: '#000000',
+ size: '0.8',
+ guide: '남은 판매시간'
  };
  this.timer.displayTime = this.getSecondsAsDigitalClock(this.timer.timeRemaining);
  }
@@ -82,7 +85,9 @@ if (!this.timer.runTimer) { return; }
  }
  else {
  this.timer.hasFinished = true;
- this.timer.displayTime = "판매 종료";
+ this.timer.displayTime = "";
+ this.timer.guide="판매가 종료되었습니다."
+ this.timer.size="1.0"
  }
  }, 1000);
  }

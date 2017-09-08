@@ -21,9 +21,19 @@
 
    Send SMS
  -->
-<div [ngSwitch]="view" style="margin-left:1%;margin-right:1%">
+  <div padding>
+  <ion-segment [(ngModel)]="orderlist">
+    <ion-segment-button value="buylist">
+      구매내역
+    </ion-segment-button>
+    <ion-segment-button value="selllist">
+      판매내역
+    </ion-segment-button>
+  </ion-segment>
+</div>
 
-    <ion-list style="height:100%;">
+<div [ngSwitch]="orderlist">
+     <ion-list style="height:100%;" *ngSwitchCase="'selllist'">
       <ion-card ion-item *ngFor="let item of items | async" (click)="onItemClick(item)" >
 		<ion-thumbnail item-start >
         <img [src]="item.imgurl1 || 'assets/images/no-photo.jpg'">
@@ -39,6 +49,15 @@
       </ion-card>
     </ion-list>
 
-  </div>
+  <ion-list *ngSwitchCase="'buylist'">
+    <ion-item>
+      <ion-thumbnail item-start>
+        <img src="img/thumbnail-kitten-1.jpg">
+      </ion-thumbnail>
+      <h2>Luna</h2>
+    </ion-item>
+    ...
+  </ion-list>
+</div>
 
 </ion-content>

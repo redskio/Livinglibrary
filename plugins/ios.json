@@ -53,6 +53,9 @@
         },
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "kr.whatshoe.outlet"
+        },
+        "cordova-plugin-badge": {
+            "PACKAGE_NAME": "kr.whatshoe.outlet"
         }
     },
     "dependent_plugins": {
