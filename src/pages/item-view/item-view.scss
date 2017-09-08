@@ -1,9 +1,82 @@
 page-item-view {
 
+    .item_content{
+        padding:10px;
+        position:relative;
+    }
+    .item_title{
+        font-size:20px; 
+        font-weight:bold;
+    }
+    .item_brand{
+        font-size:16px;
+        color:#888888;
+    }
+
+    .buy_sell{
+        background-color:#431922;
+        color:white;
+        padding:6px 10px;
+        border:2px solid white;
+        position:absolute;
+        z-index:999;
+        top:25%;
+        left:70%;
+        text-align:right;
+    }  
+
+    .buy_sell > div:nth-child(1){
+        font-size:14px;
+        text-decoration: line-through;
+    }
+
+    .buy_sell > div:nth-child(2){
+        font-size:20px;
+        font-weight:bold;
+    }
+
+    .btn > button{
+        width:90%;
+        height:40px;
+        border:1px solid #e5e5e5;
+        margin-left:5%;
+        margin-top:10px;
+        color:#888888;
+    }
+
+    .btn > button:nth-child(1){
+        background-color:white;
+        font-size:16px;
+    }
+    .btn > button:nth-child(2){
+        background-color:#e5e5e5;
+        font-size:12px;
+    }
+
+    .buy-btn{
+        background-color:#431922;
+        color:white;
+        width:70%;
+        height:40px;
+        float:right;
+        font-size:20px;
+        margin-bottom:10px;
+        margin-right:10px;
+        font-weight:bold;
+    }
+
+    .count-btn{
+        width:25%;
+        height:40px;
+        float:left;
+        background-color:#431922;
+        color:white;
+        font-size:20px;
+        font-weight:bold;
+        text-align:center;
+        line-height:200%;
+    }
+
 }
-.buy-btn{
-position:fixed;
-bottom:0;
-height:50px;
-width:50%;
-}
+
+

@@ -1,15 +1,37 @@
 page-add-item {
-    .item-img{
-        width:30%;
+
+
+
+    .sellninfo > div{
+    border:1px solid #431922;
+    width:48%;
+    height:40px;
+    float:left;
+    text-align:center;
+    line-height:250%;
     }
-    ion-label{
-        color:#696969;
-    }
-    label{
-        color:#696969;
+    .sellninfo > div:nth-child(2){
+        margin-left:4%;
     }
 
-    ion-select{
-       max-width:100%;
+    .form_sale{}
+    .form_pic{padding:10px 0; margin-top:20%;}
+
+    label{
+        color:#888888;
     }
+    .form_brand{
+        margin-top:10px;
+    }
+    .brand_title{float:left; width:60px; height:40px; padding-top:10px;}
+    .brand_slc{
+        width:200px;
+        border:1px solid #888888;
+    }
+    .input_text > ion-input{
+        border:1px solid #888888;
+        margin-top:10px;
+    }
+
 }
+

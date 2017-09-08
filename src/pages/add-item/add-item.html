@@ -5,30 +5,41 @@
   Ionic pages and navigation.
 -->
 <meta charset="utf-8" >
-<ion-header> <ion-navbar> <ion-title>NEW ITEM</ion-title>
+<ion-header> <ion-navbar> <ion-title>상품정보 작성</ion-title>
 </ion-navbar> </ion-header>
 
 
 <ion-content padding>
-<form [formGroup]="itemForm"
+
+<div class="sellninfo">
+	<div>상품판매</div>
+	<div>정보만 공유</div>
+</div>
+
+<form class="form_sale" [formGroup]="itemForm"
 	(ngSubmit)="onSubmit(); $event.preventDefault()">
-	<div><label>PIC</label><label style="font-size:0.9rem">   Please upload at least one picture</label></div>
+
+	<div class="form_pic"><label>PIC</label><label style="font-size:0.9rem">   Please upload at least one picture</label></div>
 	<div>
-	<item-img class="item-img" [itemImg]="imgurl[0]" (click)="presentActionSheet(0)"></item-img>
-	<item-img class="item-img" [itemImg]="imgurl[1]" (click)="presentActionSheet(1)"></item-img>
-	<item-img class="item-img" [itemImg]="imgurl[2]" (click)="presentActionSheet(2)"></item-img>
+		<item-img class="item-img" [itemImg]="imgurl[0]" (click)="presentActionSheet(0)"></item-img>
+		<item-img class="item-img" [itemImg]="imgurl[1]" (click)="presentActionSheet(1)"></item-img>
+		<item-img class="item-img" [itemImg]="imgurl[2]" (click)="presentActionSheet(2)"></item-img>
 	</div> 
-	<label>PRODUCT</label>
-	<ion-item >
-	<ion-select placeholder="select the brand" formControlName="_brand">
-		<ion-option value="none">선택안됨</ion-option>
-		<ion-option value="gucci">구찌</ion-option>
-		<ion-option value="chanel">샤넬</ion-option>
-	</ion-select>
-	</ion-item>
-	<br>
-	<ion-input type="text" placeholder="Name of the product" formControlName="_title"></ion-input>
-	<ion-input type="text" placeholder="comment" formControlName="_content"></ion-input>
+
+	<div class="form_brand">
+		<label class="brand_title">BRAND</label>	
+		<ion-select class="brand_slc" placeholder="select the brand" formControlName="_brand">
+			<ion-option value="none">선택안됨</ion-option>
+			<ion-option value="gucci">구찌</ion-option>
+			<ion-option value="chanel">샤넬</ion-option>
+		</ion-select>
+	</div>
+
+	<div class="input_text">
+		<ion-input type="text" placeholder="Name of the product" formControlName="_title"></ion-input>
+		<ion-input type="text" placeholder="comment" formControlName="_content"></ion-input>
+	</div>
+	
 	<ion-label>SALES TIME</ion-label>
 	<ion-item>
 		 <ion-datetime displayFormat="YYYY-MM-DD HH:mm" formControlName="duedate"></ion-datetime>

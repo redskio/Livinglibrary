@@ -10,12 +10,15 @@ page-home {
     }    
 }        
 
+.main-slider{width:100%; height:25%;}
+
+ion-list{width:100%;}
 .list_view{
     height:30%;
 }
 
 .list_img img{
-    width:12rem;
+    width:35%;
     height:15rem;
     float:left;
 }
@@ -24,6 +27,7 @@ page-home {
     margin-left:3%;
     line-height:1.3;
     letter-spacing:-0.05rem;
+    width:62%;
 }
 
 
@@ -78,6 +82,7 @@ page-home {
 .nation{
     background-color:#9a9a9a;
     color:white !important;
+    padding:1px;
 }
 
 .nextbtn{line-height:9; margin-left:2%;}

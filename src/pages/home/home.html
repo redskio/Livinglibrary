@@ -27,7 +27,7 @@
 </ion-header>
 
 <ion-content>
-<ion-slides pager style="height:25%">
+<ion-slides pager class="main-slider">
 
   <ion-slide style="background-color: black">
     	<img src="assets/images/ad1.jpg">
@@ -87,14 +87,15 @@
           <img src="../assets/images/list_view.png" width="15">{{item._view}}
         </span>
         
-        <span>
+        <span style="margin-left:0.5rem;">
           <img src="../assets/images/list_outlet.png" width="13"></span>
         <span class="nation">KOREA</span><span>&nbsp;{{getlocationTitle(item.location)}}</span>
         
         </div>
         </div>
 
-        <span class="nextbtn"><ion-icon name="arrow-forward"></ion-icon></span>
+        
+        <!--<span class="nextbtn"><ion-icon name="arrow-forward"></ion-icon></span>-->
       </ion-item>
       
     </ion-list>
