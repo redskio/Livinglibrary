@@ -7,36 +7,34 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content id="content-body" padding>
 
   <h1 text-center>
-    <ion-icon class="auth-icon" name="person-add" color="primary" (click)="uploadImg()"></ion-icon>
+    <ion-icon class="pic_load" color="primary" (click)="uploadImg()"><img src="../assets/images/signup_pic.png"></ion-icon>
   </h1>
 
   <form [formGroup]="signupForm" (ngSubmit)="onSubmit(); $event.preventDefault()">
 
-    <ion-item>
-      <ion-icon name="person" item-left color="primary"></ion-icon>
-      <ion-input type="text" placeholder="Name" formControlName="name"></ion-input>
+    <ion-item class="signup_email">
+      
+      <ion-input type="email" placeholder="Email Address" formControlName="email"></ion-input>
     </ion-item>
-
-    <ion-item>
-      <ion-icon name="at" item-left color="primary"></ion-icon>
-      <ion-input type="text" placeholder="Username" formControlName="username"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-icon name="mail" item-left color="primary"></ion-icon>
-      <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-icon name="lock" item-left color="primary"></ion-icon>
+    
+    <ion-item class="signup_pw">
+      
       <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
     </ion-item>
-    <label (click)="privacy_policy()">개인정보 취급방침</label><label (click)="access_terms()">이용약관</label>
+
+
+
+    
+
+    <div class="signup_txt">
+      <p>By creating an account and signing up to Oice. I accept the <label (click)="privacy_policy()">Termes of Service</label> and <label (click)="access_terms()">Privacy Policy</label></p>
+      
+    </div>
     <br>
-    <button ion-button full type="submit" [disabled]="signupForm.invalid">Create Account</button>
+    <button class="signup_btn" ion-button full type="submit" [disabled]="signupForm.invalid">Create Account</button>
 
   </form>
 

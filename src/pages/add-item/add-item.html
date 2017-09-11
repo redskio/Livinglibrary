@@ -19,7 +19,7 @@
 <form class="form_sale" [formGroup]="itemForm"
 	(ngSubmit)="onSubmit(); $event.preventDefault()">
 
-	<div class="form_pic"><label>PIC</label><label style="font-size:0.9rem">   Please upload at least one picture</label></div>
+	<div class="form_pic"><label>상품사진</label>&nbsp;&nbsp;<label style="font-size:1.2rem">한장이상의 사진을 업로드 해 주세요.</label></div>
 	<div>
 		<item-img class="item-img" [itemImg]="imgurl[0]" (click)="presentActionSheet(0)"></item-img>
 		<item-img class="item-img" [itemImg]="imgurl[1]" (click)="presentActionSheet(1)"></item-img>
@@ -27,37 +27,56 @@
 	</div> 
 
 	<div class="form_brand">
-		<label class="brand_title">BRAND</label>	
-		<ion-select class="brand_slc" placeholder="select the brand" formControlName="_brand">
-			<ion-option value="none">선택안됨</ion-option>
-			<ion-option value="gucci">구찌</ion-option>
-			<ion-option value="chanel">샤넬</ion-option>
-		</ion-select>
+		<ion-item no-lines no-padding>
+			<ion-label>브랜드</ion-label>
+			<ion-select class="brand_slc" formControlName="_brand">
+				<ion-option value="none">선택안됨</ion-option>
+				<ion-option value="gucci">구찌</ion-option>
+				<ion-option value="chanel">샤넬</ion-option>
+			</ion-select>
+		</ion-item>
 	</div>
 
+
 	<div class="input_text">
-		<ion-input type="text" placeholder="Name of the product" formControlName="_title"></ion-input>
-		<ion-input type="text" placeholder="comment" formControlName="_content"></ion-input>
+		<ion-input type="text" placeholder="title" formControlName="_title"></ion-input>
+		<ion-input type="text" placeholder="내용을 입력 해 주세요." formControlName="_content"></ion-input>
 	</div>
 	
-	<ion-label>SALES TIME</ion-label>
-	<ion-item>
-		 <ion-datetime displayFormat="YYYY-MM-DD HH:mm" formControlName="duedate"></ion-datetime>
-	</ion-item>
+	<div class="form_amount">
+		<ion-item no-lines no-padding>
+			<ion-label>수량</ion-label>
+		<ion-input class="amount" type="number" placeholder="Number Input with no label"></ion-input>
+		</ion-item>
+	</div>
+
 	<div>
-		<label style="display:inline-block;max-width:40%; min-height:3rem;">SALES PRICE</label><ion-input style="margin-left:15%;display:inline-block;max-width:45%; width:45%;" type="number" placeholder="판매할 가격" formControlName="selling_price"></ion-input><br>
+		<ion-item no-lines no-padding>
+			<ion-label>SALES TIME</ion-label>
+			<ion-datetime class="sale_time" displayFormat="YYYY-MM-DD HH:mm" formControlName="duedate"></ion-datetime>
+		</ion-item>
+	</div>
+
+	<div>
+		<ion-item no-lines no-padding>
+		<ion-label>SALES PRICE</ion-label>
+		<ion-input style="margin-left:15%;display:inline-block;max-width:45%; width:45%;" type="number" placeholder="판매할 가격" formControlName="selling_price"></ion-input><br>
+		</ion-item>
 	</div>
 		<ion-input style="display:inline-block;max-width:45%;" type="number" placeholder="정상가격"
 		formControlName="normal_price"></ion-input>
 	<ion-input style="display:inline-block;max-width:45%;" type="number" placeholder="구매한 가격"
 		formControlName="purchase_price"></ion-input>
-	<ion-label>OUTLET</ion-label>
-	<ion-item>
-	<ion-select style="max-width:70%;" formControlName="_location" >
-		<ion-option  value="none" checked="true">선택안됨</ion-option>
-		<ion-option *ngFor="let outlet of outlets | async; let i = index" value="{{outlet.$key}}">{{outlet.title}}</ion-option>
-	</ion-select>
-	</ion-item>
+	
+	<div class="form_ouatlet">	
+		<ion-item no-lines no-padding>
+			<ion-label>OUTLET</ion-label>
+		<ion-select class="outlet" formControlName="_location" >
+			<ion-option  value="none" checked="true">선택안됨</ion-option>
+			<ion-option *ngFor="let outlet of outlets | async; let i = index" value="{{outlet.$key}}">{{outlet.title}}</ion-option>
+		</ion-select>
+		</ion-item>
+	</div>
 	<button ion-button color="light" outline  type="button" (click)="currentMap()">맵에서 선택</button>
 	<br>
 	
