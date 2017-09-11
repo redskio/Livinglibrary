@@ -13,13 +13,19 @@ font-size:14px;
 
 
 
-.id{margin-top:5%;}
-.pw{margin-top:1%;}
+.id{
+  margin-top:5%;
+  font-size:1.2rem;
+}
+.pw{
+  margin-top:1%;
+  font-size:1.2rem;
+}
 
 /*.custom-icon{color:#431922;}*/
 
 /*forget password*/
-.find-pw{color:white; }
+.find-pw{color:white; font-size:1.2rem;text-decoration: underline;}
 
 /*login btn*/
-.login{background-color:#431922;color:white; height:50px; margin-top:5%;}
+.login{background-color:#431922;color:white; height:5rem; margin-top:5%;}
