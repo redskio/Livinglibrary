@@ -92,4 +92,7 @@ export class UserService extends BaseService {
       .child(`/users/${_filename}`)
       .putString(url, 'base64', {contentType:'image/jpeg'});
   }
+      addSellItem(userKey: string , orderNum: string){
+        this.af.database.list(`/users/${userKey}/sellItems/`).push(orderNum);
+  }
 }

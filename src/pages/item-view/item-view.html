@@ -22,7 +22,7 @@
   <div>{{currentItem.selling_price|currency:'USD':true:'2.0-2' }}</div>
   
 </div>
-gg
+
 <ion-slides pager style="height:30%">
   <ion-slide style="background-color: black">
       <img src="{{ currentItem?.imgurl1 }}">
@@ -51,7 +51,7 @@ gg
   <label><b>수량</b> 5개 (1/5)</label><br/><br/>
   <label><b>구매장소</b> {{location_title}}</label>
 </div>
-<div #map id="map" style="height:20%"></div>
+<div #map id="map" style="height:20%"></div> 
 
 <div>
   <button ion-item (click)="onProfileClick()">

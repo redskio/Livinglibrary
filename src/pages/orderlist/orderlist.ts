@@ -15,9 +15,12 @@ import { AngularFire, FirebaseApp, FirebaseListObservable } from 'angularfire2';
   templateUrl: 'orderlist.html',
 })
 export class OrderlistPage extends BaseComponent{
-  items: FirebaseListObservable<Item[]>;
+  buyitems: FirebaseListObservable<Item[]>;
+  sellList: FirebaseListObservable<any[]>;
+  sellitems: Array<Item>;
   items_length: number;
-  
+  orderlist: string = "selllist";
+
   constructor(
     public alertCtrl: AlertController,
     public navCtrl: NavController,
@@ -32,7 +35,8 @@ export class OrderlistPage extends BaseComponent{
     public af: AngularFire,
   ) {
     super(alertCtrl, authService,app, menuCtrl, storage, userService);
-   
+    this.sellitems = new Array<Item>();
+   // this.sellitems.push(new Item('aa','aa','aa','aa','aa',2222,3333,3333,1111,4444,'','','','',3333,2222));
 
   }
   
@@ -42,7 +46,18 @@ export class OrderlistPage extends BaseComponent{
       .subscribe((currentUser: User) => {
         this.currentUser = currentUser;
 			});
-      this.items = this.af.database.list('/users/'+this.currentUser.$key+'/buyItems');
+      this.buyitems = this.af.database.list('/users/'+this.currentUser.$key+'/buyItems');
+      this.sellList = this.af.database.list('/users/'+this.currentUser.$key+'/sellItems');
+      this.sellList.subscribe(list=>{list.forEach(num=>{
+       this.af.database.object('/items/'+num.itemId).subscribe(item=>{
+        this.sellitems.push(item);
+        });
 
+      });
+      });
+      
+  }
+  onSellItemClick(item:Item){
+    //item.
   }
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { IonicPage, Loading, LoadingController, NavController, NavParams, ActionSheetController } from 'ionic-angular';
+import { IonicPage, Loading, LoadingController, NavController, NavParams, ActionSheetController, ModalController } from 'ionic-angular';
 import { FirebaseListObservable } from 'angularfire2';
 import { ItemService } from './../../providers/item.service';
 import { UserService } from './../../providers/user.service';
@@ -12,7 +12,7 @@ import { HomePage } from './../home/home';
 import firebase from 'firebase';
 import { Camera } from '@ionic-native/camera';
 import { ImageResizerOptions, ImageResizer } from 'ionic-native';
-import { outletPage } from './../outlet/outlet';
+import { PickOutletPage } from './../pick-outlet/pick-outlet';
 
 /**
  * Generated class for the AddItemPage page.
@@ -34,7 +34,7 @@ export class AddItemPage {
   _thumb: string;
   currentTimestamp: Object;
   currentUser: User;
-  
+  type: number;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -45,6 +45,7 @@ export class AddItemPage {
     public userService: UserService,
     public camera: Camera,
     public outletService: OutletService,
+    public modalCtrl: ModalController,
   ) {
     this.itemForm = this.formBuilder.group({
       _title: ['', [Validators.required, Validators.minLength(3)]],
@@ -58,6 +59,7 @@ export class AddItemPage {
     });
     this.imgurl =  ['', '', ''];
     this.filePhoto = new Array(3);
+    this.type = 0 ; 
   }
 
   ionViewDidLoad() {
@@ -160,6 +162,9 @@ export class AddItemPage {
 //      .catch(e => alert("Failedresizeerr"+e));
 
   }
+  checkType(index:number){
+    this.type=index;
+  }
   uploadPhoto(index:number){
     let uploadTask = this.itemService.uploadPhoto(this.filePhoto[index], this.currentUser.name + '_' + new Date().getTime() + '_' + index);
       let loading: Loading = this.showLoading();
@@ -175,7 +180,12 @@ export class AddItemPage {
       });
   }
   currentMap(){
-    this.navCtrl.push(outletPage);
+    let pickModal = this.modalCtrl.create(PickOutletPage);
+    pickModal.present();
+    pickModal.onDidDismiss(data=>{
+      let formItem = this.itemForm.value;
+      formItem._location=data.title;
+    });
   }
   onSubmit(): void {
     this.userService.currentUser
@@ -206,7 +216,8 @@ export class AddItemPage {
           // }
           this._thumb= '';
           let duedate: number = new Date(formItem.duedate).getTime();
-          this.itemService.addItem(currentUser.$key, title, content, brand, location, date, duedate, selling_price, normal_price, purchase_price, this.imgurl[0], this.imgurl[1], this.imgurl[2], this._thumb);
+          var orderKey:string = this.itemService.addItem(currentUser.$key,this.type, title, content, brand, location, date, duedate, selling_price, normal_price, purchase_price, this.imgurl[0], this.imgurl[1], this.imgurl[2], this._thumb);
+          this.userService.addSellItem(currentUser.$key,orderKey);
           this.navCtrl.push(HomePage);
         });
 

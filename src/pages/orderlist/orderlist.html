@@ -33,8 +33,8 @@
 </div>
 
 <div [ngSwitch]="orderlist">
-     <ion-list style="height:100%;" *ngSwitchCase="'selllist'">
-      <ion-card ion-item *ngFor="let item of items | async" (click)="onItemClick(item)" >
+     <ion-list style="height:100%;" *ngSwitchCase="'buylist'">
+      <ion-card ion-item *ngFor="let item of buyitems | async" (click)="onBuyItemClick(item)" >
 		<ion-thumbnail item-start >
         <img [src]="item.imgurl1 || 'assets/images/no-photo.jpg'">
         </ion-thumbnail>
@@ -49,15 +49,20 @@
       </ion-card>
     </ion-list>
 
-  <ion-list *ngSwitchCase="'buylist'">
-    <ion-item>
-      <ion-thumbnail item-start>
-        <img src="img/thumbnail-kitten-1.jpg">
-      </ion-thumbnail>
-      <h2>Luna</h2>
-    </ion-item>
-    ...
-  </ion-list>
+  <ion-list *ngSwitchCase="'selllist'">
+        <ion-card ion-item *ngFor="let item of sellitems" (click)="onSellItemClick(item)" >
+		<ion-thumbnail item-start >
+        <img [src]="item.imgurl1 || 'assets/images/no-photo.jpg'">
+        </ion-thumbnail>
+        <div>
+          <h3>{{ item.brand }}</h3><label></label>
+          <h3 style="color:#9a9a9a;">{{ item.title }}</h3>
+        </div>
+        <div style="width:45%;" item-end > 
+          <label ion-button style="background-color:#431922">{{item.selling_price / item.normal_price  | percent:'1.0-0' }}</label>
+          <label style="float:right; font-size:15px; line-height:200%;">{{ item.selling_price|currency:'USD':true:'2.0-2' }}</label></div>
+      </ion-card> 
+    </ion-list>
 </div>
 
 </ion-content>

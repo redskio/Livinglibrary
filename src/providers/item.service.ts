@@ -32,6 +32,7 @@ export class ItemService extends BaseService {
   }
   addItem(
     userId: string,
+    type: number,
     title: string,
     content: string,
     brand: string,
@@ -45,8 +46,9 @@ export class ItemService extends BaseService {
     imgurl2: string,
     imgurl3: string,
 	_thumb: string) {
-    this.items.push({
+    return this.items.push({
       userId:userId,
+      type: type,
       title: title,
       content: content,
       brand: brand,
@@ -62,7 +64,7 @@ export class ItemService extends BaseService {
       _thumb: _thumb,
       _view: 0,
       _currentView: 0
-    });
+    }).key;
   }
   getItem(key: string){
     return this.af.database.object(`/items/`+key);

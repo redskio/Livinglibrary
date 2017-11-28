@@ -13,15 +13,24 @@
   <div class="overlay" (click)="dismiss()"></div>
   <div class="modal_content">
   <ion-list>
-    <div>
+    <ion-item (click)="menuClick(-1,'date')">
       신규상품순
-    </div>
-    <div>
+    </ion-item>
+    <ion-item (click)="menuClick(1,'selling_price')">
       가격낮은순
-    </div>
-    <div>  
+    </ion-item>
+    <ion-item (click)="menuClick(-1, 'selling_price')">
+      가격높은순
+    </ion-item>
+    <ion-item>
+      할인율 높은 순
+    </ion-item>
+    <ion-item (click)="menuClick(-1,'_view')">
       많이 찾는 순
-    </div>
+    </ion-item>
+    <ion-item (click)="menuClick(1,'title')">
+      이름 순
+    </ion-item>
   </ion-list>
   </div>
 </ion-content>

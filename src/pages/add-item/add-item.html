@@ -10,13 +10,16 @@
 
 
 <ion-content padding>
+  <ion-segment class="sellninfo" [(ngModel)]="sellform">
+    <ion-segment-button value="product" (click)="checkType(0)">
+      상품판매
+    </ion-segment-button>
+    <ion-segment-button value="info" (click)="checkType(1)">
+      정보만 공유
+    </ion-segment-button>
+  </ion-segment>
 
-<div class="sellninfo">
-	<div>상품판매</div>
-	<div>정보만 공유</div>
-</div>
-
-<form class="form_sale" [formGroup]="itemForm"
+<form class="form_sale" [formGroup]="itemForm" 
 	(ngSubmit)="onSubmit(); $event.preventDefault()">
 
 	<div class="form_pic"><label>상품사진</label>&nbsp;&nbsp;<label style="font-size:1.2rem">한장이상의 사진을 업로드 해 주세요.</label></div>

@@ -22,6 +22,7 @@ export class FilterModalPage {
   }
   menuClick(value1, value2){
      this.obj = {direction: value1, category: value2};
+     this.dismiss();
   }
   dismiss() {
     this.viewCtrl.dismiss(this.obj);

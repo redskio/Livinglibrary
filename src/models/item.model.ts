@@ -4,6 +4,7 @@ export class Item {
 
     constructor(
         public userId: string,
+        public type: number,
         public title: string,
         public content: string,
         public brand: string,

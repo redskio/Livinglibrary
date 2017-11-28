@@ -9,7 +9,12 @@ import { homeUserPage } from './../../pages/home_user/home_user';
 import { homeChatPage } from './../../pages/home_chat/home_chat';
 import { outletListPage } from './../../pages/outlet_list/outlet_list';
 import { OrderlistPage } from './../../pages/orderlist/orderlist';
-
+import { UploadlistPage } from './../../pages/uploadlist/uploadlist';
+import { StatisticspagePage } from './../../pages/statisticspage/statisticspage';
+import { HelppagePage } from './../../pages/helppage/helppage';
+import { SupportPage } from './../../pages/support/support';
+import { AccessTermsPage } from './../../pages/access-terms/access-terms';
+import { PrivacyPolicyPage } from './../../pages/privacy-policy/privacy-policy';
 import {Storage} from '@ionic/storage';
 import {UserService} from "../../providers/user.service";
 @Component({
@@ -34,7 +39,18 @@ export class UserMenuComponent extends BaseComponent {
   onProfile(): void {
     this.navCtrl.push(UserProfilePage);
   }
-
+  onUploadList(): void {
+    this.navCtrl.push(UploadlistPage);
+  }
+  onHelp(): void {
+    this.navCtrl.push(HelppagePage);
+  }
+  onStastistics():void{
+    this.navCtrl.push(StatisticspagePage);
+  }
+  onSupport():void{
+    this.navCtrl.push(SupportPage);
+  }
   onChat(): void{
   	this.navCtrl.push(homeChatPage);
   }
@@ -42,7 +58,12 @@ export class UserMenuComponent extends BaseComponent {
   onUser(): void{
   	this.navCtrl.push(homeUserPage);
   }
-
+  onAccessTerm(): void{
+    this.navCtrl.push(AccessTermsPage);
+  }
+  onPrivacyPolicy(): void{
+    this.navCtrl.push(PrivacyPolicyPage);
+  }
   onOutLet(): void{
   	this.navCtrl.push(outletListPage);
   }

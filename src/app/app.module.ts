@@ -46,6 +46,10 @@ import { SigninBhalfPage } from '../pages/signin-bhalf/signin-bhalf';
 import { AccessTermsPage } from '../pages/access-terms/access-terms';
 import { PrivacyPolicyPage } from '../pages/privacy-policy/privacy-policy';
 import { FilterModalPage } from '../pages/filter-modal/filter-modal';
+import { UploadlistPage } from '../pages/uploadlist/uploadlist';
+import { StatisticspagePage } from '../pages/statisticspage/statisticspage';
+import { HelppagePage } from '../pages/helppage/helppage';
+import { SupportPage } from '../pages/support/support';
 import { Badge } from '@ionic-native/badge';
 import { Facebook } from '@ionic-native/facebook';
 import { Geolocation } from '@ionic-native/geolocation';
@@ -59,7 +63,7 @@ import { IonicImageViewerModule } from 'ionic-img-viewer';
 import { SearchDataProvider } from '../providers/search-data/search-data';
 import { TimerComponent } from '../components/timer/timer';
 import { OrderByPipe } from '../pipes/order-by/order-by';
-
+import { PickOutletPage } from '../pages/pick-outlet/pick-outlet';
 
 const firebaseAppConfig: FirebaseAppConfig = {
     apiKey: "AIzaSyD4GWzQWo51VR0Fk4-PFU3Va2qGGnO3rsc",
@@ -109,6 +113,11 @@ const firebaseAuthConfig = {
     CommentBox,
     TimerComponent,
     OrderByPipe,
+    PickOutletPage,
+    UploadlistPage,
+    StatisticspagePage,
+    HelppagePage,
+    SupportPage
   ],
   imports: [
     AngularFireModule.initializeApp(firebaseAppConfig, firebaseAuthConfig),
@@ -150,7 +159,12 @@ const firebaseAuthConfig = {
     PaypalPage,
     FindPasswordPage,
     AccessTermsPage,
-    PrivacyPolicyPage
+    PrivacyPolicyPage,
+    PickOutletPage,
+    UploadlistPage,
+    StatisticspagePage,
+    HelppagePage,
+    SupportPage
   ],
   providers: [
     AuthService,

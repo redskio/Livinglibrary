@@ -112,7 +112,7 @@ async setBadges(badgeNumber: number) {
     this.items.subscribe(item_array =>{this.items_length= item_array.length;});
     this.menuCtrl.enable(true, 'user-menu');
     this.setFilteredItems();
-    this.sort(-1,'title');
+    this.sort(1,'title');
   }
   getlocationTitle(value: string): string{
     return this.outletService.getOutletTitle(value);
@@ -140,6 +140,9 @@ async setBadges(badgeNumber: number) {
   filterBtn(){
     let filterModal = this.modalCtrl.create(FilterModalPage);
     filterModal.present();
+    filterModal.onDidDismiss(data=>{
+      this.sort(data.direction,data.category);
+    });
   }
   setFilteredItems() {
       this.items = this.searchProvider.searchItems(this.searchTerm);

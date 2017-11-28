@@ -14,6 +14,7 @@ declare var cordova;
 export class outletPage {
 
   outletBrand: FirebaseListObservable<OutletBrand[]>;
+  outlets: FirebaseListObservable<Outlet[]>;
   currentOutlet: Outlet;
   @ViewChild('map') mapElement: ElementRef;
   map: any;
@@ -32,11 +33,7 @@ export class outletPage {
   }
 
   ionViewDidLoad() {
-    if (this.navParams.get('outletInfo')) {
       this.loadOutlet();
-    } else {
-      this.currentLocWithOutlet();
-    }
   }
 
   loadOutlet() {
@@ -63,31 +60,15 @@ export class outletPage {
 
     this.addInfoWindow(marker, this.currentOutlet.title);
   }
-  currentLocWithOutlet() {
-    this.getPermissions();
-    this.geolocation.getCurrentPosition().then((position) => {
-
-      var lat: number = position.coords.latitude
-      var lon: number = position.coords.longitude
-      let latLng = new google.maps.LatLng(lat, lon);
-
-      let mapOptions = {
-        center: latLng,
-        zoom: 15,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      }
-
-      this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-      let marker = new google.maps.Marker({
-        map: this.map,
-        animation: google.maps.Animation.DROP,
-        position: latLng
-      });
-      let title: string = 'text';
-      this.addInfoWindow(marker, title);
-    }, (err) => {
-      alert(err);
-    });
+   addOutletMarker(){
+    this.outlets = this.af.database.list('/outlet/');
+    this.outlets.forEach(outlets=>{
+      let items: Outlet[] = outlets;
+      items.forEach(outlet=>{
+        let item: Outlet = outlet;
+        alert(outlet.latitude);
+      })
+    })
   }
   addMarker() {
 
@@ -103,34 +84,7 @@ export class outletPage {
 
   }
 
-  getPermissions() {
-    var permissions = cordova.plugins.permissions;
-
-
-    var list = [
-      permissions.ACCESS_COARSE_LOCATION,
-      permissions.ACCESS_FINE_LOCATION
-    ];
-
-    permissions.hasPermission(list, success, null);
-
-    function error() {
-      console.warn('Camera or Accounts permission is not turned on');
-    }
-
-    function success(status) {
-      if (!status.hasPermission) {
-
-        permissions.requestPermissions(
-          list,
-          function(status) {
-            if (!status.hasPermission) error();
-          },
-          error);
-      }
-    }
-
-  }
+ 
   addInfoWindow(marker, content) {
 
     let infoWindow = new google.maps.InfoWindow({
